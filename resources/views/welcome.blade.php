@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="/css/main.css" />
+        <link rel="stylesheet" href="css/main.css" />
     </head>
     <body>
 
@@ -59,7 +59,7 @@
                     <div class="flex flex-2">
                         <article>
                             <div class="image round">
-                                <img src="/images/pic01.jpg" alt="Pic 01" />
+                                <img src="images/pic01.jpg" alt="Pic 01" />
                             </div>
                             <header>
                                 <h3>Sobre nosotros</h3>
@@ -71,7 +71,7 @@
                         </article>
                         <article>
                             <div class="image round">
-                                <img src="/images/pic02.jpg" alt="Pic 02" />
+                                <img src="images/pic02.jpg" alt="Pic 02" />
                             </div>
                             <header>
                                 <h3>Tutoriales</h3>
@@ -116,10 +116,10 @@
             </footer>
 
         <!-- Scripts -->
-            <script src="/js/jquery.min.js"></script>
-            <script src="/js/skel.min.js"></script>
-            <script src="/js/util.js"></script>
-            <script src="/js/main.js"></script>
+            <script src="js/jquery.min.js"></script>
+            <script src="js/skel.min.js"></script>
+            <script src="js/util.js"></script>
+            <script src="js/main.js"></script>
 
     </body>
 </html>
