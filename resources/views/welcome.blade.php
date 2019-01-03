@@ -1,98 +1,125 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE HTML>
+
+<html>
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/css/main.css" />
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+        <!-- Header -->
+            <header id="header">
+                <div class="inner">
+                    <a href="index.html" class="logo"><strong>Ingenieria Web</strong></a>
+                    
                 </div>
-            @endif
+            </header>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+        <!-- Banner -->
+            <section id="banner">
+                <div class="inner">
+                    <header>
+                        <h1>Bienvenido a la Pasarela de pago </h1>
+                    </header>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <div class="flex ">
+
+                        <div>
+                            <span class="icon fa-credit-card"></span>
+                            
+                            <h3>Proceso sencillo</h3>
+                            <p>Uso prácticamente intuitivo</p>
+                        </div>
+
+                        <div>
+                            <span class="icon fa-cogs"></span>
+                            <h3>Servicio técnico</h3>
+                            <p>Le atenderemos en cualquier momento</p>
+                        </div>
+
+                        <div>
+                            <span class="icon fa-shield"></span>
+                            <h3>Seguro</h3>
+                            <p>Podrá disfrutar de la mayor protección</p>
+                        </div>
+
+                    </div>
+
+                    <footer>
+                        <a href="#" class="button">Empezar</a>
+                    </footer>
                 </div>
-            </div>
-        </div>
+            </section>
+
+
+        <!-- Three -->
+            <section id="three" class="wrapper align-center">
+                <div class="inner">
+                    <div class="flex flex-2">
+                        <article>
+                            <div class="image round">
+                                <img src="/images/pic01.jpg" alt="Pic 01" />
+                            </div>
+                            <header>
+                                <h3>Sobre nosotros</h3>
+                            </header>
+                            <p>Somos una sociedad de informáticos que decidimos ponernos en marcha en una iniciativa para cambiar los pagos de la actualidad y actualizarlos a un modelo mas cómodo y seguro para clientes y empresas que todavía no se han pasado a la venta online. Todo ello sin ánimo de lucro.</p>
+                            <footer>
+                                <a href="#" class="button">Leer más</a>
+                            </footer>
+                        </article>
+                        <article>
+                            <div class="image round">
+                                <img src="/images/pic02.jpg" alt="Pic 02" />
+                            </div>
+                            <header>
+                                <h3>Tutoriales</h3>
+                            </header>
+                            <p>Disponemos de tutoriales realizados con nuestros expertos en comprensión audiovisual para que puedan entender toda nuestra estructura y operabilidad en menos de 10 minutos. El tiempo es oro, y este último esta pensado para que se transfiera por nuestra pasarela de pago.</p>
+                            <footer>
+                                <a href="#" class="button">Leer más</a>
+                            </footer>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+        <!-- Footer -->
+            <footer id="footer">
+                <div class="inner">
+
+                    <h3>Contacto</h3>
+
+                    <form action="#" method="post">
+
+                        <div class="field half first">
+                            <label for="name">Nombre</label>
+                            <input name="name" id="name" type="text" placeholder="Name">
+                        </div>
+                        <div class="field half">
+                            <label for="email">Email</label>
+                            <input name="email" id="email" type="email" placeholder="Email">
+                        </div>
+                        <div class="field">
+                            <label for="message">Mensaje</label>
+                            <textarea name="message" id="message" rows="6" placeholder="Message"></textarea>
+                        </div>
+                        <ul class="actions">
+                            <li><input value="Enviar Mensaje" class="button alt" type="submit"></li>
+                        </ul>
+                    </form>
+
+                    
+
+                </div>
+            </footer>
+
+        <!-- Scripts -->
+            <script src="/js/jquery.min.js"></script>
+            <script src="/js/skel.min.js"></script>
+            <script src="/js/util.js"></script>
+            <script src="/js/main.js"></script>
+
     </body>
 </html>
