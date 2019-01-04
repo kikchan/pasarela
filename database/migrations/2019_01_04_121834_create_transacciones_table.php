@@ -15,12 +15,16 @@ class CreateTransaccionesTable extends Migration
     {
         Schema::create('transacciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idComercio');
+            $table->unsignedInteger('idComercio');
             $table->decimal('importe',10, 2);
-            $table->integer('idTarjeta');
-            $table->integer('idEstado');
-            $table->string('comentario');
+            $table->unsignedInteger('idTarjeta');
+            $table->unsignedInteger('idEstado');
+            $table->string('comentario'); //Enlazado al estado
             $table->timestamps();
+
+            $table->foreign('idComercio')->references('id')->on('users');
+            $table->foreign('idTarjeta')->references('id')->on('tarjetas');
+            $table->foreign('idEstado')->references('id')->on('estados');            
         });
     }
 

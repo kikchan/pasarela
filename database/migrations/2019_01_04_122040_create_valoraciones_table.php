@@ -15,11 +15,15 @@ class CreateValoracionesTable extends Migration
     {
         Schema::create('valoraciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idComercio');
-            $table->integer('idTecnico');
+            $table->unsignedInteger('idComercio');
+            $table->unsignedInteger('idTecnico');
             $table->integer('valoracion');
-            $table->integer('comentario');
+            $table->string('comentario');
             $table->timestamps();
+
+            $table->foreign('idComercio')->references('id')->on('users');
+            $table->foreign('idTecnico')->references('id')->on('users');
+
         });
     }
 
