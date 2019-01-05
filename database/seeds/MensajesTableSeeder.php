@@ -13,21 +13,21 @@ class MensajesTableSeeder extends Seeder
     {
         DB::table('mensajes')->delete();
         DB::table('mensajes')->insert([
-            'idUsuario' => '',
-            'idTicket' => '',
-            'comentario' => '',
+            'idUsuario' => 2,
+            'idTicket' => 1,
+            'comentario' => 'Hola, estoy haciendo un pago y me dice que el número de la tarjeta no es válida',
             'adjunto' => ''
         ]);
         DB::table('mensajes')->insert([
-            'idUsuario' => '',
-            'idTicket' => '',
-            'comentario' => '',
+            'idUsuario' => 3,
+            'idTicket' => 1,
+            'comentario' => 'Hola, estamos revisando la página. En breve le informaremos.',
             'adjunto' => ''
         ]);
         DB::table('mensajes')->insert([
-            'idUsuario' => '',
-            'idTicket' => '',
-            'comentario' => '',
+            'idUsuario' => 6,
+            'idTicket' => 4,
+            'comentario' => 'Buenas, al hacer login me dice que no existe el usuario cuando he comprobado que mi usuario es correcto.',
             'adjunto' => ''
         ]);
     }
