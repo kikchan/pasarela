@@ -14,7 +14,6 @@
             <header id="header">
                 <div class="inner">
                     <a href="/" class="logo"><img src="images/LogotipoIW.png"/></a>
-                    
                 </div>
             </header>
 
