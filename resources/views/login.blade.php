@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="icon" href="images/favicon.ico" />
         <title>Pasarela - Login</title>
         <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
         <link rel="stylesheet" href="css/style.css">
@@ -28,14 +29,12 @@
                                 </div>
                                 <div class="form-group form-button">
                                     <input type="submit" name="signup" id="signup" class="form-submit" value="Login"/>
-                                </div>
-                                <div class="form-group">
-                                    <a class="btn btn-danger" href="/">Volver</a>
+                                    <button class="form-return" href="/">Volver</button>
                                 </div>
                             </form>
                         </div>
                         <div class="signup-image">
-                            <figure><img src="images/signin-image.jpg" alt="sing up image"></figure>
+                            <figure><img src="images/loginpannel.png" alt="sing up image"></figure>
                         </div>
                     </div>
                 </div>
