@@ -8,6 +8,7 @@
         <title>Pasarela - Login</title>
         <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
     </head>
     <body>
         <div class="main">
@@ -25,8 +26,11 @@
                                     <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                                     <input type="password" name="email" id="email" placeholder="Contraseña"/>
                                 </div>
+                                <div class="form-group form-button">
+                                    <input type="submit" name="signup" id="signup" class="form-submit" value="Login"/>
+                                </div>
                                 <div class="form-group">
-                                    <a href="/">Volver</a>
+                                    <a class="btn btn-danger" href="/">Volver</a>
                                 </div>
                             </form>
                         </div>

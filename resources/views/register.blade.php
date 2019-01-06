@@ -44,7 +44,7 @@
                     </div>
                     <div class="signup-image">
                         <figure><img src="images/signup-image.jpg" alt="sing up image"></figure>
-                        <a href="/login" class="signup-image-link">Ya tengo cuenta</a>
+                        <a href="login" class="signup-image-link">Ya tengo cuenta</a>
                     </div>
                 </div>
             </div>
