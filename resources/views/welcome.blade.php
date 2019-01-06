@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="css/main.css" />
         <link rel="icon" href="images/favicon.ico" />
+        <title>Pasarela</title>
     </head>
     <body>
 
@@ -48,7 +49,7 @@
                     </div>
 
                     <footer>
-                        <a href="#" class="button">Empezar</a>
+                        <a href="register" class="button">Empezar</a>
                     </footer>
                 </div>
             </section>
