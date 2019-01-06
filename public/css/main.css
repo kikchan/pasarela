@@ -2722,6 +2722,7 @@
 			position: relative;
 		}
 
+	@media screen and (min-width: 1200px) {				
 		#header .logo {
 			color: #ffffff;
 			display: inline-block;
@@ -2735,7 +2736,14 @@
 			top: 0;
 			font-size: 1em;
 		}
+	}
 
+			#header .logo {
+				display: block;
+				width: 330px;
+				margin: 0 auto;
+			}
+			
 			#header .logo strong {
 				color: #ffffff;
 				font-weight: 600;
@@ -2915,15 +2923,29 @@
 
 /* Banner */
 
+	@media screen and (min-width: 1200px) {
+		#banner .inner {
+			border-top: 2px solid rgba(255, 255, 255, 0.2);
+			position: relative;
+			z-index: 10005;
+			padding-top: 8em;
+			max-width: 80em;
+		}
+	}
+
 	#banner {
 		padding: 8em 0 9em 0;
-		background-image: url(../images/fondo.jpg);
+		background-image: url('../images/fondo.jpg');
 		background-size: cover;
 		background-position: bottom;
+		position: fixed;
+		bottom: 0;
+		top: 0;
+		left: 0;
+		right: 0;
 		background-attachment: fixed;
 		background-repeat: no-repeat;
 		text-align: center;
-		position: relative;
 	}
 
 		#banner:before {
@@ -2937,10 +2959,10 @@
 		}
 
 		#banner .inner {
-			border-top: 2px solid rgba(255, 255, 255, 0.2);
 			position: relative;
 			z-index: 10005;
 			padding-top: 8em;
+			max-width: 80em;
 		}
 
 		#banner h1 {
