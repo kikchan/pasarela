@@ -54,7 +54,6 @@
                 </div>
             </section>
 
-
         <!-- Three -->
             <section id="three" class="wrapper align-center">
                 <div class="inner">
@@ -111,9 +110,6 @@
                             <li><input value="Enviar Mensaje" class="button alt" type="submit"></li>
                         </ul>
                     </form>
-
-                    
-
                 </div>
             </footer>
 
@@ -122,6 +118,5 @@
             <script src="js/skel.min.js"></script>
             <script src="js/util.js"></script>
             <script src="js/main.js"></script>
-
     </body>
 </html>
