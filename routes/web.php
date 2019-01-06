@@ -24,3 +24,4 @@ Route::get('/login', function() {
 });
 
 Route::get('pruebas', "PasarelaController@pruebas");
+Route::get('comercio', "ComercioController@vista");
