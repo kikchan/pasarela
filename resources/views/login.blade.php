@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="form-group form-button">
                                     <input type="submit" name="signup" id="signup" class="form-submit" value="Login"/>
-                                    <button class="form-return" href="/">Volver</button>
+                                    <input type="button" class="form-return" onclick="window.location='/'" value="Volver">
                                 </div>
                             </form>
                         </div>
