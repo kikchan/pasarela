@@ -23,5 +23,8 @@ Route::get('login', function() {
     return view('login');
 });
 
-Route::get('pruebas', "PasarelaController@pruebas");
 Route::get('comercio', "ComercioController@vista");
+
+Route::get('pruebas', "PasarelaController@pruebas");
+Route::get('pruebas/form', "PasarelaController@gform");
+Route::post('pruebas/form', "PasarelaController@pform");
