@@ -20,5 +20,15 @@ class Input {
         $encryption = @openssl_encrypt($serialized, "AES-256-CBC", env("TPVV_KEY"));
         return $encryption;
     }
+
+    public function validate(){
+        $resultado = false;
+        if(isset($this->web) && $this->web!='')
+            if(isset($this->idPedido) && $this->idPedido!='')
+                if(isset($this->AES) && $this->AES!='')
+                    if(isset($this->SHA) && $this->SHA!='')
+                        $resultado = true;
+        return $resultado;
+    }
 }
 

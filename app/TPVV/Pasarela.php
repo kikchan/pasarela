@@ -38,13 +38,17 @@ class Pasarela {
         $this->precioFinal = $precio;
     }
 
-    public function generateURL(){
+    public function getINPUT(){
         $this->generateInput();
         return $this->input->toString();
     }
 
+    public function getURL(){
+        return "http://localhost/pasarela/pruebas/form/".$this->web;
+    }
+
     private function generateInput(){
-        $struct = array();
+        $struct = array(); //Input->AES
         $struct["web"] = $this->web;
         $struct["idPedido"] = $this->idPedido;
         $struct["carrito"] = $this->carrito;
@@ -58,5 +62,17 @@ class Pasarela {
         $this->input = $entrada;
     }
 
+    public function setInput($data){ //Server
+        $struct = @openssl_decrypt($data, "AES-256-CBC", env("TPVV_KEY"));
+        $this->input = unserialize($struct);
+        dump($this->input);
+    }
+
+    public function validateInput(){
+        
+        if($this->input!=null && $this->input instanceof Input){
+            dump($this->input->validate());
+        }
+    }
     
 }

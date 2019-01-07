@@ -25,6 +25,10 @@ Route::get('login', function() {
 
 Route::get('comercio', "ComercioController@vista");
 
+
+
+
+//Montoya (NO TOCAR POR DIOS)
 Route::get('pruebas', "PasarelaController@pruebas");
 Route::get('pruebas/form', "PasarelaController@gform");
-Route::post('pruebas/form', "PasarelaController@pform");
+Route::post('pruebas/form/{web}', "PasarelaController@pform");

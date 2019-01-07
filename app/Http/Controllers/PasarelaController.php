@@ -29,13 +29,16 @@ class PasarelaController extends Controller
         $tpvv->anadirProducto(3,3,3);
         $tpvv->asignarPrecioFinal(1);
         
-        
-        return view('pago/form',['input'=>$tpvv->generateURL()]);
+        return view('pago/form',['input'=>$tpvv->getINPUT(),'url'=>$tpvv->getURL()]);
     }
 
     public function pform(Request $request){
+        
+      
         $texto = $request->input('prueba');
-        echo $texto;
+        $tpvv = new Pasarela(env("APP_NAME","Error"),1);
+        echo $tpvv->setInput($texto);
+        $tpvv->validateInput();
         //return view('pago/form',['input'=>$tpvv->generateURL()]);
     }
 }
