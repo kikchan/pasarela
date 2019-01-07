@@ -40,7 +40,7 @@ class Pasarela {
 
     public function generateURL(){
         $this->generateInput();
-        echo $this->input->toString();
+        return $this->input->toString();
     }
 
     private function generateInput(){
@@ -57,4 +57,6 @@ class Pasarela {
         $entrada = new Input($this->web,$this->idPedido,$aes,$sha);
         $this->input = $entrada;
     }
+
+    
 }
