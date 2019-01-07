@@ -1,6 +1,7 @@
 @extends('principal')
 
 @section('menu')
+
 <div class="nav-side-menu">
     <div class="brand">Menu</div>
     <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
@@ -17,7 +18,7 @@
             <ul class="sub-menu collapse" id="products">
                 <li class="active"><a href="#">General</a></li>
                 <li><a href="#">Buscador</a></li>
-                <li><a href="#">Pedidos</a></li>
+                <li><a href="pedidos">Pedidos</a></li>
             </ul>
 
             <li data-toggle="collapse" data-target="#new" class="collapsed active">
@@ -34,4 +35,6 @@
         </ul>
     </div>
 </div>
+@yield('contenido')
+
 @endsection
