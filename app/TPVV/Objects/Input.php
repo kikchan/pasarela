@@ -6,13 +6,13 @@ class Input {
     public $web;
     public $idPedido;
     public $AES;
-    public $SHA;
+    public $tpvv_token;
 
-    function __construct($w,$idP,$a,$s){
+    function __construct($w,$idP,$a,$t){
         $this->web = $w;
         $this->idPedido = $idP;
         $this->AES = $a;
-        $this->SHA = $s;
+        $this->tpvv_token = $t;
     }
 
     public function toString(){
@@ -21,13 +21,21 @@ class Input {
         return $encryption;
     }
 
-    public function validate(){
+    private function check(){
         $resultado = false;
         if(isset($this->web) && $this->web!='')
             if(isset($this->idPedido) && $this->idPedido!='')
                 if(isset($this->AES) && $this->AES!='')
-                    if(isset($this->SHA) && $this->SHA!='')
+                    if(isset($this->tpvv_token) && $this->tpvv_token!='')
                         $resultado = true;
+        return $resultado;
+    }
+
+    public function validate(){
+        $resultado = false;
+        if($this->check())
+            dump(@openssl_decrypt($this->AES, "AES-256-CBC", strrev(env("TPVV_KEY"))));
+        
         return $resultado;
     }
 }

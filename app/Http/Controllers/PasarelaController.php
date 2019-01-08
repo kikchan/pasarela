@@ -37,7 +37,7 @@ class PasarelaController extends Controller
       
         $texto = $request->input('prueba');
         $tpvv = new Pasarela(env("APP_NAME","Error"),1);
-        echo $tpvv->setInput($texto);
+        $tpvv->setInput($texto);
         $tpvv->validateInput();
         //return view('pago/form',['input'=>$tpvv->generateURL()]);
     }

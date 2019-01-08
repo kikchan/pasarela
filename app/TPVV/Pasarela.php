@@ -55,10 +55,10 @@ class Pasarela {
         $struct["precio"] = $this->precioFinal;
         $serialized = serialize($struct);
 
-        $aes = @openssl_encrypt($serialized, "AES-256-CBC", env("TPVV_KEY"));
-        $sha = hash("sha256",$serialized);
+        $aes = @openssl_encrypt($serialized, "AES-256-CBC", strrev(env("TPVV_KEY")));
+        $token = hash("sha256",$serialized);
         
-        $entrada = new Input($this->web,$this->idPedido,$aes,$sha);
+        $entrada = new Input($this->web,$this->idPedido,$aes,$token);
         $this->input = $entrada;
     }
 
