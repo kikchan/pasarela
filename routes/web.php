@@ -24,7 +24,10 @@ Route::get('login', function() {
 });
 
 Route::get('comercio', "ComercioController@vista");
-Route::get('pedidos', "ComercioController@pedidos");
+
+Route::get('pagos={idComercio}', "TransaccionesController@pagos");
+Route::get('filtrar/pagos', 'TransaccionesController@filtrarEstado');
+
 Route::get('pruebas', "PasarelaController@pruebas");
 Route::get('pruebas/form', "PasarelaController@gform");
 Route::post('pruebas/form', "PasarelaController@pform");
