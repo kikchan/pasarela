@@ -31,3 +31,7 @@ Route::get('filtrar/pagos', 'TransaccionesController@filtrarEstado');
 Route::get('pruebas', "PasarelaController@pruebas");
 Route::get('pruebas/form', "PasarelaController@gform");
 Route::post('pruebas/form', "PasarelaController@pform");
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
