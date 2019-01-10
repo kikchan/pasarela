@@ -11,8 +11,8 @@ class TransaccionesController extends Controller
 {
 
     public function pagos($idComercio){
-        $pagos = Transacciones::where('idComercio',$idComercio)->get();
-        return view('listaTransacciones', ['pagos' => $pagos]);
+        $transacciones = Transacciones::where('idComercio',$idComercio)->get();
+        return view('listaTransacciones', ['pagos' => $transacciones]);
     }
 
     public function filtrar(Request $request, $idComercio) {
@@ -50,5 +50,11 @@ class TransaccionesController extends Controller
             }
         }
         return view('listaTransacciones', ['pagos' => $transacciones]);
+    }
+
+    public function buscarId(Request $request, $idComercio) {
+        $idTransaccion = $request->input('idTransaccion');
+        $transaccion = DB::table('transacciones')->where('idComercio',$idComercio)->where('id', $idTransaccion)->get();
+        return view('listaTransacciones', ['pagos' => $transaccion]);
     }
 }
