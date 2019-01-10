@@ -4,7 +4,7 @@
 <div class="container-contenido">
 <h2 style="margin:3%;"><font color = '#084B8A'> PEDIDOS </font></h2>
 
-<form id="filtros" action="{{ action('TransaccionesController@filtrarEstado') }}" method="GET" width="100%" >
+<form id="filtros" action="{{ action('TransaccionesController@filtrar', 2) }}" method="GET" width="100%" >
     <select style="color:white; background-color:#084B8A;" name="estado">
         <option value="0"> Todas los estados </option>
         @foreach(App\Estados::select(['id as c'])->groupBy(['id'])->get() as $estado)
