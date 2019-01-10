@@ -3,7 +3,9 @@
 namespace App\TPVV;
 
 use App\TPVV\Objects\Item;
-use App\TPVV\Objects\Input;
+use App\TPVV\Objects\Request;
+use App\TPVV\Objects\Struct;
+
 use Illuminate\Support\Facades\Hash;
 
 class Pasarela {
@@ -11,7 +13,7 @@ class Pasarela {
     private $web;
     private $idPedido;
     private $carrito;
-    private $input;
+    private $request;
     private $output;
     private $precioAsignado; //boolean
     private $precioFinal;
@@ -20,59 +22,64 @@ class Pasarela {
         $this->web = $w;
         $this->idPedido = $idP;
         $this->carrito = array();
-        $this->input = "";
+        $this->request = "";
         $this->output = "";
         $this->precioAsignado = false;
         $this->precioFinal = 0;
     }
 
-    public function anadirProducto($nombre,$precio,$cantidad){
+    public function AnadirProducto($nombre,$precio,$cantidad){
         $item = new Item($nombre,$precio,$cantidad);
         array_push($this->carrito,$item);
         if(!$this->precioAsignado)
             $this->precioFinal += $precio*$cantidad;
     }
 
-    public function asignarPrecioFinal($precio){ //Para aplicar algun descuento
+    public function AsignarPrecioFinal($precio){ //Para aplicar algun descuento
         $this->precioAsignado = true;
         $this->precioFinal = $precio;
     }
 
-    public function getINPUT(){
-        $this->generateInput();
-        return $this->input->toString();
+    //**** GETTERS ****\\
+
+    public function GetURL(){
+        if(count($this->carrito)>0)
+            return "http://localhost/pasarela/pruebas/form/".$this->web;
+        return false;
     }
 
-    public function getURL(){
-        return "http://localhost/pasarela/pruebas/form/".$this->web;
+    public function GetREQUEST(){
+        if(count($this->carrito)>0){
+            $this->GenerateRequest();
+            if($this->request!=false)
+                return $this->request->ToString();
+        }
+        return false;
+    }    
+
+    private function GenerateRequest(){
+        $struct = new Struct($this->web,$this->idPedido,$this->carrito,$this->precioFinal); //Input->AES
+        $tokens = $struct->Encode('Request');
+        if(!empty($tokens) && count($tokens)==2)
+            $this->request = new Request($this->web,$this->idPedido,$tokens['struct'],$tokens['token']);
+        else 
+            $this->request = false;
     }
 
-    private function generateInput(){
-        $struct = array(); //Input->AES
-        $struct["web"] = $this->web;
-        $struct["idPedido"] = $this->idPedido;
-        $struct["carrito"] = $this->carrito;
-        $struct["precio"] = $this->precioFinal;
-        $serialized = serialize($struct);
+    //**** GETTERS ****\\
 
-        $aes = @openssl_encrypt($serialized, "AES-256-CBC", strrev(env("TPVV_KEY")));
-        $token = hash("sha256",$serialized);
-        
-        $entrada = new Input($this->web,$this->idPedido,$aes,$token);
-        $this->input = $entrada;
-    }
-
-    public function setInput($data){ //Server
+    public function SetREQUEST($data){ //Server
         $struct = @openssl_decrypt($data, "AES-256-CBC", env("TPVV_KEY"));
-        $this->input = unserialize($struct);
-        dump($this->input);
+        $this->request = unserialize($struct);
+        dump($this->request);
     }
 
-    public function validateInput(){
+    public function ValidateRequest(){
         
-        if($this->input!=null && $this->input instanceof Input){
-            dump($this->input->validate());
+        if($this->request!=null && $this->request instanceof Request){
+            dump($this->request->validate());
         }
     }
     
 }
+

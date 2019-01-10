@@ -2,16 +2,16 @@
 
 namespace App\TPVV\Objects;
 
-class Input {
+class Request {
     public $web;
     public $idPedido;
-    public $AES;
+    public $struct;
     public $tpvv_token;
 
     function __construct($w,$idP,$a,$t){
         $this->web = $w;
         $this->idPedido = $idP;
-        $this->AES = $a;
+        $this->struct = $a;
         $this->tpvv_token = $t;
     }
 
@@ -25,7 +25,7 @@ class Input {
         $resultado = false;
         if(isset($this->web) && $this->web!='')
             if(isset($this->idPedido) && $this->idPedido!='')
-                if(isset($this->AES) && $this->AES!='')
+                if(isset($this->struct) && $this->struct!='')
                     if(isset($this->tpvv_token) && $this->tpvv_token!='')
                         $resultado = true;
         return $resultado;
@@ -34,7 +34,7 @@ class Input {
     public function validate(){
         $resultado = false;
         if($this->check())
-            dump(@openssl_decrypt($this->AES, "AES-256-CBC", strrev(env("TPVV_KEY"))));
+            dump(@openssl_decrypt($this->struct, "AES-256-CBC", strrev(env("TPVV_KEY"))));
         
         return $resultado;
     }
