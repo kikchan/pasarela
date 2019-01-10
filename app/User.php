@@ -18,21 +18,27 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     
-    // Relación 1-N con Ticket
-    public function tickets()
+    // Relación 1-N con Ticket (Solo comercios)
+    public function tickets_comercio()
 	{
-		return $this->hasMany('App\Ticket');
+		return $this->hasMany('App\Ticket', 'idComercio');
     }
 
-    // Relación 1-N con Transaccion (Solo comercio)
+    // Relación 1-N con Ticket (Solo técnicos)
+    public function tickets_tecnico()
+	{
+		return $this->hasMany('App\Ticket', 'idTecnico');
+    }
+
+    // Relación 1-N con Transaccion (Solo comercios)
     public function transacciones()
 	{
-		return $this->hasMany('App\Transaccion');
+		return $this->hasMany('App\Transaccion', 'idComercio');
     }
 
     // Relación 1-N con Valoracion (Solo técnicos)
     public function valoraciones()
     {
-        return $this->hasMany('App\Valoracion');
+        return $this->hasMany('App\Valoracion', 'idTecnico');
     }
 }

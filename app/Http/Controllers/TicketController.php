@@ -19,21 +19,20 @@ class TicketController extends Controller
     {
 		$ticket = Ticket::find($id);
 		return View::make("Ticket/detalles")->with('ticket', $ticket);
-    }
-
-	/*
-	public function detail($id)
+	}
+	
+	public function ajax_detalle($id)
 	{
 		$res = "";
 		
-		$cliente = Cliente::find($id);
+		$ticket = Ticket::find($id);
 		
-		if($cliente)
+		if($ticket)
 		{
 			$res="<table>"; $res.="<tr>";
-			$res.="<td>ID:</td><td>" . $cliente->nombre . "</td>";
+			$res.="<td>Asunto:</td><td>" . $ticket->asunto . "</td>";
+			$res.="</tr>"; $res.="</table>";
 		}
-		//$res .= 
-    }
-    */
+		return $res;
+	}
 }

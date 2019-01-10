@@ -31,4 +31,5 @@ Route::post('pruebas/form', "PasarelaController@pform");
 
 Route::get('tickets', 'TicketController@listado');
 Route::get('tickets/{id}', 'TicketController@detalles');
+Route::get('/detalle_ajax/{id}', 'TicketController@ajax_detalle')->name('detalle_ajax');
 

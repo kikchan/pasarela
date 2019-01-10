@@ -15,6 +15,6 @@ class Tarjeta extends Model
     // Relación 1-N con Transaccion
     public function transacciones()
     {
-        return $this->hasMany('App\Transaccion');
+        return $this->hasMany('App\Transaccion', 'idTarjeta');
     }
 }

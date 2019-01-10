@@ -15,7 +15,7 @@ class Transaccion extends Model
     // Relación 1-N con Ticket
     public function tickets()
     {
-        return $this->hasMany('App\Ticket');
+        return $this->hasMany('App\Ticket', 'idTransaccion');
     }
     
     // Relación N-1 con Usuario (Comercio)

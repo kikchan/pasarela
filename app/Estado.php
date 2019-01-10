@@ -15,12 +15,12 @@ class Estado extends Model
     // Relación 1-N con Ticket
     public function tickets()
     {
-        return $this->hasMany('App\Ticket');
+        return $this->hasMany('App\Ticket', 'idEstado');
     }
 
     // Relación 1-N con Transaccion
     public function transacciones()
     {
-        return $this->hasMany('App\Transaccion');
+        return $this->hasMany('App\Transaccion', 'idEstado');
     }
 }
