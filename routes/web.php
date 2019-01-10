@@ -28,3 +28,7 @@ Route::get('pedidos', "ComercioController@pedidos");
 Route::get('pruebas', "PasarelaController@pruebas");
 Route::get('pruebas/form', "PasarelaController@gform");
 Route::post('pruebas/form', "PasarelaController@pform");
+
+Route::get('tickets', 'TicketController@listado');
+Route::get('tickets/{id}', 'TicketController@detalles');
+
