@@ -20,6 +20,7 @@ class TransaccionesController extends Controller
         $importe = $request->input('importe');
 
         if($estado != "0") {
+            $transacciones = DB::table('transacciones')->where('idComercio', $idComercio)->where('idEstado', $estado)->paginate(5);
             if($importe == "1") {
                 $transacciones = Transacciones::where('idComercio', $idComercio)->where('idEstado', $estado)->where('importe', '<=', 50.0)->paginate(5);
             }
@@ -33,7 +34,8 @@ class TransaccionesController extends Controller
                 $transacciones = Transacciones::where('idComercio', $idComercio)->where('idEstado', $estado)->where('importe', '>=', 500.0)->paginate(5);
             }
         }
-        elseif($estado == "0" && $importe != "0") {
+        elseif($estado == "0") {
+            $transacciones = DB::table('transacciones')->where('idComercio', $idComercio)->paginate(5);
             if($importe == "1") {
                 $transacciones = Transacciones::where('importe', '<=', 50.0)->paginate(5);
             }
