@@ -18,6 +18,8 @@ class Pasarela {
     private $precioAsignado; //boolean
     private $precioFinal;
 
+    //*****  *****/
+
     function __construct($w,$idP) {
         $this->web = $w;
         $this->idPedido = $idP;
@@ -40,7 +42,7 @@ class Pasarela {
         $this->precioFinal = $precio;
     }
 
-    //**** GETTERS ****\\
+    //**** COMERCIO ****\\
 
     public function GetURL(){
         if(count($this->carrito)>0)
@@ -50,35 +52,33 @@ class Pasarela {
 
     public function GetREQUEST(){
         if(count($this->carrito)>0){
-            $this->GenerateRequest();
-            if($this->request!=false)
+            $struct = new Struct($this->web,$this->idPedido,$this->carrito,$this->precioFinal); //Input->AES
+            $tokens = $struct->Encode('Request');
+            if(!empty($tokens) && count($tokens)==2){
+                $this->request = new Request($this->web,$this->idPedido,$tokens['struct'],$tokens['token']);
                 return $this->request->ToString();
+            } else {
+                $this->request = false;
+            }
         }
         return false;
     }    
 
-    private function GenerateRequest(){
-        $struct = new Struct($this->web,$this->idPedido,$this->carrito,$this->precioFinal); //Input->AES
-        $tokens = $struct->Encode('Request');
-        if(!empty($tokens) && count($tokens)==2)
-            $this->request = new Request($this->web,$this->idPedido,$tokens['struct'],$tokens['token']);
-        else 
-            $this->request = false;
+    //**** SERVIDOR ****\\
+
+    public function SetREQUEST($data){ 
+        $request = new Request();
+        $this->request = $request->Fill($data);
     }
 
-    //**** GETTERS ****\\
-
-    public function SetREQUEST($data){ //Server
-        $struct = @openssl_decrypt($data, "AES-256-CBC", env("TPVV_KEY"));
-        $this->request = unserialize($struct);
-        dump($this->request);
-    }
+    
 
     public function ValidateRequest(){
-        
-        if($this->request!=null && $this->request instanceof Request){
-            dump($this->request->validate());
+
+        if($this->request!=NULL && $this->request instanceof Request){
+            return $this->request->Validate();
         }
+        return false;
     }
     
 }

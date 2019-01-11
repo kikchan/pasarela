@@ -35,7 +35,7 @@ class PasarelaController extends Controller
         $texto = $request->input('prueba');
         dump($texto);
         $tpvv = new Pasarela(env("APP_NAME","Error"),1);
-        $tpvv->SetRequest($texto);
+        $tpvv->SetREQUEST($texto);
         $tpvv->ValidateRequest();
         
     }
