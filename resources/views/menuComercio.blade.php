@@ -27,7 +27,16 @@
                 <li><a href="#">Listado</a></li>
                 <li><a href="#">Buscador</a></li>
                 <li><a href="#">Ticket</a></li>
-                <li><a href="#">Valoraciones</a></li>
+                
+                 <li data-toggle="collapse" data-target="#valoraciones" class="collapsed active">
+                <a href="#"><i class=""></i> Valoraciones <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-sub-menu collapse" id="valoraciones">
+                    <li><a href="#">Valoraciones > Listado</a></li>
+                    <li><a href="#">Valoraciones > Buscador</a></li>
+                    <li><a href="#">Valoraciones > Ticket</a></li>
+                </ul>
+                
                 <li><a href="#">Técnicos</a></li>
                 <li><a href="#">Valorar al técnico</a></li>
             </ul>
@@ -36,3 +45,4 @@
 </div>
     @yield('contenido')
 </body>
+1
