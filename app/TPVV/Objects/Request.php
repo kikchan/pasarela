@@ -33,9 +33,9 @@ class Request {
         return false;
     }
 
-    public function ToString(){
+    public function ToString($key=NULL){
         $serialized = serialize($this);
-        $encryption = @openssl_encrypt($serialized, "AES-256-CBC", env("TPVV_KEY"));
+        $encryption = @openssl_encrypt($serialized, "AES-256-CBC", $key??env("TPVV_KEY"));
         return $encryption;
     }
 
@@ -53,10 +53,9 @@ class Request {
         dump($this->struct);
     }
 
-    public function Validate(){ //por completar
+    public function Validate($web=NULL,$idp){ //por completar
         $resultado = false;
-        if($this->check()){
-            dump($this);
+        if(isset($web) && isset($web) && $this->check()){
             $resultado=true;
         }
         return $resultado;

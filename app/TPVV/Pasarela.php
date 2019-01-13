@@ -17,10 +17,11 @@ class Pasarela {
     private $output;
     private $precioAsignado; //boolean
     private $precioFinal;
+    private $key;
 
     //*****  *****/
 
-    function __construct($w,$idP) {
+    function __construct($w,$idP,$key=NULL) {
         $this->web = $w;
         $this->idPedido = $idP;
         $this->carrito = array();
@@ -28,6 +29,7 @@ class Pasarela {
         $this->output = "";
         $this->precioAsignado = false;
         $this->precioFinal = 0;
+        $this->key=$key;
     }
 
     public function AnadirProducto($nombre,$precio,$cantidad){
@@ -53,10 +55,10 @@ class Pasarela {
     public function GetREQUEST(){
         if(count($this->carrito)>0){
             $struct = new Struct($this->web,$this->idPedido,$this->carrito,$this->precioFinal); //Input->AES
-            $tokens = $struct->Encode('Request');
+            $tokens = $struct->Encode('Request',$this->key);
             if(!empty($tokens) && count($tokens)==2){
                 $this->request = new Request($this->web,$this->idPedido,$tokens['struct'],$tokens['token']);
-                $html = sprintf('<input type="hidden" name="tpvv_request" value="%s">',$this->request->ToString());
+                $html = sprintf('<input type="hidden" name="tpvv_request" value="%s">',$this->request->ToString($this->key));
                 return $html;
             } else {
                 $this->request = false;
@@ -73,14 +75,13 @@ class Pasarela {
             if(isset($result) && count($result)==1){ //Comprobar BD registrado comercio
                 $request = new Request();
                 $this->request = $request->Fill($result[0]->key,$data);
-                dump($this->request);
             }
         }
     }
 
     public function ValidateRequest(){
         if($this->request!=NULL && $this->request instanceof Request){
-            return $this->request->Validate();
+            return $this->request->Validate($this->web,$this->idPedido);
         }
         return false;
     }

@@ -8,14 +8,31 @@ use App\User;
 
 class PasarelaController extends Controller
 {
-    public function pruebas(){
-        $tpvv = new Pasarela(env("APP_NAME","Error"),1);
+    public function gen(){
+        return view('pago/generate');
+    }
+
+    public function pgen(Request $request){
+        $web = $request->input('web');
+        $idPedido = $request->input('idPedido');
+        $key = $request->input('key');
+        $carrito = $request->input('lista');
+        $precio = $request->input('precio');
         
-        $tpvv->AnadirProducto(1,1,1);
-        $tpvv->AnadirProducto(2,2,2);
-        $tpvv->AnadirProducto(3,3,3);
-        $tpvv->AsignarPrecioFinal(1);
-        $tpvv->GetURL();        
+        $tpvv = new Pasarela($web,(int)$idPedido,$key);
+        $items = explode('|',$carrito);
+        foreach($items as $item){
+            $data = explode(',',$item);
+            if(count($data)==3)
+                $tpvv->AnadirProducto((int)$data[0],(int)$data[1],(int)$data[2]);
+        }
+        if(isset($precio))
+            $tpvv->AsignarPrecioFinal((int)$precio);
+
+        dump($tpvv);
+
+        return view('pago/form',['request'=>$tpvv->getREQUEST(),'url'=>$tpvv->getURL()]);
+
     }
 
     public function gform(){ //Comercio envia la solicitud
@@ -26,7 +43,7 @@ class PasarelaController extends Controller
         $tpvv->AnadirProducto(2,2,2);
         $tpvv->AnadirProducto(3,3,3);
         $tpvv->AsignarPrecioFinal(1);
-        
+        dump($tpvv);
         return view('pago/form',['request'=>$tpvv->getREQUEST(),'url'=>$tpvv->getURL()]);
     }
 
@@ -40,3 +57,5 @@ class PasarelaController extends Controller
         
     }
 }
+
+
