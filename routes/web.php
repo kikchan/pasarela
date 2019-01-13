@@ -31,3 +31,8 @@ Route::get('filtrar/pagos', 'TransaccionesController@filtrarEstado');
 Route::get('pruebas', "PasarelaController@pruebas");
 Route::get('pruebas/form', "PasarelaController@gform");
 Route::post('pruebas/form', "PasarelaController@pform");
+
+Route::get('tickets', 'TicketController@listado');
+Route::get('tickets/{id}', 'TicketController@detalles');
+Route::get('/detalle_ajax/{id}', 'TicketController@ajax_detalle')->name('detalle_ajax');
+
