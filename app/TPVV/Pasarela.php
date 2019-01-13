@@ -79,9 +79,13 @@ class Pasarela {
         }
     }
 
+    public function CreateTransaction(){
+        
+    }
+
     public function ValidateRequest(){
-        if($this->request!=NULL && $this->request instanceof Request){
-            return $this->request->Validate($this->web,$this->idPedido);
+        if(isset($this->request) && $this->request instanceof Request){
+            return $this->request->Validate($this->web);
         }
         return false;
     }

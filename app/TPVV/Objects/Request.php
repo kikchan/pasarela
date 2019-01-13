@@ -38,25 +38,25 @@ class Request {
         $encryption = @openssl_encrypt($serialized, "AES-256-CBC", $key??env("TPVV_KEY"));
         return $encryption;
     }
-
-    private function Check(){
-        $resultado = false;
-        if(isset($this->web) && $this->web!='')
-            if(isset($this->idPedido) && $this->idPedido!='')
-                if(isset($this->struct) && $this->struct!='')
-                    if(isset($this->tpvv_token) && $this->tpvv_token!='')
-                        $resultado = true;
-        return $resultado;
-    }
-
+    
     private function getStruct(){
         dump($this->struct);
     }
 
-    public function Validate($web=NULL,$idp){ //por completar
+    public function Validate($web=NULL){ //por completar
         $resultado = false;
-        if(isset($web) && isset($web) && $this->check()){
-            $resultado=true;
+        if(isset($web)){ //Comprobamos vacios y nulos
+            if(isset($this->web) && $this->web!='')
+                if(isset($this->idPedido) && $this->idPedido!='')
+                    if(isset($this->struct) && $this->struct!='')
+                        if(isset($this->tpvv_token) && $this->tpvv_token!=''){
+                            $data = $this->struct->DataAndValidate('Request');
+                            if(isset($data) && count($data)==4) //Comenzamos las comparaciones
+                                if($data['web']==$web && $web==$this->web)
+                                    if($data['idPedido']==$this->idPedido)
+                                        if(hash("sha256",serialize($data))==$this->tpvv_token)
+                                            $resultado = true;             
+                        }
         }
         return $resultado;
     }
