@@ -2,6 +2,8 @@
 
 namespace App\TPVV\Objects;
 
+use App\TPVV\Objects\Struct;
+
 class Request {
     public $web;
     public $idPedido;
@@ -15,15 +17,18 @@ class Request {
         $this->tpvv_token = $t;
     }
 
-    public function Fill($text){
+    public function Fill($key,$text){
         if(isset($text) && $text!=''){
-            $struct = @openssl_decrypt($text, "AES-256-CBC", env("TPVV_KEY"));
+            $struct = @openssl_decrypt($text, "AES-256-CBC", $key);
             $deserialized = unserialize($struct);
-            $this->web=$deserialized->web;
-            $this->idPedido=$deserialized->idPedido;
-            $this->struct=$deserialized->struct;
-            $this->tpvv_token=$deserialized->tpvv_token;
-            return $this;
+            if(isset($deserialized) && $deserialized){
+                $this->web=$deserialized->web;
+                $this->idPedido=$deserialized->idPedido;
+                    $s = new Struct(); $s->Decode($deserialized->struct,$key,'Request');
+                $this->struct=$s;
+                $this->tpvv_token=$deserialized->tpvv_token;
+                return $this;
+            }
         }
         return false;
     }
@@ -44,16 +49,18 @@ class Request {
         return $resultado;
     }
 
+    private function getStruct(){
+        dump($this->struct);
+    }
+
     public function Validate(){ //por completar
         $resultado = false;
         if($this->check()){
-            dump(@openssl_decrypt($this->struct, "AES-256-CBC", strrev(env("TPVV_KEY"))));
+            dump($this);
             $resultado=true;
         }
-        
         return $resultado;
     }
-
 
 }
 

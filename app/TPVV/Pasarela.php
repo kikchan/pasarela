@@ -5,7 +5,7 @@ namespace App\TPVV;
 use App\TPVV\Objects\Item;
 use App\TPVV\Objects\Request;
 use App\TPVV\Objects\Struct;
-
+use App\User;
 use Illuminate\Support\Facades\Hash;
 
 class Pasarela {
@@ -24,7 +24,7 @@ class Pasarela {
         $this->web = $w;
         $this->idPedido = $idP;
         $this->carrito = array();
-        $this->request = "";
+        $this->request = NULL;
         $this->output = "";
         $this->precioAsignado = false;
         $this->precioFinal = 0;
@@ -56,7 +56,8 @@ class Pasarela {
             $tokens = $struct->Encode('Request');
             if(!empty($tokens) && count($tokens)==2){
                 $this->request = new Request($this->web,$this->idPedido,$tokens['struct'],$tokens['token']);
-                return $this->request->ToString();
+                $html = sprintf('<input type="hidden" name="tpvv_request" value="%s">',$this->request->ToString());
+                return $html;
             } else {
                 $this->request = false;
             }
@@ -66,15 +67,18 @@ class Pasarela {
 
     //**** SERVIDOR ****\\
 
-    public function SetREQUEST($data){ 
-        $request = new Request();
-        $this->request = $request->Fill($data);
+    public function SetREQUEST($data){  
+        if(isset($data)){
+            $result = User::where('nick',$this->web)->get();
+            if(isset($result) && count($result)==1){ //Comprobar BD registrado comercio
+                $request = new Request();
+                $this->request = $request->Fill($result[0]->key,$data);
+                dump($this->request);
+            }
+        }
     }
 
-    
-
     public function ValidateRequest(){
-
         if($this->request!=NULL && $this->request instanceof Request){
             return $this->request->Validate();
         }

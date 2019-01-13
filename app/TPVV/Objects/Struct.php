@@ -43,28 +43,20 @@ class Struct {
         return $s;
     }
 
-    public function Decode($request, $method=NULL){
-        $s = array();
+    public function Decode($struct,$key,$method=NULL){
+        $s = @openssl_decrypt($struct, "AES-256-CBC", strrev(env("TPVV_KEY")));
+        $s = unserialize($s);
         if($method=='Request'){
-            $temp = array();
-                $temp['web'] = $this->web;
-                $temp['idPedido'] = $this->idPedido;
-                $temp['carro'] = $this->carro;
-                $temp['precio'] = $this->precio;
-            $serialized = serialize($temp);
-            $s['struct'] = @openssl_encrypt($serialized, "AES-256-CBC", strrev(env("TPVV_KEY")));
-            $s['token'] =  hash("sha256",$serialized);
+            $this->web = $s['web'];
+            $this->idPedido = $s['idPedido'];
+            $this->carro = $s['carro'] ;
+            $this->precio = $s['precio'];
         }else if ($method=='Response'){
-            $temp = array();
-                $temp['web'] = $this->web;
-                $temp['idPedido'] = $this->idPedido;
-                $temp['estado'] = $this->estado;
-                $temp['fecha'] = $this->fecha;
-            $serialized = serialize($temp);
-            $s['struct'] = @openssl_encrypt($serialized, "AES-256-CBC", strrev(env("TPVV_KEY")));
-            $s['token'] =  hash("sha256",$serialized);
+            $this->web = $s['web'];
+            $this->idPedido = $s['idPedido'];
+            $this->estado = $s['estado'];
+            $this->fecha = $s['fecha'];
         }
-        return $s;
     }
 
 
