@@ -27,12 +27,25 @@
                 <li><a href="#">Listado</a></li>
                 <li><a href="#">Buscador</a></li>
                 <li><a href="#">Ticket</a></li>
-                <li><a href="valoraciones">Valoraciones</a></li>
+                <li><a href="#">Valoraciones</a></li>
                 <li><a href="#">Técnicos</a></li>
                 <li><a href="#">Valorar al técnico</a></li>
             </ul>
         </ul>
     </div>
 </div>
-    @yield('contenido')
+
+<div class="container-contenido">
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action">
+    Cras justo odio
+  </a>
+  <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+  <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+  <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+  <a href="#" class="list-group-item list-group-item-action">Vestibulum at eros</a>
+</div>
+</div> 
+    <!--@yield('contenido')-->
+
 </body>
