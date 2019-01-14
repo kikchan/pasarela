@@ -8,6 +8,11 @@ use App\User;
 
 class PasarelaController extends Controller
 {
+
+    public function pagar(){
+        return view('pago/pagar');
+    }
+
     public function gen(){
         return view('pago/generate');
     }
@@ -29,8 +34,6 @@ class PasarelaController extends Controller
         if(isset($precio))
             $tpvv->AsignarPrecioFinal((int)$precio);
 
-        dump($tpvv);
-
         return view('pago/form',['request'=>$tpvv->getREQUEST(),'url'=>$tpvv->getURL()]);
 
     }
@@ -43,18 +46,19 @@ class PasarelaController extends Controller
         $tpvv->AnadirProducto(2,2,2);
         $tpvv->AnadirProducto(3,3,3);
         $tpvv->AsignarPrecioFinal(1);
-        dump($tpvv);
+        //dump($tpvv);
         return view('pago/form',['request'=>$tpvv->getREQUEST(),'url'=>$tpvv->getURL()]);
     }
 
     public function pform($web,Request $request){ //Nuestro servidor recibe la solicitud
         $tpvv = new Pasarela($web,NULL);
         $texto = $request->input('tpvv_request');
-        dump($texto);
+        //dump($texto);
         
         $tpvv->SetREQUEST($texto);
-        $tpvv->CreateTransaction();
-        
+        $sha = $tpvv->CreateTransaction();
+        return redirect()->action('TicketController@detalles', ['id' => $sha]);
+
     }
 }
 

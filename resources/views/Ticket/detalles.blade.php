@@ -1,5 +1,6 @@
 @extends('principal')
 
+@section('menu')
 <h2>Detalles de Ticket</h2>
 @if ($ticket != null)
 <ul>
@@ -14,3 +15,4 @@
 @else
     <div class="alert alert-warning">El ticket no existe</div>
 @endif
+@endsection

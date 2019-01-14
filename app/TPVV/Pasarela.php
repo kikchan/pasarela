@@ -95,7 +95,9 @@ class Pasarela {
             $t->importe = $struct['precio'];
             $t->save();            
             //Transaccion
+            return $t->sha;
         }
+        return false;
     }
 
     private function ValidateRequest(){
