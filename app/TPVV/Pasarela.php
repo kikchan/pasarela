@@ -6,6 +6,7 @@ use App\TPVV\Objects\Item;
 use App\TPVV\Objects\Request;
 use App\TPVV\Objects\Struct;
 use App\User;
+use App\Transaccion;
 use Illuminate\Support\Facades\Hash;
 
 class Pasarela {
@@ -18,6 +19,7 @@ class Pasarela {
     private $precioAsignado; //boolean
     private $precioFinal;
     private $key;
+    private $idComercio;
 
     //*****  *****/
 
@@ -72,7 +74,10 @@ class Pasarela {
     public function SetREQUEST($data){  
         if(isset($data)){
             $result = User::where('nick',$this->web)->get();
+            
             if(isset($result) && count($result)==1){ //Comprobar BD registrado comercio
+                $this->idComercio= $result[0]->id;
+                $this->key= $result[0]->key;
                 $request = new Request();
                 $this->request = $request->Fill($result[0]->key,$data);
             }
@@ -81,7 +86,14 @@ class Pasarela {
 
     public function CreateTransaction(){
         $struct = $this->ValidateRequest();
-        if($struct !=false && ($struct instanceof Struct)){
+        if($struct !=false && is_array($struct)){
+            $t = new Transaccion();
+            $t->idComercio = $this->idComercio;
+            $t->Pedido = $struct['idPedido'];
+            $t->sha = hash("sha256",serialize($struct));
+            $t->carro = @openssl_encrypt(serialize($struct['carro']), "AES-256-CBC", $this->key);
+            $t->importe = $struct['precio'];
+            $t->save();            
             //Transaccion
         }
     }
@@ -94,4 +106,5 @@ class Pasarela {
     }
     
 }
+
 

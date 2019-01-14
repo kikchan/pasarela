@@ -16,13 +16,13 @@ class CreateTransaccionesTable extends Migration
         Schema::create('transacciones', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('idComercio');
-            $table->unsignedInteger('idPedido');
+            $table->unsignedInteger('pedido');
             $table->string('sha');
-            $table->string('carro');
+            $table->longText('carro');
             $table->decimal('importe',10, 2);
-            $table->unsignedInteger('idTarjeta');
-            $table->unsignedInteger('idEstado');
-            $table->string('comentario'); //Enlazado al estado
+            $table->unsignedInteger('idTarjeta')->nullable();
+            $table->unsignedInteger('idEstado')->nullable();
+            $table->string('comentario')->nullable(); //Enlazado al estado
             $table->timestamps();
 
             $table->foreign('idComercio')->references('id')->on('users');
