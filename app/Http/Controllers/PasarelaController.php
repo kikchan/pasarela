@@ -3,39 +3,59 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\TPVV\Pasarela;
-
+use App\User;
 
 class PasarelaController extends Controller
 {
-    public function pruebas(){
-        $tpvv = new Pasarela(env("APP_NAME","Error"),1);
-        
-        $tpvv->anadirProducto(1,1,1);
-        $tpvv->anadirProducto(2,2,2);
-        $tpvv->anadirProducto(3,3,3);
-        $tpvv->asignarPrecioFinal(1);
-        
-        $tpvv->generateURL();
-        
+    public function gen(){
+        return view('pago/generate');
     }
 
-    public function gform(){
-        $tpvv = new Pasarela(env("APP_NAME","Error"),1);
+    public function pgen(Request $request){
+        $web = $request->input('web');
+        $idPedido = $request->input('idPedido');
+        $key = $request->input('key');
+        $carrito = $request->input('lista');
+        $precio = $request->input('precio');
         
-        $tpvv->anadirProducto(1,1,1);
-        $tpvv->anadirProducto(2,2,2);
-        $tpvv->anadirProducto(3,3,3);
-        $tpvv->asignarPrecioFinal(1);
-        
-        
-        return view('pago/form',['input'=>$tpvv->generateURL()]);
+        $tpvv = new Pasarela($web,(int)$idPedido,$key);
+        $items = explode('|',$carrito);
+        foreach($items as $item){
+            $data = explode(',',$item);
+            if(count($data)==3)
+                $tpvv->AnadirProducto((int)$data[0],(int)$data[1],(int)$data[2]);
+        }
+        if(isset($precio))
+            $tpvv->AsignarPrecioFinal((int)$precio);
+
+        dump($tpvv);
+
+        return view('pago/form',['request'=>$tpvv->getREQUEST(),'url'=>$tpvv->getURL()]);
+
     }
 
-    public function pform(Request $request){
-        $texto = $request->input('prueba');
-        echo $texto;
-        //return view('pago/form',['input'=>$tpvv->generateURL()]);
+    public function gform(){ //Comercio envia la solicitud
+        
+        $tpvv = new Pasarela('Fran',1);
+        
+        $tpvv->AnadirProducto(1,1,1);
+        $tpvv->AnadirProducto(2,2,2);
+        $tpvv->AnadirProducto(3,3,3);
+        $tpvv->AsignarPrecioFinal(1);
+        dump($tpvv);
+        return view('pago/form',['request'=>$tpvv->getREQUEST(),'url'=>$tpvv->getURL()]);
+    }
+
+    public function pform($web,Request $request){ //Nuestro servidor recibe la solicitud
+        $tpvv = new Pasarela($web,NULL);
+        $texto = $request->input('tpvv_request');
+        dump($texto);
+        
+        $tpvv->SetREQUEST($texto);
+        $tpvv->CreateTransaction();
+        
     }
 }
+
+
