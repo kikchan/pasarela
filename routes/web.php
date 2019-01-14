@@ -25,11 +25,15 @@ Route::get('login', function() {
 
 Route::get('comercio', "ComercioController@vista");
 
-
-
+Route::get('pagos={idComercio}', "TransaccionesController@pagos");
+Route::get('filtrar/pagos', 'TransaccionesController@filtrarEstado');
 
 //Montoya (NO TOCAR POR DIOS)
 Route::get('pruebas/form', "PasarelaController@gform");
 Route::get('pruebas/form/generate', "PasarelaController@gen")->name('gen');
 Route::post('pruebas/form/generate', "PasarelaController@pgen")->name('pgen');
 Route::post('pruebas/form/{web}', "PasarelaController@pform");
+
+Route::get('tickets', 'TicketController@listado');
+Route::get('tickets/{id}', 'TicketController@detalles');
+Route::get('/detalle_ajax/{id}', 'TicketController@ajax_detalle')->name('detalle_ajax');
