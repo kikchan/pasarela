@@ -80,10 +80,13 @@ class Pasarela {
     }
 
     public function CreateTransaction(){
-        
+        $struct = $this->ValidateRequest();
+        if($struct !=false && ($struct instanceof Struct)){
+            //Transaccion
+        }
     }
 
-    public function ValidateRequest(){
+    private function ValidateRequest(){
         if(isset($this->request) && $this->request instanceof Request){
             return $this->request->Validate($this->web);
         }

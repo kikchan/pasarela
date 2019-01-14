@@ -53,7 +53,7 @@ class PasarelaController extends Controller
         dump($texto);
         
         $tpvv->SetREQUEST($texto);
-        var_dump($tpvv->ValidateRequest());
+        $tpvv->CreateTransaction();
         
     }
 }
