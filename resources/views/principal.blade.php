@@ -10,6 +10,7 @@
         <link href = {{ asset("/css/app.css") }} rel="stylesheet" />
         <script src = {{ asset("/js/app.js") }} ></script>
         <link href = {{ asset("/css/font-awesome.min.css") }} rel="stylesheet" />
+        @yield('includes')
         <style>@yield('style')</style>
     </head>
     <body>  
