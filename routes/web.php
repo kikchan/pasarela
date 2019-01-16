@@ -24,11 +24,16 @@ Route::get('login', function() {
 });
 
 Route::get('comercio', "ComercioController@vista");
+Route::get('comercio/{id}', "ComercioController@general");
 
 Route::get('valoraciones', "ValoracionesController@vista");
 
 Route::get('pagos={idComercio}', "TransaccionesController@pagos");
 Route::get('filtrar/pagos', 'TransaccionesController@filtrarEstado');
+Route::get('comercio/{id}/pagos', "TransaccionesController@pagos");
+Route::get('comercio/{id}/pagosFiltro', 'TransaccionesController@filtrar');
+Route::get('comercio/{id}/pagosBusqueda', 'TransaccionesController@buscarId');
+
 
 Route::get('pruebas', "PasarelaController@pruebas");
 Route::get('pruebas/form', "PasarelaController@gform");
