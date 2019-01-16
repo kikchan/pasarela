@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
+use App\Valoracion;
+use App\User;
+use Illuminate\Database\Eloquent\Model;
 
 class ValoracionesController extends Controller
 {
      public function vista(){
 
-     	$listaValoraciones = DB::table('pasarelabd.valoraciones')->get();
-        return view('menuComercioValoraciones')->with('listaValoraciones', $listaValoraciones);
+     	$listaValoraciones = Valoracion::all();
+     	$listaUsuarios = User::all();
+		
+        return view('menuComercioValoraciones')->with('listaValoraciones', $listaValoraciones)->with('usuarios', $listaUsuarios);
     }
 }

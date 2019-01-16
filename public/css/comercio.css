@@ -291,38 +291,26 @@ body {
 
 
 ////////////////
-#form {
-  width: 250px;
-  margin: 0 auto;
-  height: 50px;
+.valoracion {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
 }
 
-#form p {
-  text-align: center;
+.valoracion input {
+    position: absolute;
+    top: -100px;
 }
 
-#form label {
-  font-size: 20px;
+
+.valoracion label {
+    float: right;
+    color: #c1b8b8;
+    font-size: 30px; 
 }
 
-input[type="radio"] {
-  display: none;
-}
-
-label {
-  color: grey;
-}
-
-.clasificacion {
-  direction: rtl;
-  unicode-bidi: bidi-override;
-}
-
-label:hover,
-label:hover ~ label {
-  color: orange;
-}
-
-input[type="radio"]:checked ~ label {
-  color: orange;
+.valoracion label:hover,
+.valoracion label:hover ~ label,
+.valoracion input:checked ~ label {
+    color: #ffff00;
 }
