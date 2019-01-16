@@ -15,9 +15,9 @@ class CreateTarjetasTable extends Migration
     {
         Schema::create('tarjetas', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('numero',16);
-            $table->char('caducidad',5);
-            $table->char('cvv',3);
+            $table->string('numero',19);
+            $table->char('caducidad',7);
+            $table->char('cvv',4);
         });
     }
 

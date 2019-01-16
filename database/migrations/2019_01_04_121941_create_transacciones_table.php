@@ -17,7 +17,7 @@ class CreateTransaccionesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('idComercio');
             $table->unsignedInteger('pedido');
-            $table->string('sha');
+            $table->string('sha')->unique();
             $table->longText('carro');
             $table->decimal('importe',10, 2);
             $table->unsignedInteger('idTarjeta')->nullable();

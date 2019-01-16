@@ -93,7 +93,9 @@ class Pasarela {
             $t->sha = hash("sha256",serialize($struct));
             $t->carro = @openssl_encrypt(serialize($struct['carro']), "AES-256-CBC", $this->key);
             $t->importe = $struct['precio'];
-            $t->save();            
+            $result = Transaccion::where('sha',$t->sha)->get();
+            if(count($result)==0)
+                $t->save();            
             //Transaccion
             return $t->sha;
         }

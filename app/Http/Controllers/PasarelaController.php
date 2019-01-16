@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TPVV\Pasarela;
 use App\User;
+use App\Transaccion;
 
 class PasarelaController extends Controller
 {
 
-    public function pagar(){
-        return view('pago/pagar');
+    public function pagar($id){
+        $result = Transaccion::where('sha',$id)->get();
+        
+        return view('pago/pagar',['registro'=>$result]);
     }
 
     public function gen(){
@@ -57,7 +60,7 @@ class PasarelaController extends Controller
         
         $tpvv->SetREQUEST($texto);
         $sha = $tpvv->CreateTransaction();
-        return redirect()->action('TicketController@detalles', ['id' => $sha]);
+        return redirect()->action('PasarelaController@pagar', ['id' => $sha]);
 
     }
 }
