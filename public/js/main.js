@@ -6,6 +6,18 @@
 
 (function($) {
 
+
+	//Expandir lista valoraciones
+    $(function(){
+	     expandir(quien){
+	    var capa = document.getElementById(quien);
+	    if(capa.style.display=='')
+	    capa.style.display='none';
+	    else
+	    capa.style.display='';}
+	});
+
+
 	// Breakpoints.
 		skel.breakpoints({
 			xlarge:	'(max-width: 1680px)',
@@ -64,3 +76,5 @@
 	});
 
 })(jQuery);
+
+

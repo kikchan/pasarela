@@ -41,16 +41,22 @@
                 @foreach($listaValoraciones as $valoracion)
                     @foreach($usuarios as $tecnico)  
                         @if($tecnico->id == $valoracion->idTecnico)    
-                            <a href="#" class="list-group-item list-group-item-action">
-                             Técnico encargado: {{$tecnico->nombre}}, valoración: {{$valoracion->comentario}}
-                            @for($i=0;$i < $valoracion->valoracion;$i++)
+                            <a href="javascript:expandir('{{$valoracion->id}}')" class="list-group-item list-group-item-action">
+                                 ALMACENAM. Y LECTURA
+
+                                 <div id="{{$valoracion->id}}" style="display:none">
+                                Técnico encargado: {{$tecnico->nombre}}, valoración: {{$valoracion->comentario}}
+                                </div>
+
+                                @for($i=0;$i < $valoracion->valoracion;$i++)
                                                         
-                                <div class="valoracion">
-                                    <input id="radio1" type="radio" name="estrellas" value="5"><!--
-                                    --><label for="radio1">★</label>
+                                <div class="valoracionMuestra">
+                                    
+                                    <label for="radio1">★</label>
                                 </div>
                             @endfor
-                            </a>
+                             </a>
+                                
                         @endif
                     @endforeach
                 @endforeach
@@ -70,8 +76,17 @@
             --><input id="radio5" type="radio" name="estrellas" value="1"><!--
             --><label for="radio5">★</label>
           </div>
-
+        
     </div> 
         @yield('contenido')
 
 </body>
+<script language="JavaScript1.2">
+                                function expandir(quien){
+                                var capa = document.getElementById(quien);
+                                if(capa.style.display=='')
+                                capa.style.display='none';
+                                else
+                                capa.style.display='';
+                                }
+                                </script>
