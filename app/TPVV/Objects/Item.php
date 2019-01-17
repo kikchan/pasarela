@@ -5,12 +5,10 @@ namespace App\TPVV\Objects;
 class Item {
     public $nombre;
     public $cantidad;
-    public $precio;
 
-    function __construct($n, $c, $p) {
+    function __construct($n, $c) {
         $this->nombre = $n;
-        $this->cantidad = $c;
-        $this->precio = $p;        
+        $this->cantidad = $c;   
     }
 }
 

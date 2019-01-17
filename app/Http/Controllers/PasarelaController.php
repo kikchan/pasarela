@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TPVV\Pasarela;
+use App\TPVV\Objects\Item;
 use App\User;
 use App\Transaccion;
 
@@ -11,9 +12,17 @@ class PasarelaController extends Controller
 {
 
     public function pagar($id){
-        $result = Transaccion::where('sha',$id)->get();
-        
-        return view('pago/pagar',['registro'=>$result]);
+        $model = Transaccion::where('sha',$id)->get();
+        $lista = array();
+        if(count($model)==0) {
+            $result = 'error';
+        }elseif(count($model)==1) {
+            $result = $model[0];
+            $serial = @openssl_decrypt($result->carro, "AES-256-CBC", $result->_idComercio->key);
+            $lista = unserialize($serial);
+    }
+    
+        return view('pago/pagar',['registro'=>$result,'lista'=>$lista]);
     }
 
     public function gen(){
@@ -31,8 +40,8 @@ class PasarelaController extends Controller
         $items = explode('|',$carrito);
         foreach($items as $item){
             $data = explode(',',$item);
-            if(count($data)==3)
-                $tpvv->AnadirProducto((int)$data[0],(int)$data[1],(int)$data[2]);
+            if(count($data)==2)
+                $tpvv->AnadirProducto((int)$data[0],(int)$data[1]);
         }
         if(isset($precio))
             $tpvv->AsignarPrecioFinal((int)$precio);
@@ -56,10 +65,10 @@ class PasarelaController extends Controller
     public function pform($web,Request $request){ //Nuestro servidor recibe la solicitud
         $tpvv = new Pasarela($web,NULL);
         $texto = $request->input('tpvv_request');
-        //dump($texto);
-        
+                
         $tpvv->SetREQUEST($texto);
         $sha = $tpvv->CreateTransaction();
+
         return redirect()->action('PasarelaController@pagar', ['id' => $sha]);
 
     }

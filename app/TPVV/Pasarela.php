@@ -34,11 +34,9 @@ class Pasarela {
         $this->key=$key;
     }
 
-    public function AnadirProducto($nombre,$precio,$cantidad){
-        $item = new Item($nombre,$precio,$cantidad);
+    public function AnadirProducto($nombre,$precio){
+        $item = new Item($nombre,$precio);
         array_push($this->carrito,$item);
-        if(!$this->precioAsignado)
-            $this->precioFinal += $precio*$cantidad;
     }
 
     public function AsignarPrecioFinal($precio){ //Para aplicar algun descuento
@@ -49,13 +47,13 @@ class Pasarela {
     //**** COMERCIO ****\\
 
     public function GetURL(){
-        if(count($this->carrito)>0)
+        if(count($this->carrito)>0 && $this->precioAsignado) 
             return "http://localhost/pasarela/pruebas/form/".$this->web;
         return false;
     }
 
     public function GetREQUEST(){
-        if(count($this->carrito)>0){
+        if(count($this->carrito)>0 && $this->precioAsignado){
             $struct = new Struct($this->web,$this->idPedido,$this->carrito,$this->precioFinal); //Input->AES
             $tokens = $struct->Encode('Request',$this->key);
             if(!empty($tokens) && count($tokens)==2){
@@ -94,12 +92,14 @@ class Pasarela {
             $t->carro = @openssl_encrypt(serialize($struct['carro']), "AES-256-CBC", $this->key);
             $t->importe = $struct['precio'];
             $result = Transaccion::where('sha',$t->sha)->get();
-            if(count($result)==0)
+            dump($result,$t->sha);
+            $t->idEstado = 1;
+            if(count($result)==0){
                 $t->save();            
-            //Transaccion
-            return $t->sha;
+                return $t->sha;
+            }
         }
-        return false;
+        return 'error';
     }
 
     private function ValidateRequest(){
@@ -110,5 +110,6 @@ class Pasarela {
     }
     
 }
+
 
 
