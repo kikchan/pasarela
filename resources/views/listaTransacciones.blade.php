@@ -7,16 +7,16 @@
 <form id="filtros" action="{{ action('TransaccionesController@filtrarEstado') }}" method="GET" width="100%" >
     <select style="color:white; background-color:#084B8A;" name="estado">
         <option value="0"> Todas los estados </option>
-        @foreach(App\Estados::select(['descripcion as d'])->groupBy(['descripcion'])->get() as $estado)
-            <option value="{{$estado->d}}"> {{$estado->d}} </option>    
+        @foreach(App\Estados::select(['id as c'])->groupBy(['id'])->get() as $estado)
+            <option value="{{$estado->c}}"> {{$estado->c}} </option>    
         @endforeach
     </select>
-    <select style="color:white; background-color:#084B8A;" name = "precio" >
+    <select style="color:white; background-color:#084B8A;" name = "importe" >
         <option value="0"> Todos los importes </option>
         <option value="1"> 0€ - 50€ </option>
-        <option value="3"> 50€ - 100€ </option>
-        <option value="4"> 100€ - 500€ </option>
-        <option value="5"> 500€ o más </option>
+        <option value="2"> 50€ - 100€ </option>
+        <option value="3"> 100€ - 500€ </option>
+        <option value="4"> 500€ o más </option>
     </select>
     <button style="color:white; background-color:#084B8A;"  type="sumbit"> Filtrar </button>
 </form>
