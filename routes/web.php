@@ -30,6 +30,13 @@ Route::get('comercio/{id}/pagos', "TransaccionesController@pagos");
 Route::get('comercio/{id}/pagosFiltro', 'TransaccionesController@filtrar');
 Route::get('comercio/{id}/pagosBusqueda', 'TransaccionesController@buscarId');
 
-Route::get('pruebas', "PasarelaController@pruebas");
+
+//Montoya (NO TOCAR POR DIOS)
 Route::get('pruebas/form', "PasarelaController@gform");
-Route::post('pruebas/form', "PasarelaController@pform");
+Route::get('pruebas/form/generate', "PasarelaController@gen")->name('gen');
+Route::post('pruebas/form/generate', "PasarelaController@pgen")->name('pgen');
+Route::post('pruebas/form/{web}', "PasarelaController@pform");
+
+Route::get('tickets', 'TicketController@listado');
+Route::get('tickets/{id}', 'TicketController@detalles');
+Route::get('/detalle_ajax/{id}', 'TicketController@ajax_detalle')->name('detalle_ajax');

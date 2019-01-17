@@ -16,6 +16,9 @@ class CreateTransaccionesTable extends Migration
         Schema::create('transacciones', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('idComercio');
+            $table->unsignedInteger('idPedido');
+            $table->string('sha');
+            $table->string('carro');
             $table->decimal('importe',10, 2);
             $table->unsignedInteger('idTarjeta');
             $table->unsignedInteger('idEstado');
