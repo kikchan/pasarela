@@ -57,4 +57,26 @@ class TransaccionesController extends Controller
         $transaccion = DB::table('transacciones')->where('idComercio',$idComercio)->where('id', $idTransaccion)->get();
         return view('listaTransacciones', ['pagos' => $transaccion]);
     }
+
+    public function general($idComercio) {
+        $transaccionesDia = array();
+        for($i=0; $i<30; $i++) {
+            $numPagos = DB::table('transacciones')->where('idComercio', $idComercio)->whereDate('created_at', '=', date('2018-12-'.$i))->count();
+            $transaccionesDia[] = (string)$numPagos;
+        }
+        $totalTrans = DB::table('transacciones')->where('idComercio', $idComercio)->whereDate('created_at', '<=', date('2018-12-31'))
+            ->whereDate('created_at', '>=', date('2018-12-01'))->count();
+        $totalTickets = DB::table('tickets')->where('idComercio', $idComercio)->count();
+
+        $transaccionesPorEstado = array();
+        $ticketsPorEstado = array();
+        for($i=0; $i<4; $i++) {    
+            $transaccionesPorEstado[] = DB::table('transacciones')->where('idComercio', $idComercio)->where('idEstado', $i+1)->whereDate('created_at', '<=', date('2018-12-31'))
+                ->whereDate('created_at', '>=', date('2018-12-01'))->count();
+            $ticketsPorEstado[] = DB::table('tickets')->where('idComercio', $idComercio)->where('idEstado', $i+1)->count();
+        }
+        
+        return view('generalComercio', ['numPagos'=>$transaccionesDia, 'totalTrans'=>$totalTrans, 'totalTickets'=>$totalTickets,'transacciones'=>$transaccionesPorEstado, 'tickets'=>$ticketsPorEstado]);
+    
+    }
 }

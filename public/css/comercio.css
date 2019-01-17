@@ -1,5 +1,6 @@
 .container-contenido {
-  margin-left: 300px;
+  width: 100%;
+  padding-left: 300px;
 }
 .nav-side-menu {
   overflow: auto;
@@ -18,7 +19,7 @@
   line-height: 50px;
   display: block;
   text-align: center;
-  font-size: 14px;
+  font-size: 20px;
 }
 .nav-side-menu .toggle-btn {
   display: none;
@@ -84,6 +85,7 @@
 .nav-side-menu li a {
   text-decoration: none;
   color: #e1ffff;
+  padding-left: 25px;
 }
 .nav-side-menu li a i {
   padding-left: 10px;

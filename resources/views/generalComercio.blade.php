@@ -5,9 +5,9 @@
 <script src="{{ URL::asset('js/Chart.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
 
-<div class="container-contenido">
+<div class="container-contenido" >
     <nav class="navbar navbar-light bg-light">
-    <span class="navbar-brand mb-0 h1">General</span>
+    <span class="navbar-brand mb-0 h3">Vista General</span>
     </nav>
 
     <div class="container">
@@ -16,11 +16,32 @@
       @endforeach
     </div>
 
-    <canvas id="grafico"></canvas>
+    <canvas id="grafico" height="300" width="900" style="margin-left: 30px;"></canvas>
 
-    <div class="container">
-      <table>
-        <
+    <div class="container" style="width: 100%;">
+    <h2></h2>
+      <table class='table table-striped table-bordered tablesorter' style="width: 45%;float: left;margin-right: 50px;">
+        <head>
+          <tr><th>Número de peagos realizados en el mes anterior: {{$totalTrans}}</th></tr>
+        </head>
+        <body>
+          <tr><td>Pagos generados: {{$transacciones[0]}}</td></tr>
+          <tr><td>Pagos en espera: {{$transacciones[1]}}</td></tr>
+          <tr><td>Pagos aceptado: {{$transacciones[2]}}</td></tr>
+          <tr><td>Pagos rechazados: {{$transacciones[3]}}</td></tr>
+        </body>
+      </table>
+
+      <table class='table table-striped table-bordered tablesorter' style="width: 45%;">
+        <head>
+          <tr><th>Número de tickets(incidencias): {{$totalTickets}}</th></tr>
+        </head>
+        <body>
+          <tr><td>Tickets generados: {{$tickets[0]}}</td></tr>
+          <tr><td>Tickets en espera: {{$tickets[1]}}</td></tr>
+          <tr><td>Tickets aceptado: {{$tickets[2]}}</td></tr>
+          <tr><td>Tickets rechazados: {{$tickets[3]}}</td></tr>
+        </body>
       </table>
     </div>
 </div>
@@ -47,7 +68,7 @@
       labels: labelsDinamo
     },
     options: {
-      responsive: true,
+      responsive: false,
       title: {
         display: true,
         text: 'Análisis de las tranacciones realizadas',
@@ -58,8 +79,7 @@
           display: true,
           ticks: {
             beginAtZero: true,
-            steps: 1,
-            max: 5
+            suggestedMax: 5
           }
         }],
         xAxes: [{
