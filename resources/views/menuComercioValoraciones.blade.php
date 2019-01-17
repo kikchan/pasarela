@@ -41,7 +41,7 @@
                 @foreach($listaValoraciones as $valoracion)
                     @foreach($usuarios as $tecnico)  
                         @if($tecnico->id == $valoracion->idTecnico)    
-                            <a href="javascript:expandir('{{$valoracion->id}}')" class="list-group-item list-group-item-action">
+                            <a onclick="javascript:expandir('{{$valoracion->id}}')" class="list-group-item list-group-item-action">
                                  ALMACENAM. Y LECTURA
 
                                  <div id="{{$valoracion->id}}" style="display:none">
