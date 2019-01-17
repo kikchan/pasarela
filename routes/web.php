@@ -26,7 +26,17 @@ Route::get('login', function() {
 Route::get('comercio', "ComercioController@vista");
 Route::get('comercio/{id}', "ComercioController@general");
 
-Route::get('valoraciones', "ValoracionesController@vista");
+
+
+
+Route::get('valoracionesTecnico', "ValoracionesController@vistaTecnico");
+Route::get('valoracinesAdministrador', "ValoracionesController@vistaAdministrador");
+
+Route::post('/valoraciones/borrarComentario', "ValoracionesController@delete");
+
+
+
+
 
 Route::get('pagos={idComercio}', "TransaccionesController@pagos");
 Route::get('filtrar/pagos', 'TransaccionesController@filtrarEstado');

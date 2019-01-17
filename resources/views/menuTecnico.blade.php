@@ -25,7 +25,7 @@
             </ul>
 
             <li>
-                <a href="#"><i class=""></i> Valoraciones </a>
+                <a href="/valoracionesTecnico"><i class=""></i> Mis Valoraciones </a>
             </li>
         </ul>
     </div>

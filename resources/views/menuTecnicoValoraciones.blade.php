@@ -11,26 +11,22 @@
                     <a href="#"><i class=""></i> Dashboard</a>
                 </li>
 
-                <li  data-toggle="collapse" data-target="#products" class="collapsed active">
-                    <a href="#"><i class=""></i> BackOffice <span class="arrow"></span></a>
+                <li>
+                    <a href="#"><i class=""></i> Perfil del Soporte</a>
                 </li>
-                <ul class="sub-menu collapse" id="products">
-                    <li class="active"><a href="#">General</a></li>
-                    <li><a href="#">Buscador</a></li>
-                    <li><a href="pedidos">Pedidos</a></li>
-                </ul>
 
-                <li data-toggle="collapse" data-target="#new" class="collapsed active">
-                    <a href="#"><i class=""></i> Soporte <span class="arrow"></span></a>
+                <li data-toggle="collapse" data-target="#new" class="collapsed">
+                    <a href="#"><i class=""></i> Tickets<span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="new">
                     <li><a href="#">Listado</a></li>
                     <li><a href="#">Buscador</a></li>
                     <li><a href="#">Ticket</a></li>
-                    <li><a href="#">Valoraciones</a></li>
-                    <li><a href="#">Técnicos</a></li>
-                    <li><a href="#">Valorar al técnico</a></li>
                 </ul>
+
+                <li>
+                    <a href="valoracionesTecnico"><i class=""></i> Mis Valoraciones </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -56,21 +52,20 @@
                                     </font>
                                 </div>
 
-                                @for($i=0;$i < $valoracion->valoracion;$i++)                    
+                                @for($i=0;$i < $valoracion->valoracion;$i++)
+                                                            
                                     <div class="valoracionMuestra">
+                                        
                                         <label for="radio1">★</label>
                                     </div>
                                 @endfor
-                                <form action="/valoraciones/borrarComentario" method="POST" role="form">    
-                                    {{ csrf_field( )}}
-                                    <input type="hidden" value="{{$valoracion->id}}" name="id">
-                                    <button type="submit" class="btn btn-outline-delete">Borrar</button>
-                                </form>
                              </a>
                                 
                         @endif
                     @endforeach
                 @endforeach
+            @else
+                <strong>jodete</strong>
             @endif
         </div>
 
