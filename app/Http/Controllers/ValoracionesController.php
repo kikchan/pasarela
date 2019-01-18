@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Valoracion;
 use App\User;
+use App\Ticket;
+use App\Estado;
 use Illuminate\Database\Eloquent\Model;
 use Redirect;
 
@@ -19,13 +21,50 @@ class ValoracionesController extends Controller
         return view('menuComercioValoraciones')->with('listaValoraciones', $listaValoraciones)->with('usuarios', $listaUsuarios);
     }
 
+
+
+    public function create(Request $request){
+    	/*$this->validate($request, [
+        'estrellas' => 'required|max:5|min:1',
+        'idTecnico' => 'required',
+        'comentario' => 'required|max:255|min:1',
+        'nombreTecnico' => 'required',
+    ]);*/
+		
+		$estrellas = $request->input('estrellas');
+		$idTecnico = $request->input('idTecnico');
+		$comentario = $request->input('comentario');
+		$valoracion = new Valoracion();
+ 
+		$valoracion->valoracion = $estrellas;
+		$valoracion->comentario = $comentario;
+		$valoracion->idTecnico = $idTecnico;
+		$valoracion->idComercio = 2;
+		$valoracion->save();
+        return Redirect::to('valoracionesComercio');
+    }
+   
+
+    public function vistaCrearValoracion(Request $request){
+		$idTecnico = $request->input('idTecnico');
+		$nombreTecnico = $request->input('nombreTecnico');
+        return view('crearValoracion')->with('idTecnico', $idTecnico)->with('nombreTecnico', $nombreTecnico);
+    }
+   
+    public function vistaComercio(){
+    	//cambiar id usuario
+     	$listaTickets = Ticket::where('idComercio', '=', 2)->get();
+     	$listaUsuarios = User::all();
+     	$estados = Estado::all();
+		
+        return view('menuComercioValoraciones')->with('listaTickets', $listaTickets)->with('usuarios', $listaUsuarios)->with('estados', $estados);
+    }
+
+
     public function vistaTecnico(){
     	//sustituir por id usuario
-     	//$listaValoraciones = Valoracion::where("id","=",4)->get()->toArray();
-     	//$listaValoraciones = Valoracion::all();
-    	$listaValoraciones = Valoracion::where('id', '=', 4)->get();
-     	$listaUsuarios = User::all();
-
+    	$listaUsuarios = User::where('id', '=', 4)->get();
+       	$listaValoraciones = Valoracion::all();
         return view('menuTecnicoValoraciones')->with('listaValoraciones', $listaValoraciones)->with('usuarios', $listaUsuarios);
     }
     public function delete(Request $request){

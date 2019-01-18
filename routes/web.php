@@ -28,11 +28,16 @@ Route::get('comercio/{id}', "ComercioController@general");
 
 
 
+Route::get('vistaTecnicos', "ValoracionesController@vistaTecnicos");
 
-Route::get('valoracionesTecnico', "ValoracionesController@vistaTecnico");
 Route::get('valoracinesAdministrador', "ValoracionesController@vistaAdministrador");
+Route::get('valoracionesTecnico', "ValoracionesController@vistaTecnico");
+Route::get('valoracionesComercio', "ValoracionesController@vistaComercio");
+
+Route::post('valoraciones/crearValoracionComercio', "ValoracionesController@vistaCrearValoracion");
 
 Route::post('/valoraciones/borrarComentario', "ValoracionesController@delete");
+Route::post('/valoraciones/crearComentario', "ValoracionesController@create");
 
 
 

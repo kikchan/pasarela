@@ -64,13 +64,10 @@
                         @endif
                     @endforeach
                 @endforeach
-            @else
-                <strong>jodete</strong>
             @endif
-        </div>
+        </ul>
 
-
-
+ 
         @yield('contenido')
 
 </body>

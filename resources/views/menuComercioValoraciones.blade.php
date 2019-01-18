@@ -27,9 +27,7 @@
                     <li><a href="#">Listado</a></li>
                     <li><a href="#">Buscador</a></li>
                     <li><a href="#">Ticket</a></li>
-                    <li><a href="#">Valoraciones</a></li>
-                    <li><a href="#">Técnicos</a></li>
-                    <li><a href="#">Valorar al técnico</a></li>
+                    <li><a href="valoracionesComercio">Técnicos</a></li>
                 </ul>
             </ul>
         </div>
@@ -37,51 +35,44 @@
 
     <div class="container-contenido">
         <ul class="list-group">
-            @if($listaValoraciones != null)
-                @foreach($listaValoraciones as $valoracion)
-                    @foreach($usuarios as $tecnico)  
-                        @if($tecnico->id == $valoracion->idTecnico)    
-                            <a onclick="javascript:expandir('{{$valoracion->id}}')" class="list-group-item list-group-item-action">
+            @if($listaTickets != null)
+                @foreach($listaTickets as $ticket)
+                    @foreach($usuarios as $usuario)  
+                        @if($usuario->id == $ticket->idTecnico)
+                        <form action="valoraciones/crearValoracionComercio" method="POST" role="form">    
+                            {{ csrf_field( )}}
+                            <a class="list-group-item list-group-item-action">
                                  <font size="3">
-                                    <strong> Técnico valorado: {{$tecnico->nombre}}<br/> 
-                                    Comentario: {{$valoracion->comentario}}</strong>
-                                </font>
-                                    <div id="{{$valoracion->id}}" style="display:none">
-                                     <hr class="style2">
-                                    <font size="3">
-                                    Comercio id: {{$valoracion->idComercio}}<br/> 
-                                    Nombre completo del técnico: {{$tecnico->nombre}} {{$tecnico->apellidos}}<br/> 
-                                    Email técnico: {{$tecnico->email}} <br/> 
-                                    Nick técnico: {{$tecnico->nick}}
+                                    <strong> Técnico asignado:</strong> {{$usuario->nombre}}<br/> 
+                                    <strong>Problema:</strong> {{$ticket->asunto}}<br/> 
+                                    @foreach($estados as $estado)
+                                        @if($estado->id == $ticket->idEstado)
+                                            <strong>Estado ticket: </strong>{{$estado->descripcion}}<br/> 
+                                        @endif
+                                    @endforeach
+                                    <strong>Tecnico id: </strong>{{$usuario->id}}<br/> 
+                                    <strong>Nombre completo del técnico: </strong>{{$usuario->nombre}}  {{$usuario->apellidos}}<br/> 
+                                    <strong>Email técnico: </strong>{{$usuario->email}} <br/> 
+                                    <strong>Nick técnico: </strong>{{$usuario->nick}}</strong><br/> <br/> 
                                     </font>
-                                </div>
-
-                                @for($i=0;$i < $valoracion->valoracion;$i++)
-                                                        
-                                <div class="valoracionMuestra">
-                                    
-                                    <label for="radio1">★</label>
-                                </div>
-                            @endfor
+                                    <button type="submit" align="right" class="btn btn-primary">Añadir valoración</button>
                              </a>
-                                
+                             <input type="hidden" name="idTecnico" value="{{$usuario->id}}">
+                             <input type="hidden" name="nombreTecnico" value="{{$usuario->nombre}}">
+
+                        </form>      
+                       
                         @endif
                     @endforeach
                 @endforeach
             @endif
-        </div>
+        </ul>
+           
 
 
+    </div>
 
+    </div>
         @yield('contenido')
 
 </body>
-<script language="JavaScript1.2">
-                                function expandir(quien){
-                                var capa = document.getElementById(quien);
-                                if(capa.style.display=='')
-                                capa.style.display='none';
-                                else
-                                capa.style.display='';
-                                }
-                                </script>

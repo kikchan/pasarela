@@ -27,12 +27,13 @@
                 <li><a href="#">Listado</a></li>
                 <li><a href="#">Buscador</a></li>
                 <li><a href="#">Ticket</a></li>
-                <li><a href="valoraciones">Valoraciones</a></li>
-                <li><a href="#">Técnicos</a></li>
-                <li><a href="#">Valorar al técnico</a></li>
+                <li><a href="valoracionesComercio">Técnicos</a></li>
             </ul>
         </ul>
     </div>
 </div>
+
+
+
     @yield('contenido')
 </body>
