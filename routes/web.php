@@ -24,7 +24,7 @@ Route::get('login', function() {
 });
 
 Route::get('comercio', "ComercioController@vista");
-Route::get('comercio/{id}', "ComercioController@general");
+Route::get('comercio/{id}', "TransaccionesController@general");
 
 Route::get('comercio/{id}/pagos', "TransaccionesController@pagos");
 Route::get('comercio/{id}/pagosFiltro', 'TransaccionesController@filtrar');
