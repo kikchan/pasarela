@@ -6,8 +6,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
 
 <div class="container-contenido" >
-    <nav class="navbar navbar-light bg-light">
-    <span class="navbar-brand mb-0 h3">Vista General</span>
+    <nav class="navbar navbar-light bg-light" style="background-color:  #fbfcfc;">
+    <p style="font-size: 18px;padding: 10px;padding-bottom: 0px;">Vista general</p>
     </nav>
 
     <div class="container">
@@ -16,13 +16,36 @@
       @endforeach
     </div>
 
-    <canvas id="grafico" height="300" width="900" style="margin-left: 30px;"></canvas>
+    <div class="container" style="width: 100%;">
+      <div class="cuadrado" style="background: #ebc12e; float: left;">
+        <p>Transacciones</p>
+        <p style="text-align: right;font-size: 24px;">{{$pagos}}</p>
+      </div>
+      <div class="cuadrado" style="background: #d37250 ; float: left;">
+        <p style="margin-bottom: 0px;font-size: 14px;">Transacciones rechazadas</p>
+        <p style="text-align: right;font-size: 24px;">{{$tickets[3]}}</p>
+      </div>
+      <div class="cuadrado" style="background: #3ad2ab ; float: left;">
+        <p>Ingresos</p>
+        <p style="text-align: right;font-size: 24px;">{{$ingresos}} €</p>
+      </div>
+      <div class="cuadrado" style="background: #3dcb80; float: left;">
+        <p>Tickets</p>
+        <p style="text-align: right;font-size: 24px;">{{$totalTickets}}</p>
+      </div>
+      <div class="cuadrado" style="background: #a641d2; float: left;">
+        <p>Top técnico</p>
+        <p style="text-align: right;font-size: 24px;">{{$topTecnico->nombre}}</p>
+      </div>
+    </div>
+
+    <canvas id="grafico" height="300" width="900" style="margin-left: 30px;background-color: white;"></canvas>
 
     <div class="container" style="width: 100%;">
     <h2></h2>
-      <table class='table table-striped table-bordered tablesorter' style="width: 45%;float: left;margin-right: 50px;">
+      <table class='table table-striped table-bordered tablesorter' style="width: 45%;float: left;margin-right: 50px; background-color: white;">
         <head>
-          <tr><th>Número de peagos realizados en el mes anterior: {{$totalTrans}}</th></tr>
+          <tr><th style="background: #67676c; color: white;">Número de pagos realizados en el mes anterior: {{$totalTrans}}</th></tr>
         </head>
         <body>
           <tr><td>Pagos generados: {{$transacciones[0]}}</td></tr>
@@ -34,7 +57,7 @@
 
       <table class='table table-striped table-bordered tablesorter' style="width: 45%;">
         <head>
-          <tr><th>Número de tickets(incidencias): {{$totalTickets}}</th></tr>
+          <tr><th style="background: #67676c; color: white;">Número de tickets (incidencias): {{$totalTickets}}</th></tr>
         </head>
         <body>
           <tr><td>Tickets generados: {{$tickets[0]}}</td></tr>
@@ -61,7 +84,7 @@
     type: 'line',
     data: {
       datasets: [{
-        label: 'Pagos realizados',
+        label: 'Número de transacciones',
         data: datosDinamo,
         backgroundColor: "#6b9dfa",
       }],
@@ -72,7 +95,7 @@
       title: {
         display: true,
         text: 'Análisis de las tranacciones realizadas',
-        fontSize: 30
+        fontSize: 28
       },
       scales: {
         yAxes: [{

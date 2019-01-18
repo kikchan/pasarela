@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 //use App\TPVV\Pasarela;
 use App\Transacciones;
+use App\Valoracion;
+use App\User;
 
 class TransaccionesController extends Controller
 {
@@ -59,24 +61,38 @@ class TransaccionesController extends Controller
     }
 
     public function general($idComercio) {
+        $pagos = DB::table('transacciones')->where('idComercio', $idComercio)->count();
+        $ingresos = DB::table('transacciones')->where('idComercio', $idComercio)->sum('importe');
+        $totalTrans = DB::table('transacciones')->where('idComercio', $idComercio)->whereDate('created_at', '<=', date('2018-12-31'))
+            ->whereDate('created_at', '>=', date('2018-12-01'))->count();
+        $totalTickets = DB::table('tickets')->where('idComercio', $idComercio)->count();
+
+        // Numero total de transacciones en un mes en específico
         $transaccionesDia = array();
         for($i=0; $i<30; $i++) {
             $numPagos = DB::table('transacciones')->where('idComercio', $idComercio)->whereDate('created_at', '=', date('2018-12-'.$i))->count();
             $transaccionesDia[] = (string)$numPagos;
         }
-        $totalTrans = DB::table('transacciones')->where('idComercio', $idComercio)->whereDate('created_at', '<=', date('2018-12-31'))
-            ->whereDate('created_at', '>=', date('2018-12-01'))->count();
-        $totalTickets = DB::table('tickets')->where('idComercio', $idComercio)->count();
-
+        // Numero de trasacciones y tichets generado, en espera, aceptado y rechazado
         $transaccionesPorEstado = array();
         $ticketsPorEstado = array();
         for($i=0; $i<4; $i++) {    
-            $transaccionesPorEstado[] = DB::table('transacciones')->where('idComercio', $idComercio)->where('idEstado', $i+1)->whereDate('created_at', '<=', date('2018-12-31'))
-                ->whereDate('created_at', '>=', date('2018-12-01'))->count();
+            $transaccionesPorEstado[] = DB::table('transacciones')->where('idComercio', $idComercio)->where('idEstado', $i+1)
+                ->whereDate('created_at', '<=', date('2018-12-31'))->whereDate('created_at', '>=', date('2018-12-01'))->count();
             $ticketsPorEstado[] = DB::table('tickets')->where('idComercio', $idComercio)->where('idEstado', $i+1)->count();
         }
-        
-        return view('generalComercio', ['numPagos'=>$transaccionesDia, 'totalTrans'=>$totalTrans, 'totalTickets'=>$totalTickets,'transacciones'=>$transaccionesPorEstado, 'tickets'=>$ticketsPorEstado]);
+        // Obtenemos el tecnico con la media de sus valoraciones mas alta
+        $valoraciones=0;
+        $topTecnico = 0;
+        $tecnicos = User::where('esTecnico', 1)->get();
+        foreach($tecnicos as $tecnico) {
+            if($tecnico->valoraciones->avg('valoracion') > $valoraciones) {
+                $valoraciones = $tecnico->valoraciones->avg('valoracion');
+                $topTecnico = $tecnico;
+            }
+        }
+        return view('generalComercio', ['numPagos'=>$transaccionesDia, 'totalTrans'=>$totalTrans, 'totalTickets'=>$totalTickets,'transacciones'=>$transaccionesPorEstado,
+                'tickets'=>$ticketsPorEstado,'pagos'=>$pagos, 'ingresos'=>$ingresos, 'topTecnico'=>$topTecnico]);
     
     }
 }

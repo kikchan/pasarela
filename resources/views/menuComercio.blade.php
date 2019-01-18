@@ -15,9 +15,8 @@
                 <a href="#"><i class=""></i> BackOffice <span class="arrow"></span></a>
             </li>
             <ul class="sub-menu collapse" id="products">
-                <li class="active"><a href="#">General</a></li>
-                <li><a href="#">Buscador</a></li>
-                <li><a href="pedidos">Pedidos</a></li>
+                <li class="active"><a href="/pasarela/comercio/2">General</a></li>
+                <li><a href="/pasarela/comercio/2/pagos">Pedidos</a></li>
             </ul>
 
             <li data-toggle="collapse" data-target="#new" class="collapsed active">

@@ -1,6 +1,21 @@
 .container-contenido {
   width: 100%;
   padding-left: 300px;
+  background-color: rgb(239, 239, 239);
+}
+.cuadrado {
+  width: 180px;
+  height: 90px; 
+  position: relative;
+  margin: 11px;
+  margin-top: 0px;
+  margin-bottom: 18px;
+  color: white;
+  font-size: 16px;
+  float: left;
+  padding: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .nav-side-menu {
   overflow: auto;
@@ -104,6 +119,8 @@
 @media (max-width: 767px) {
   .container-contenido {
     margin-left: 10px;
+    padding-left: 0px;
+    background-color: rgb(239, 239, 239);
   }
   .nav-side-menu {
     position: relative;
