@@ -8,16 +8,11 @@
     <div class="menu-list"> 
         <ul id="menu-content" class="menu-content collapse out">
             <li>
-                <a href="#"><i class=""></i> Dashboard</a>
+                <a href="/pasarela/comercio/2"><i class=""></i> Dashboard</a>
             </li>
-
-            <li  data-toggle="collapse" data-target="#products" class="collapsed active">
-                <a href="#"><i class=""></i> BackOffice <span class="arrow"></span></a>
+            <li>
+                <a href="/pasarela/comercio/2/pagos"><i class=""></i> BackOffice</a>
             </li>
-            <ul class="sub-menu collapse" id="products">
-                <li class="active"><a href="/pasarela/comercio/2">General</a></li>
-                <li><a href="/pasarela/comercio/2/pagos">Pedidos</a></li>
-            </ul>
 
             <li data-toggle="collapse" data-target="#new" class="collapsed active">
                 <a href="#"><i class=""></i> Soporte <span class="arrow"></span></a>
