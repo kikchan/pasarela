@@ -22,14 +22,12 @@ class ValoracionesController extends Controller
     }
 
 
-
     public function create(Request $request){
-    	/*$this->validate($request, [
-        'estrellas' => 'required|max:5|min:1',
-        'idTecnico' => 'required',
-        'comentario' => 'required|max:255|min:1',
-        'nombreTecnico' => 'required',
-    ]);*/
+    	$this->validate($request, [
+        'estrellas' => ['required'],
+        'idTecnico' => ['required'],
+        'comentario' => ['required']
+    ]);
 		
 		$estrellas = $request->input('estrellas');
 		$idTecnico = $request->input('idTecnico');

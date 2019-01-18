@@ -1,6 +1,7 @@
 @include('principal')
 
 <body>
+
 <div class="nav-side-menu">
     <div class="brand">Menu</div>
     <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
@@ -34,6 +35,7 @@
 </div>
 
 <div class="container-contenido">
+       @include('partials/errors')
 <div class="form-group">
     </br>
     <form action="/valoraciones/crearComentario" method="POST" role="form">    
@@ -60,9 +62,9 @@
 
     <button type="submit" class="btn btn-success">Crear</button>
     <button onclick="valoracionesComercio" type="button" class="btn btn-danger">Cancelar</button>
-</form>
-</div>
 
+</div>
+</form>
 </div>
 
     @yield('contenido')
