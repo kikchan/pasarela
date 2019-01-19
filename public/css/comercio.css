@@ -320,9 +320,21 @@ body {
 }
 
 
-///
+///valoracionMuestra
+.valoracionMuestra {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.valoracionMuestra input {
+    position: absolute;
+    top: -100px;
+}
+
+
 .valoracionMuestra label {
-    float: right;
+    float: left;
     color: #ffff00;
     font-size: 30px; 
 }
@@ -333,5 +345,9 @@ body {
     color: #ffff00;
 }
 
+
+
+
 hr.style2 { 
   border-top: 3px solid #2c343c;}
+
