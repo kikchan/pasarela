@@ -63,7 +63,7 @@
                 La transaccion ya se ha completado previamente.
             </div>
         @else
-            <form  method="POST" action="{{route('pgen') }}">
+            <form  method="POST" action="{{action('PasarelaController@check',$registro->sha)}}">
             {{ csrf_field() }}
             {{ method_field('POST') }}
             <input type="hidden" name="sha" value="{{$registro->sha}}">

@@ -7,9 +7,39 @@ use App\TPVV\Pasarela;
 use App\TPVV\Objects\Item;
 use App\User;
 use App\Transaccion;
+use App\Tarjeta;
 
 class PasarelaController extends Controller
 {
+
+    public function check($sha,Request $request){
+        dump($sha);
+
+        $name = $request->input('name');
+        $number = str_replace(' ','',$request->input('number'));
+        $expiry = str_replace(' ','',$request->input('expiry'));
+        $cvv = $request->input('cvc');
+        
+        if(strlen($name)>3 && strlen($number)>10 && strlen($expiry)==7 && strlen($cvv)>2 && strlen($cvv)<5){
+            var_dump('dentro');
+            $transacciones = Transaccion::where('sha',$sha)->get();
+            if(count($transacciones)==1 && $transacciones[0]->idEstado==1){
+                $tarjetas = Tarjeta::where('numero',$number)->get();
+                if(count($tarjetas)==0){
+                    $t = new Tarjeta();
+                    $t->numero = $number;
+                    $t->caducidad = $expiry;
+                    $t->cvv = $cvv;
+                    $t->save();
+                    $transacciones[0]->idTarjeta = $t->id;
+                    $transacciones[0]->save();
+                }else {
+                    $transacciones[0]->idTarjeta = $tarjetas[0]->id;
+                    $transacciones[0]->save();
+                }
+            }
+        }
+    }
 
     public function pagar($id){
         $model = Transaccion::where('sha',$id)->get();
