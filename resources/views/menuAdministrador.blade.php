@@ -40,7 +40,7 @@
                 </ul>
 
                 <li>
-                <a href="#"><i class=""></i> Valoraciones </a>
+                <a href="valoracionesAdministrador"><i class=""></i> Valoraciones </a>
             </li>
         </ul>
     </div>

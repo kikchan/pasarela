@@ -53,6 +53,7 @@
                                     Nombre completo del técnico: {{$tecnico->nombre}} {{$tecnico->apellidos}}<br/> 
                                     Email técnico: {{$tecnico->email}} <br/> 
                                     Nick técnico: {{$tecnico->nick}}
+                                    Valoracion:
                                     </font>
                                 </div>
 
@@ -61,10 +62,11 @@
                                         <label for="radio1">★</label>
                                     </div>
                                 @endfor
+                            </br></br>
                                 <form action="/valoraciones/borrarComentario" method="POST" role="form">    
                                     {{ csrf_field( )}}
                                     <input type="hidden" value="{{$valoracion->id}}" name="id">
-                                    <button type="submit" class="btn btn-outline-delete">Borrar</button>
+                                    <button float="left" type="submit" class="btn btn-outline-delete">Borrar</button>
                                 </form>
                              </a>
                                 

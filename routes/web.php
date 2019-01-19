@@ -30,7 +30,7 @@ Route::get('comercio/{id}', "ComercioController@general");
 
 Route::get('vistaTecnicos', "ValoracionesController@vistaTecnicos");
 
-Route::get('valoracinesAdministrador', "ValoracionesController@vistaAdministrador");
+Route::get('valoracionesAdministrador', "ValoracionesController@vistaAdministrador");
 Route::get('valoracionesTecnico', "ValoracionesController@vistaTecnico");
 Route::get('valoracionesComercio', "ValoracionesController@vistaComercio");
 
