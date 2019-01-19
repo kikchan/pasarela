@@ -37,7 +37,7 @@ Route::get('valoracionesComercio', "ValoracionesController@vistaComercio");
 Route::post('valoraciones/crearValoracionComercio', "ValoracionesController@vistaCrearValoracion");
 
 Route::post('/valoraciones/borrarComentario', "ValoracionesController@delete");
-Route::post('/valoraciones/crearComentario', "ValoracionesController@create");
+Route::post('/valoraciones/crearValoracion', "ValoracionesController@create");
 
 
 

@@ -35,36 +35,37 @@
 </div>
 
 <div class="container-contenido">
-       @include('partials/errors')
-<div class="form-group">
-    </br>
-    <form action="/valoraciones/crearComentario" method="POST" role="form">    
-        {{ csrf_field( )}}
-    <label for="exampleInputEmail1">Nombre técnico</label>
-    <input type="hidden" name="idTecnico" value="{{$idTecnico}}">
-    <input type="email" class="form-control" id="exampleInputEmail1" name="nombreTecnico"aria-describedby="emailHelp" placeholder="{{$nombreTecnico}}" readonly>
-    </br>
-  <label for="exampleInputEmail1">Comentario</label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" name="comentario" rows="3"></textarea>
- <label for="exampleInputEmail1">Valoración:</label>
-  <p class="valoracion">
-    <input id="radio1" type="radio" name="estrellas" value="5"><!--
-    --><label for="radio1">★</label><!--
-    --><input id="radio2" type="radio" name="estrellas" value="4"><!--
-    --><label for="radio2">★</label><!--
-    --><input id="radio3" type="radio" name="estrellas" value="3"><!--
-    --><label for="radio3">★</label><!--
-    --><input id="radio4" type="radio" name="estrellas" value="2"><!--
-    --><label for="radio4">★</label><!--
-    --><input id="radio5" type="radio" name="estrellas" value="1"><!--
-    --><label for="radio5">★</label>
-  </p>
+    <div class="form-group">
+        </br>
+        <form method="POST" action="crearValoracion">    
+             @csrf
+            <label for="exampleInputEmail1">Nombre técnico</label>
+            <input type="hidden" name="idTecnico" value="{{$idTecnico}}">
+            <input type="email" class="form-control" id="exampleInputEmail1" name="nombreTecnico"aria-describedby="emailHelp" placeholder="{{$nombreTecnico}}" readonly>
+            </br>
+          <label for="exampleInputEmail1">Comentario</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" name="comentario" rows="3" required></textarea>
+          <div style="height:75px">
+             <label for="exampleInputEmail1">Valoración:</label>
+              <p class="valoracion" style="margin-left:10px;position:absolute">
+                <input style="opacity: 0!important;z-index:-1!important" id="radio1" type="radio" name="estrellas" value="5" required><!--
+                --><label for="radio1">★</label><!--
+                --><input style="opacity: 0!important;z-index:-1!important" id="radio2" type="radio" name="estrellas" value="4" required><!--
+                --><label for="radio2">★</label><!--
+                --><input style="opacity: 0!important;z-index:-1!important" id="radio3" type="radio" name="estrellas" value="3" required><!--
+                --><label for="radio3">★</label><!--
+                --><input style="opacity: 0!important;z-index:-1!important" id="radio4" type="radio" name="estrellas" value="2" required><!--
+                --><label for="radio4">★</label><!--
+                --><input style="opacity: 0!important;z-index:-1!important" id="radio5" type="radio" name="estrellas" value="1" required><!--
+                --><label for="radio5">★</label>
+              </p>
+          </div>
 
-    <button type="submit" class="btn btn-success">Crear</button>
-    <button onclick="valoracionesComercio" type="button" class="btn btn-danger">Cancelar</button>
-
-</div>
-</form>
+            <button type="submit" class="btn btn-success">Crear</button>
+                <input type="button" class = "btn btn-danger"value="Cancelar" onclick = "location='/valoracionesComercio'"/>
+        </form>
+    
+    </div>
 </div>
 
     @yield('contenido')

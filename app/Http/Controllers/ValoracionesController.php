@@ -23,12 +23,7 @@ class ValoracionesController extends Controller
 
 
     public function create(Request $request){
-    	$this->validate($request, [
-        'estrellas' => ['required'],
-        'idTecnico' => ['required'],
-        'comentario' => ['required']
-    ]);
-		
+    	
 		$estrellas = $request->input('estrellas');
 		$idTecnico = $request->input('idTecnico');
 		$comentario = $request->input('comentario');
@@ -54,8 +49,10 @@ class ValoracionesController extends Controller
      	$listaTickets = Ticket::where('idComercio', '=', 2)->get();
      	$listaUsuarios = User::all();
      	$estados = Estado::all();
-		
-        return view('menuComercioValoraciones')->with('listaTickets', $listaTickets)->with('usuarios', $listaUsuarios)->with('estados', $estados);
+
+     	//cambiar id usuario
+		$valoraciones = Valoracion::where('idComercio', '=', 2)->get();
+        return view('menuComercioValoraciones')->with('listaTickets', $listaTickets)->with('usuarios', $listaUsuarios)->with('estados', $estados)->with('valoraciones', $valoraciones);
     }
 
 

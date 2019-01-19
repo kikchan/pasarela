@@ -45,6 +45,7 @@
                                  <font size="3">
                                     <strong> Técnico asignado:</strong> {{$usuario->nombre}}<br/> 
                                     <strong>Problema:</strong> {{$ticket->asunto}}<br/> 
+                                    
                                     @foreach($estados as $estado)
                                         @if($estado->id == $ticket->idEstado)
                                             <strong>Estado ticket: </strong>{{$estado->descripcion}}<br/> 
@@ -56,6 +57,25 @@
                                     <strong>Nick técnico: </strong>{{$usuario->nick}}</strong><br/> <br/> 
                                     </font>
                                     <button type="submit" align="right" class="btn btn-primary">Añadir valoración</button>
+                                    <input type="button" class = "btn btn-secondary"value="Mas detalles" onclick = "javascript:expandir('{{$ticket->id}}')"/>
+                                        <div id="{{$ticket->id}}" style="display:none">
+                                            @foreach($valoraciones as $valoracion)
+                                                @if($valoracion->idTecnico == $usuario->id)
+                                                 <hr class="style2">
+                                                    Nombre completo del técnico: {{$usuario->nombre}} {{$usuario->apellidos}}<br/> 
+                                                    Email técnico: {{$usuario->email}} <br/> 
+                                                    Comentario: {{$valoracion->comentario}} <br/>
+                                                    Valoracion:
+                                                        @for($i=0;$i < $valoracion->valoracion;$i++)                 
+                                                            <div class="valoracionMuestra">
+                                                                <label for="radio1">★</label>
+                                                            </div>
+                                                        @endfor
+                                                    </br>
+                                                @endif
+                                            @endforeach
+                                            <hr class="style2">
+                                        </div>
                              </a>
                              <input type="hidden" name="idTecnico" value="{{$usuario->id}}">
                              <input type="hidden" name="nombreTecnico" value="{{$usuario->nombre}}">
@@ -76,3 +96,12 @@
         @yield('contenido')
 
 </body>
+<script language="JavaScript1.2">
+                                function expandir(quien){
+                                var capa = document.getElementById(quien);
+                                if(capa.style.display=='')
+                                capa.style.display='none';
+                                else
+                                capa.style.display='';
+                                }
+                                </script>
