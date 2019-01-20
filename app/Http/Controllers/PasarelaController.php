@@ -13,6 +13,14 @@ class PasarelaController extends Controller
 {
 
 
+    public function response(Request $response){
+        dump($response);
+        $tpvv = new Pasarela('Fran',1,'cl12347');
+        $tpvv->SetRESPONSE($response);
+        dump($tpvv->ValidateResponse());
+
+    }
+
 
     public function check($sha,Request $request){
 
@@ -44,10 +52,11 @@ class PasarelaController extends Controller
                 $transacciones[0]->save();
             }
         }
-        $tpvv = new Pasarela($transacciones[0]->_idComercio->nick,$transacciones[0]->pedido);
+        $user = $transacciones[0]->_idComercio;
+        $tpvv = new Pasarela($user->nick,$transacciones[0]->pedido,$user->key);
         $tpvv->AsignTransaction($transacciones[0]);
         //return view
-        return view('pago/status',['registro'=>$transacciones[0]]);
+        return view('pago/status',['registro'=>$transacciones[0],'url'=>$user->endpoint,'response'=>$tpvv->GetRESPONSE()]);
     }
 
     public function pagar($id){

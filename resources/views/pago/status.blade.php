@@ -2,16 +2,18 @@
 
 @section('menu')
 <div class='container'>
-<form action="">
-    <input type="hidden" name="response">
+<form method="POST" action="{{$url}}">
+    {{ csrf_field() }}
+    {{ method_field('POST') }}
+    <input type="hidden" name="response" value="{{$response}}">
 @if($registro->idEstado==4)
     <div class="alert alert-danger" style="margin-top:15px" role="alert">
-        Se ha producido un error. Redirigiendo automáticamente a la web. <input type="button" class="btn btn-info" value="Volver" >
+        Se ha producido un error. Redirigiendo automáticamente a la web. <input type="submit" class="btn btn-info" value="Volver" >
     </div>
 @endif
 @if($registro->idEstado==3)
     <div class="alert alert-success" style="margin-top:15px" role="alert">
-        Pago realizado correctamente. Redirigiendo automáticamente a la web. <input type="button" class="btn btn-info" value="Volver">
+        Pago realizado correctamente. Redirigiendo automáticamente a la web. <input type="submit" class="btn btn-info" value="Volver">
     </div>
 @endif
 </form>

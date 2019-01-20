@@ -30,6 +30,8 @@ Route::get('filtrar/pagos', 'TransaccionesController@filtrarEstado');
 
 //Montoya (NO TOCAR POR DIOS)
 Route::get('pruebas/form', "PasarelaController@gform");
+Route::get('pruebas/form', "PasarelaController@gform");
+Route::post('pruebas/response', "PasarelaController@response");
 Route::get('pruebas/form/pagar/{id}', "PasarelaController@pagar");
 Route::post('pruebas/form/check/{id}', "PasarelaController@check");
 Route::get('pruebas/form/generate', "PasarelaController@gen")->name('gen');

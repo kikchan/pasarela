@@ -59,8 +59,6 @@ class Struct {
         }
     }
 
-
-
     public function DataAndValidate($method=NULL){
         $array = array();
         if($method=='Request'){
@@ -72,8 +70,15 @@ class Struct {
                             $array['idPedido'] = $this->idPedido;
                             $array['carro'] = $this->carro;
                             $array['precio'] = $this->precio;
-        }else if ($method=='Response' && $s){
-
+        }else if ($method=='Response'){
+            if(isset($this->web) && $this->web!='')
+                if(isset($this->idPedido) && $this->idPedido!='')
+                    if(isset($this->estado) && $this->estado!='')
+                        if(isset($this->fecha) && $this->fecha!='')
+                            $array['web'] = $this->web; 
+                            $array['idPedido'] = $this->idPedido;
+                            $array['estado'] = $this->estado;
+                            $array['fecha'] = $this->fecha;
         }
         return $array;
     }
