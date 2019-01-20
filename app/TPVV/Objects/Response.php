@@ -2,9 +2,9 @@
 
 namespace App\TPVV\Objects;
 
-class Output {
+class Response {
     public $web;
     public $idPedido;
-    public $AES;
-    public $SHA;
+    public $struct;
+    public $tpvv_token;
 }

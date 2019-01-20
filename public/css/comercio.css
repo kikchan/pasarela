@@ -1,5 +1,21 @@
 .container-contenido {
-  margin-left: 300px;
+  width: 100%;
+  padding-left: 300px;
+  background-color: rgb(239, 239, 239);
+}
+.cuadrado {
+  width: 190px;
+  height: 90px; 
+  position: relative;
+  margin: 25px;
+  margin-top: 0px;
+  margin-bottom: 18px;
+  color: white;
+  font-size: 16px;
+  float: left;
+  padding: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .nav-side-menu {
   overflow: auto;
@@ -18,7 +34,7 @@
   line-height: 50px;
   display: block;
   text-align: center;
-  font-size: 14px;
+  font-size: 20px;
 }
 .nav-side-menu .toggle-btn {
   display: none;
@@ -84,6 +100,7 @@
 .nav-side-menu li a {
   text-decoration: none;
   color: #e1ffff;
+  padding-left: 25px;
 }
 .nav-side-menu li a i {
   padding-left: 10px;
@@ -102,6 +119,8 @@
 @media (max-width: 767px) {
   .container-contenido {
     margin-left: 10px;
+    padding-left: 0px;
+    background-color: rgb(239, 239, 239);
   }
   .nav-side-menu {
     position: relative;
@@ -286,3 +305,68 @@ body {
     text-align: center;
   }
 }
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+
+	background-color: #f97777;
+}
+
+
+
+//valoraciones
+.valoracion {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.valoracion input {
+    position: absolute;
+    top: -100px;
+}
+
+
+.valoracion label {
+    float: right;
+    color: #c1b8b8;
+    font-size: 30px; 
+}
+
+.valoracion label:hover,
+.valoracion label:hover ~ label,
+.valoracion input:checked ~ label {
+    color: #ffff00;
+}
+
+
+///valoracionMuestra
+.valoracionMuestra {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.valoracionMuestra input {
+    position: absolute;
+    top: -100px;
+}
+
+
+.valoracionMuestra label {
+    float: left;
+    color: #ffff00;
+    font-size: 30px; 
+}
+
+.valoracionMuestra label:hover,
+.valoracionMuestra label:hover ~ label,
+.valoracionMuestra input:checked ~ label {
+    color: #ffff00;
+}
+
+
+
+
+hr.style2 { 
+  border-top: 3px solid #2c343c;}
+
