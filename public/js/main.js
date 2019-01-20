@@ -3,8 +3,18 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 */
+ function expandir(quien){
+	    var capa = document.getElementById(quien);
+	    if(capa.style.display=='')
+	    capa.style.display='none';
+	    else
+	    capa.style.display='';}
 
 (function($) {
+
+
+	//Expandir lista valoraciones
+   
 
 	// Breakpoints.
 		skel.breakpoints({
@@ -64,3 +74,5 @@
 	});
 
 })(jQuery);
+
+
