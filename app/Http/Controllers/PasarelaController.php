@@ -12,18 +12,15 @@ use App\Tarjeta;
 class PasarelaController extends Controller
 {
 
-
     public function response(Request $response){
-        dump($response);
-        $tpvv = new Pasarela('Fran',1,'cl12347');
-        $tpvv->SetRESPONSE($response);
-        dump($tpvv->ValidateResponse());
+        
+        $tpvv = new Pasarela('Fran',NULL,'cl12347'); //web, idPedido, clave
+        $tpvv->SetRESPONSE($response); 
+        $datos = $tpvv->ValidateResponse(); //Se obtiene un array 
 
     }
 
-
     public function check($sha,Request $request){
-
 
         $name = $request->input('name');
         $number = str_replace(' ','',$request->input('number'));
@@ -101,13 +98,13 @@ class PasarelaController extends Controller
 
     public function gform(){ //Comercio envia la solicitud
         
-        $tpvv = new Pasarela('Fran',1);
+        $tpvv = new Pasarela('Fran',1); //web, idpedido
         
-        $tpvv->AnadirProducto(1,1,1);
-        $tpvv->AnadirProducto(2,2,2);
-        $tpvv->AnadirProducto(3,3,3);
-        $tpvv->AsignarPrecioFinal(1);
-        //dump($tpvv);
+        $tpvv->AnadirProducto('smartphone',1); //producto,cantidad
+        $tpvv->AnadirProducto('bateria_externa',1); //producto,cantidad
+        $tpvv->AnadirProducto('funda',1); //producto,cantidad
+        $tpvv->AsignarPrecioFinal(267.38); //precio
+        
         return view('pago/form',['request'=>$tpvv->getREQUEST(),'url'=>$tpvv->getURL()]);
     }
 
