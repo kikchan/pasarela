@@ -49,7 +49,8 @@
                                     <strong>Comercio id: {{$valoracion->idComercio}}</strong><br/> 
                                     <strong>Nombre completo del técnico:</strong> {{$tecnico->nombre}} {{$tecnico->apellidos}}<br/> 
                                     <strong>Email técnico:</strong> {{$tecnico->email}} <br/> 
-                                    <strong>Nick técnico: </strong>{{$tecnico->nick}}
+                                    <strong>Nick técnico: </strong>{{$tecnico->nick}}<br/>
+                                    <strong>Valoración: </strong>
                                     </font>
                               
 
@@ -61,6 +62,7 @@
                                     </div>
                                 @endfor
                                   </div>
+                              </br></br>
                              </a>
                                 
                         @endif

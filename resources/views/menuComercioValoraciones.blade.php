@@ -75,7 +75,9 @@
                                                         @endfor
                                                     </br>
                                                 @endif
+                                                <br/>
                                             @endforeach
+
                                             <hr class="style2">
                                         </div>
                              </a>

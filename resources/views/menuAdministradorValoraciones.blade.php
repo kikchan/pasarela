@@ -64,7 +64,7 @@
                                                                 <label for="radio1">★</label>
                                                             </div>
                                                         @endfor
-                                                    </br>
+                                                    </br></br>
                                             <hr class="style2">
                                         </div>
                              </a>

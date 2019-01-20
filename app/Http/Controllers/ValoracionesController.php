@@ -58,7 +58,7 @@ class ValoracionesController extends Controller
 
     public function vistaTecnico(){
     	//sustituir por id usuario
-    	$listaUsuarios = User::where('id', '=', 4)->get();
+    	$listaUsuarios = User::where('id', '=', 3)->get();
        	$listaValoraciones = Valoracion::all();
         return view('menuTecnicoValoraciones')->with('listaValoraciones', $listaValoraciones)->with('usuarios', $listaUsuarios);
     }
