@@ -5,17 +5,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+                <div class="card-header">{{ __('Verifica tu correo electrónico') }}</div>
 
                 <div class="card-body">
                     @if (session('resent'))
                         <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
+                            {{ __('Te acabamos de enviar un correo electrónico al email indicado. Por favor, sigue los pasos del email.') }}
                         </div>
                     @endif
 
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }}, <a href="{{ route('verification.resend') }}">{{ __('click here to request another') }}</a>.
+                    {{ __('Comprueba tu bandeja de entrada y spam del correo electrónico antes de seguir.') }}
+                    {{ __('Si no has recibido un correo,') }}, <a href="{{ route('verification.resend') }}">{{ __('haz click aquí para reenviarte otro.') }}</a>.
                 </div>
             </div>
         </div>
