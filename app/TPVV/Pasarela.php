@@ -91,6 +91,7 @@ class Pasarela {
             $t->sha = hash("sha256",serialize($struct));
             $t->carro = @openssl_encrypt(serialize($struct['carro']), "AES-256-CBC", $this->key);
             $t->importe = $struct['precio'];
+            $t->timestamps = true;
             $result = Transaccion::where('sha',$t->sha)->get();
             dump($result,$t->sha);
             $t->idEstado = 1;
@@ -109,6 +110,14 @@ class Pasarela {
         return false;
     }
     
+    public function AsignTransaction($transaccion){
+        $struct = new Struct($this->web,$this->idPedido,NULL,NULL,$transaccion->_idEstado->descripcion,date("Y-m-d H:i:s"));
+        dump($struct);
+
+    }
+
+
+
 }
 
 

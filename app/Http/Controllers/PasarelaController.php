@@ -12,16 +12,19 @@ use App\Tarjeta;
 class PasarelaController extends Controller
 {
 
+
+
     public function check($sha,Request $request){
-        dump($sha);
+
 
         $name = $request->input('name');
         $number = str_replace(' ','',$request->input('number'));
         $expiry = str_replace(' ','',$request->input('expiry'));
         $cvv = $request->input('cvc');
+        $anyo = substr($expiry,3,4);
         
         if(strlen($name)>3 && strlen($number)>10 && strlen($expiry)==7 && strlen($cvv)>2 && strlen($cvv)<5){
-            var_dump('dentro');
+            var_dump('dentro'); //Falta simular tarjeta y cvv
             $transacciones = Transaccion::where('sha',$sha)->get();
             if(count($transacciones)==1 && $transacciones[0]->idEstado==1){
                 $tarjetas = Tarjeta::where('numero',$number)->get();
@@ -35,10 +38,16 @@ class PasarelaController extends Controller
                     $transacciones[0]->save();
                 }else {
                     $transacciones[0]->idTarjeta = $tarjetas[0]->id;
-                    $transacciones[0]->save();
+             
                 }
+                $transacciones[0]->idEstado = 3;
+                $transacciones[0]->save();
             }
         }
+        $tpvv = new Pasarela($transacciones[0]->_idComercio->nick,$transacciones[0]->pedido);
+        $tpvv->AsignTransaction($transacciones[0]);
+        //return view
+        return view('pago/status',['registro'=>$transacciones[0]]);
     }
 
     public function pagar($id){
@@ -64,17 +73,18 @@ class PasarelaController extends Controller
         $idPedido = $request->input('idPedido');
         $key = $request->input('key');
         $carrito = $request->input('lista');
-        $precio = $request->input('precio');
+        $precio = str_replace(',','.',$request->input('precio'));
         
+        dump($precio);
         $tpvv = new Pasarela($web,(int)$idPedido,$key);
         $items = explode('|',$carrito);
         foreach($items as $item){
             $data = explode(',',$item);
             if(count($data)==2)
-                $tpvv->AnadirProducto((int)$data[0],(int)$data[1]);
+                $tpvv->AnadirProducto($data[0],(int)$data[1]);
         }
         if(isset($precio))
-            $tpvv->AsignarPrecioFinal((int)$precio);
+            $tpvv->AsignarPrecioFinal((real)$precio);
 
         return view('pago/form',['request'=>$tpvv->getREQUEST(),'url'=>$tpvv->getURL()]);
 
