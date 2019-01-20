@@ -16,9 +16,9 @@ class ValoracionesController extends Controller
      public function vistaAdministrador(){
 
      	$listaValoraciones = Valoracion::all();
-     	$listaUsuarios = User::all();
+     	$usuarios = User::all();
 		
-        return view('menuAdministradorValoraciones')->with('listaValoraciones', $listaValoraciones)->with('usuarios', $listaUsuarios);
+        return view('menuAdministradorValoraciones')->with('listaValoraciones', $listaValoraciones)->with('usuarios', $usuarios);
     }
 
 

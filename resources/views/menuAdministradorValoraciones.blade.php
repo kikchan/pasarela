@@ -36,45 +36,47 @@
     </div>
 
     <div class="container-contenido">
-        <ul class="list-group">
+       <ul class="list-group">
             @if($listaValoraciones != null)
                 @foreach($listaValoraciones as $valoracion)
-                    @foreach($usuarios as $tecnico)  
-                        @if($tecnico->id == $valoracion->idTecnico)    
-                            <a onclick="javascript:expandir('{{$valoracion->id}}')" class="list-group-item list-group-item-action">
+                    @foreach($usuarios as $usuario)  
+                        @if($usuario->id == $valoracion->idTecnico)
+                        <form action="/valoraciones/borrarComentario" method="POST" role="form">    
+                            {{ csrf_field( )}}
+                            <a class="list-group-item list-group-item-action">
                                  <font size="3">
-                                    <strong> Técnico valorado: {{$tecnico->nombre}}<br/> 
-                                    Comentario: {{$valoracion->comentario}}</strong>
-                                </font>
-                                    <div id="{{$valoracion->id}}" style="display:none">
-                                     <hr class="style2">
-                                    <font size="3">
-                                    Comercio id: {{$valoracion->idComercio}}<br/> 
-                                    Nombre completo del técnico: {{$tecnico->nombre}} {{$tecnico->apellidos}}<br/> 
-                                    Email técnico: {{$tecnico->email}} <br/> 
-                                    Nick técnico: {{$tecnico->nick}}
-                                    Valoracion:
+                                    <strong> Técnico valorado:</strong> {{$usuario->nombre}}<br/> 
+                                    <strong>Comentario:</strong> {{$valoracion->comentario}}<br/> 
+                                    <strong>Tecnico id: </strong>{{$usuario->id}}<br/> 
+                                    <br/> 
                                     </font>
-                                </div>
-
-                                @for($i=0;$i < $valoracion->valoracion;$i++)                    
-                                    <div class="valoracionMuestra">
-                                        <label for="radio1">★</label>
-                                    </div>
-                                @endfor
-                            </br></br>
-                                <form action="/valoraciones/borrarComentario" method="POST" role="form">    
-                                    {{ csrf_field( )}}
-                                    <input type="hidden" value="{{$valoracion->id}}" name="id">
-                                    <button float="left" type="submit" class="btn btn-outline-delete">Borrar</button>
-                                </form>
+                                    <button type="submit" align="right" class="btn btn-danger">Borrar</button>
+                                    <input type="button" class = "btn btn-secondary"value="Ver detalles" onclick = "javascript:expandir('{{$valoracion->id}}')"/>
+                                        <div id="{{$valoracion->id}}" style="display:none">
+                                                 <hr class="style2">
+                                                      <font size="3">
+                                                    <strong>Nombre completo del técnico:</strong> {{$usuario->nombre}} {{$usuario->apellidos}}<br/> 
+                                                    <strong>Email técnico: </strong>{{$usuario->email}} <br/> 
+                                                    <strong>Valoracion:</strong>
+                                                    </font>
+                                                        @for($i=0;$i < $valoracion->valoracion;$i++)                 
+                                                            <div class="valoracionMuestra">
+                                                                <label for="radio1">★</label>
+                                                            </div>
+                                                        @endfor
+                                                    </br>
+                                            <hr class="style2">
+                                        </div>
                              </a>
-                                
+                             <input type="hidden" name="id" value="{{$valoracion->id}}">
+                        </form>      
+                       
                         @endif
                     @endforeach
                 @endforeach
             @endif
-        </div>
+        </ul>
+    </div>
 
 
 
