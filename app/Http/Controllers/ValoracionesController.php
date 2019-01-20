@@ -18,7 +18,7 @@ class ValoracionesController extends Controller
      	$listaValoraciones = Valoracion::all();
      	$usuarios = User::all();
 		
-        return view('menuAdministradorValoraciones')->with('listaValoraciones', $listaValoraciones)->with('usuarios', $usuarios);
+        return view('menuAdministradorValoraciones', compact('listaValoraciones'))->with('listaValoraciones', $listaValoraciones)->with('usuarios', $usuarios);
     }
 
 
@@ -68,7 +68,7 @@ class ValoracionesController extends Controller
     	$valoracion = Valoracion::where('id', '=', $idEliminar);
 		$valoracion->delete();
 
-        return Redirect::to('valoraciones');
+        return Redirect::to('valoracionesAdministrador');
     }
 
 

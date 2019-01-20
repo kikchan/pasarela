@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ComercioController extends Controller
 {
     public function vista(){
-        return view('menuAdministrador');
+        return view('menuComercio');
         
         
     }

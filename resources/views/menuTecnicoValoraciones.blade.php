@@ -37,20 +37,21 @@
                 @foreach($listaValoraciones as $valoracion)
                     @foreach($usuarios as $tecnico)  
                         @if($tecnico->id == $valoracion->idTecnico)    
-                            <a onclick="javascript:expandir('{{$valoracion->id}}')" class="list-group-item list-group-item-action">
+                            <a class="list-group-item list-group-item-action">
                                  <font size="3">
                                     <strong> Técnico valorado: {{$tecnico->nombre}}<br/> 
-                                    Comentario: {{$valoracion->comentario}}</strong>
+                                    Comentario: {{$valoracion->comentario}}</strong><br/> <br/>
+                                     <input type="button" class = "btn btn-secondary"value="Ver detalles" onclick = "javascript:expandir('{{$valoracion->id}}')"/>
                                 </font>
                                     <div id="{{$valoracion->id}}" style="display:none">
                                      <hr class="style2">
                                     <font size="3">
-                                    Comercio id: {{$valoracion->idComercio}}<br/> 
-                                    Nombre completo del técnico: {{$tecnico->nombre}} {{$tecnico->apellidos}}<br/> 
-                                    Email técnico: {{$tecnico->email}} <br/> 
-                                    Nick técnico: {{$tecnico->nick}}
+                                    <strong>Comercio id: {{$valoracion->idComercio}}</strong><br/> 
+                                    <strong>Nombre completo del técnico:</strong> {{$tecnico->nombre}} {{$tecnico->apellidos}}<br/> 
+                                    <strong>Email técnico:</strong> {{$tecnico->email}} <br/> 
+                                    <strong>Nick técnico: </strong>{{$tecnico->nick}}
                                     </font>
-                                </div>
+                              
 
                                 @for($i=0;$i < $valoracion->valoracion;$i++)
                                                             
@@ -59,6 +60,7 @@
                                         <label for="radio1">★</label>
                                     </div>
                                 @endfor
+                                  </div>
                              </a>
                                 
                         @endif
