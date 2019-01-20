@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Transacciones;
 use App\Valoracion;
 use App\User;
+use App\Tarjeta;
 use Carbon\Carbon;
 
 class TransaccionesController extends Controller
@@ -15,6 +16,12 @@ class TransaccionesController extends Controller
 
     public function pagos($idComercio){
         $transacciones = Transacciones::where('idComercio',$idComercio)->get();
+       for($i=0; $i<$transacciones->count(); $i++)
+        {
+            $id = $transacciones->get($i)->idTarjeta;
+            $tarjeta = Tarjeta::FindOrFail($id);
+            $transacciones->get($i)->idTarjeta = substr($tarjeta->numero,12,16);
+        }
         return view('listaTransacciones', ['pagos' => $transacciones]);
     }
 
@@ -57,7 +64,12 @@ class TransaccionesController extends Controller
 
     public function buscarId(Request $request, $idComercio) {
         $idTransaccion = $request->input('idTransaccion');
-        $transaccion = DB::table('transacciones')->where('idComercio',$idComercio)->where('id', $idTransaccion)->get();
+        if($idTransaccion == null)
+        {
+            $transaccion = Transacciones::where('idComercio',$idComercio)->get();
+        } else {
+            $transaccion = DB::table('transacciones')->where('idComercio',$idComercio)->where('id', $idTransaccion)->get();
+        }
         return view('listaTransacciones', ['pagos' => $transaccion]);
     }
 

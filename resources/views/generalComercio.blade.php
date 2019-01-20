@@ -16,7 +16,7 @@
       @endforeach
     </div>
 
-    <div class="container" style="width: 100%;">
+    <div class="container" style="width: 100%;padding-left: 30px;">
       <div class="cuadrado" style="background: #ebc12e; float: left;">
         <p>Transacciones</p>
         <p style="text-align: right;font-size: 24px;">{{$pagos}}</p>
@@ -35,20 +35,20 @@
       </div>
     </div>
 
-    <canvas id="grafico" height="300" width="900" style="margin-left: 30px;background-color: white;"></canvas>
+    <canvas id="grafico" height="300" width="900" style="margin-left: 60px;background-color: white;"></canvas>
 
-    <div class="container" style="width: 100%;">
+    <div class="container" style="width: 100%;padding-left: 45px;">
     <h2></h2>
       <table class='table table-striped table-bordered tablesorter' style="width: 45%;float: left;margin-right: 50px; background-color: white;">
-        <head>
+        <thead>
           <tr><th style="background: #67676c; color: white;">Número de pagos realizados en el mes anterior: {{$totalTrans}}</th></tr>
-        </head>
-        <body>
+        </thead>
+        <tbody>
           <tr><td>Pagos generados: {{$transacciones[0]}}</td></tr>
           <tr><td>Pagos en espera: {{$transacciones[1]}}</td></tr>
           <tr><td>Pagos aceptado: {{$transacciones[2]}}</td></tr>
           <tr><td>Pagos rechazados: {{$transacciones[3]}}</td></tr>
-        </body>
+        </tbody>
       </table>
 
       <table class='table table-striped table-bordered tablesorter' style="width: 45%;">
