@@ -41,7 +41,7 @@
 
 
                         <div class="form-group row">
-                            <label for="appellidos" class="col-md-4 col-form-label text-md-right">{{ __('Apellidos') }}</label>
+                            <label for="apellidos" class="col-md-4 col-form-label text-md-right">{{ __('Apellidos') }}</label>
 
                             <div class="col-md-6">
                                 <input id="apellidos" type="text" class="form-control{{ $errors->has('apellidos') ? ' is-invalid' : '' }}" name="apellidos" value="{{ old('apellidos') }}">
