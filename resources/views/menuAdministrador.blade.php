@@ -12,7 +12,7 @@
             </li>
 
             <li  data-toggle="collapse" data-target="#products" class="collapsed active">
-                <a href="#"><i class=""></i> Cuentas <span class="arrow"></span></a>
+                <a class="li-link-full" href="#"><i class=""></i> Cuentas <span class="arrow"></span></a>
             </li>
             <ul class="sub-menu collapse" id="products">
                 <li class="active"><a href="#">Listado</a></li>
@@ -22,7 +22,7 @@
             </ul>
 
             <li data-toggle="collapse" data-target="#new" class="collapsed">
-                <a href="#"><i class=""></i> Soporte (tickets)<span class="arrow"></span></a>
+                <a class="li-link-full" href="#"><i class=""></i> Soporte (tickets)<span class="arrow"></span></a>
             </li>
             <ul class="sub-menu collapse" id="new">
                 <li><a href="#">Listado</a></li>
@@ -31,7 +31,7 @@
             </ul>
 
             <li data-toggle="collapse" data-target="#service" class="collapsed">
-                  <a href="#"><i class=""></i> Soporte (técnico) <span class="arrow"></span></a>
+                  <a class="li-link-full" href="#"><i class=""></i> Soporte (técnico) <span class="arrow"></span></a>
                 </li>  
                 <ul class="sub-menu collapse" id="service">
                   <li><a href="#">Listado</a></li>
