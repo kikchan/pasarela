@@ -370,3 +370,12 @@ body {
 hr.style2 { 
   border-top: 3px solid #2c343c;}
 
+/*
+ * CUSTOM STYLES BEYOND THIS LINE
+ */
+ .li-link-full {
+  margin: 0;
+  display: block;
+  height: 100%;
+  width: 100%;
+ }

@@ -8,7 +8,7 @@
     <div class="menu-list"> 
         <ul id="menu-content" class="menu-content collapse out">
             <li>
-                <a href="#"><i class=""></i> Dashboard</a>
+                <a class="li-link-full" href="#"><i class=""></i> Dashboard</a>
             </li>
 
             <li  data-toggle="collapse" data-target="#products" class="collapsed active">
@@ -40,7 +40,16 @@
                 </ul>
 
                 <li>
-                <a href="valoracionesAdministrador"><i class=""></i> Valoraciones </a>
+                <a class="li-link-full" href="valoracionesAdministrador"><i class=""></i> Valoraciones </a>
+            </li>
+            <li>
+                <a class="li-link-full" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class=""></i>
+                    {{ __('Cerrar sesión') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </li>
         </ul>
     </div>
