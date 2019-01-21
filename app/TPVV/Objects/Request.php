@@ -55,7 +55,7 @@ class Request {
                                 if($data['web']==$web && $web==$this->web)
                                     if($data['idPedido']==$this->idPedido)
                                         if(hash("sha256",serialize($data))==$this->tpvv_token)
-                                            $resultado = $this->struct;         
+                                            $resultado = $data;
                         }
         }
         return $resultado;

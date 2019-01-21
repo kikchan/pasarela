@@ -48,8 +48,11 @@ Route::get('tecnico', "TecnicoController@vista");
 Route::get('pruebas', "PasarelaController@pruebas");
 
 Route::get('pruebas/form', "PasarelaController@gform");
-Route::post('pruebas/form', "PasarelaController@pform");
 
+Route::get('pruebas/form', "PasarelaController@gform");
+Route::post('pruebas/response', "PasarelaController@response");
+Route::get('pruebas/form/pagar/{id}', "PasarelaController@pagar");
+Route::post('pruebas/form/check/{id}', "PasarelaController@check");
 Route::get('pruebas/form/generate', "PasarelaController@gen")->name('gen');
 Route::post('pruebas/form/generate', "PasarelaController@pgen")->name('pgen');
 

@@ -4,8 +4,10 @@ namespace App\TPVV;
 
 use App\TPVV\Objects\Item;
 use App\TPVV\Objects\Request;
+use App\TPVV\Objects\Response;
 use App\TPVV\Objects\Struct;
 use App\User;
+use App\Transaccion;
 use Illuminate\Support\Facades\Hash;
 
 class Pasarela {
@@ -14,29 +16,28 @@ class Pasarela {
     private $idPedido;
     private $carrito;
     private $request;
-    private $output;
+    private $response;
     private $precioAsignado; //boolean
     private $precioFinal;
     private $key;
+    private $idComercio;
 
-    //*****  *****/
+    //***** INICIO *****/
 
     function __construct($w,$idP,$key=NULL) {
         $this->web = $w;
         $this->idPedido = $idP;
         $this->carrito = array();
         $this->request = NULL;
-        $this->output = "";
+        $this->response = NULL;
         $this->precioAsignado = false;
         $this->precioFinal = 0;
         $this->key=$key;
     }
 
-    public function AnadirProducto($nombre,$precio,$cantidad){
-        $item = new Item($nombre,$precio,$cantidad);
+    public function AnadirProducto($nombre,$precio){
+        $item = new Item($nombre,$precio);
         array_push($this->carrito,$item);
-        if(!$this->precioAsignado)
-            $this->precioFinal += $precio*$cantidad;
     }
 
     public function AsignarPrecioFinal($precio){ //Para aplicar algun descuento
@@ -44,16 +45,16 @@ class Pasarela {
         $this->precioFinal = $precio;
     }
 
-    //**** COMERCIO ****\\
+    //**** COMERCIO ****\\ Generar A
 
     public function GetURL(){
-        if(count($this->carrito)>0)
+        if(count($this->carrito)>0 && $this->precioAsignado) 
             return "http://localhost/pasarela/pruebas/form/".$this->web;
         return false;
     }
 
     public function GetREQUEST(){
-        if(count($this->carrito)>0){
+        if(count($this->carrito)>0 && $this->precioAsignado){
             $struct = new Struct($this->web,$this->idPedido,$this->carrito,$this->precioFinal); //Input->AES
             $tokens = $struct->Encode('Request',$this->key);
             if(!empty($tokens) && count($tokens)==2){
@@ -67,31 +68,81 @@ class Pasarela {
         return false;
     }    
 
-    //**** SERVIDOR ****\\
+    //**** SERVIDOR ****\\ Validar A
 
     public function SetREQUEST($data){  
         if(isset($data)){
             $result = User::where('nick',$this->web)->get();
+            
             if(isset($result) && count($result)==1){ //Comprobar BD registrado comercio
+                $this->idComercio= $result[0]->id;
+                $this->key= $result[0]->key;
                 $request = new Request();
                 $this->request = $request->Fill($result[0]->key,$data);
             }
         }
     }
 
-    public function CreateTransaction(){
-        $struct = $this->ValidateRequest();
-        if($struct !=false && ($struct instanceof Struct)){
-            //Transaccion
+    public function CreateTransaction(){ //Incluye validacion
+        if(isset($this->request) && $this->request instanceof Request){
+            $struct = $this->request->Validate($this->web);
+            if($struct !=false && is_array($struct)){
+                $t = new Transaccion();
+                $t->idComercio = $this->idComercio;
+                $t->Pedido = $struct['idPedido'];
+                $t->sha = hash("sha256",serialize($struct));
+                $t->carro = @openssl_encrypt(serialize($struct['carro']), "AES-256-CBC", $this->key);
+                $t->importe = $struct['precio'];
+                $t->timestamps = true;
+                $result = Transaccion::where('sha',$t->sha)->get();
+                dump($result,$t->sha);
+                $t->idEstado = 1;
+                if(count($result)==0){
+                    $t->save();            
+                    return $t->sha;
+                }
+            }
+        }
+            return 'error';
+    }
+   
+    //**** SERVIDOR ****\\ Generar B
+
+
+    public function AsignTransaction($transaccion){
+        $struct = new Struct($this->web,$this->idPedido,NULL,NULL,$transaccion->_idEstado->descripcion,date("Y-m-d H:i:s"));
+        dump($struct);
+        $response = new Response($this->web,$this->idPedido,NULL,NULL);
+        $response->CompleteData($this->key,$struct);
+        $this->response = $response;
+        dump($response);
+    }
+
+    public function GetRESPONSE(){
+        if(isset($this->web) && isset($this->idPedido) && $this->response instanceof Response){
+            return $this->response->ToString($this->key);
         }
     }
 
-    private function ValidateRequest(){
-        if(isset($this->request) && $this->request instanceof Request){
-            return $this->request->Validate($this->web);
+    //**** SERVIDOR ****\\ Validar B
+
+
+    public function SetRESPONSE($data){ 
+        $input = $data->input('response');
+        if(isset($input)){
+            $response = new Response();
+            $this->response = $response->Fill($this->key,$input);
+        }
+    }
+
+    public function ValidateResponse(){ //devuelve Struct como array de los campos necesarios (4)
+        if(isset($this->response) && $this->response instanceof Response){
+            return $this->response->Validate($this->web);
         }
         return false;
     }
-    
+
 }
+
+
 

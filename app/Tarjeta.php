@@ -12,6 +12,7 @@ class Tarjeta extends Model
         'id', 'numero', 'caducidad', 'cvv'
     ];
 
+    public $timestamps = false;
     // Relación 1-N con Transaccion
     public function transacciones()
     {
