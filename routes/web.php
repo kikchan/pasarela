@@ -11,37 +11,37 @@
 |
 */
 
+//Inicio
 Route::get('/', function () {
     return view('welcome');
 });
 
+//Comercio
 Route::get('comercio', "ComercioController@vista");
 Route::get('comercio/{id}', "TransaccionesController@general");
-
-
 
 Route::get('vistaTecnicos', "ValoracionesController@vistaTecnicos");
 
 Route::get('valoracionesAdministrador', "ValoracionesController@vistaAdministrador");
 Route::get('valoracionesTecnico', "ValoracionesController@vistaTecnico");
 Route::get('valoracionesComercio', "ValoracionesController@vistaComercio");
-
 Route::post('valoraciones/crearValoracionComercio', "ValoracionesController@vistaCrearValoracion");
-
 Route::post('/valoraciones/borrarComentario', "ValoracionesController@delete");
 Route::post('/valoraciones/crearValoracion', "ValoracionesController@create");
 
-
-
-
-
 Route::get('pagos={idComercio}', "TransaccionesController@pagos");
+
 Route::get('filtrar/pagos', 'TransaccionesController@filtrarEstado');
+
 Route::get('comercio/{id}/pagos', "TransaccionesController@pagos");
 Route::get('comercio/{id}/pagosFiltro', 'TransaccionesController@filtrar');
 Route::get('comercio/{id}/pagosBusqueda', 'TransaccionesController@buscarId');
 
+//Administrador
+Route::get('administrador', "AdministradorController@vista");
 
+//Técnico
+Route::get('tecnico', "TecnicoController@vista");
 
 //Montoya (NO TOCAR POR DIOS)
 
