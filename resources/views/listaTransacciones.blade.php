@@ -14,8 +14,8 @@
 <form id="filtros" action="{{ action('TransaccionesController@filtrar', 2) }}" method="GET" width="100%" style="padding-left: 30px;">
     <select class="selectpicker" data-style="btn-success" name="estado">
         <option value="0"> Todas los estados </option>
-        @foreach(App\Estados::select(['id as c'])->groupBy(['id'])->get() as $estado)
-            <option value="{{$estado->c}}"> {{App\Estados::where('id', $estado->c)->firstOrFail()->descripcion}} </option>    
+        @foreach(App\Estado::select(['id as c'])->groupBy(['id'])->get() as $estado)
+            <option value="{{$estado->c}}"> {{App\Estado::where('id', $estado->c)->firstOrFail()->descripcion}} </option>    
         @endforeach
     </select>
     <select class="selectpicker" data-style="btn-success" name = "importe" >
@@ -44,7 +44,7 @@
           <tr>
               <td> {{$pago->id}} </td>
               <td> {{$pago->importe}} €</td>
-              <td> {{App\Estados::where('id', $pago->idEstado)->firstOrFail()->descripcion}} </td>
+              <td> {{App\Estado::where('id', $pago->idEstado)->firstOrFail()->descripcion}} </td>
               <td> **** **** **** {{$pago->idTarjeta}} </td>
               <td> {{$pago->comentario}} </td>
           </tr> 

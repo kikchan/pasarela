@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 //use App\TPVV\Pasarela;
-use App\Transacciones;
+use App\Transaccion;
 use App\Valoracion;
 use App\User;
 use App\Tarjeta;
@@ -15,7 +15,7 @@ class TransaccionesController extends Controller
 {
 
     public function pagos($idComercio){
-        $transacciones = Transacciones::where('idComercio',$idComercio)->get();
+        $transacciones = Transaccion::where('idComercio',$idComercio)->get();
        for($i=0; $i<$transacciones->count(); $i++)
         {
             $id = $transacciones->get($i)->idTarjeta;
@@ -32,31 +32,31 @@ class TransaccionesController extends Controller
         if($estado != "0") {
             $transacciones = DB::table('transacciones')->where('idComercio', $idComercio)->where('idEstado', $estado)->paginate(5);
             if($importe == "1") {
-                $transacciones = Transacciones::where('idComercio', $idComercio)->where('idEstado', $estado)->where('importe', '<=', 50.0)->paginate(5);
+                $transacciones = Transaccion::where('idComercio', $idComercio)->where('idEstado', $estado)->where('importe', '<=', 50.0)->paginate(5);
             }
             elseif($importe == "2") {
-                $transacciones = Transacciones::where('idComercio', $idComercio)->where('idEstado', $estado)->whereBetween('importe', [50.0, 100.0])->paginate(5);
+                $transacciones = Transaccion::where('idComercio', $idComercio)->where('idEstado', $estado)->whereBetween('importe', [50.0, 100.0])->paginate(5);
             }
             elseif($importe == "3") {
-                $transacciones = Transacciones::where('idComercio', $idComercio)->where('idEstado', $estado)->whereBetween('importe', [100.0, 500.0])->paginate(5);
+                $transacciones = Transaccion::where('idComercio', $idComercio)->where('idEstado', $estado)->whereBetween('importe', [100.0, 500.0])->paginate(5);
             }
             elseif($importe == "4") {
-                $transacciones = Transacciones::where('idComercio', $idComercio)->where('idEstado', $estado)->where('importe', '>=', 500.0)->paginate(5);
+                $transacciones = Transaccion::where('idComercio', $idComercio)->where('idEstado', $estado)->where('importe', '>=', 500.0)->paginate(5);
             }
         }
         elseif($estado == "0") {
             $transacciones = DB::table('transacciones')->where('idComercio', $idComercio)->paginate(5);
             if($importe == "1") {
-                $transacciones = Transacciones::where('importe', '<=', 50.0)->paginate(5);
+                $transacciones = Transaccion::where('importe', '<=', 50.0)->paginate(5);
             }
             elseif($importe == "2") {
-                $transacciones = Transacciones::whereBetween('importe', [50.0, 100.0])->paginate(5);
+                $transacciones = Transaccion::whereBetween('importe', [50.0, 100.0])->paginate(5);
             }
             elseif($importe == "3") {
-                $transacciones = Transacciones::whereBetween('importe', [100.0, 500.0])->paginate(5);
+                $transacciones = Transaccion::whereBetween('importe', [100.0, 500.0])->paginate(5);
             }
             elseif($importe == "4") {
-                $transacciones = Transacciones::where('importe', '>=', 500.0)->paginate(5);
+                $transacciones = Transaccion::where('importe', '>=', 500.0)->paginate(5);
             }
         }
         return view('listaTransacciones', ['pagos' => $transacciones]);
@@ -66,7 +66,7 @@ class TransaccionesController extends Controller
         $idTransaccion = $request->input('idTransaccion');
         if($idTransaccion == null)
         {
-            $transaccion = Transacciones::where('idComercio',$idComercio)->get();
+            $transaccion = Transaccion::where('idComercio',$idComercio)->get();
         } else {
             $transaccion = DB::table('transacciones')->where('idComercio',$idComercio)->where('id', $idTransaccion)->get();
         }
