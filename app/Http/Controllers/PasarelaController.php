@@ -12,7 +12,7 @@ use App\Tarjeta;
 class PasarelaController extends Controller
 {
 
-    public function response(Request $response){
+    public function endpoint(Request $response){
         
         $tpvv = new Pasarela('Fran',NULL,'cl12347'); //web, idPedido, clave
         $tpvv->SetRESPONSE($response); 
