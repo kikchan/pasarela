@@ -10,4 +10,8 @@ class AdministradorController extends Controller
     public function vista(){
         return view('admin/dashboard');       
     }
+
+    public function valoraciones() {
+        return view('admin/valoraciones');
+    }
 }

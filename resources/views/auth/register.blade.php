@@ -89,6 +89,22 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
+                        
+                        <div class="form-group row">
+                            <label for="key" class="col-md-4 col-form-label text-md-right">{{ __('Key') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="key" type="text" class="form-control{{ $errors->has('key') ? ' is-invalid' : '' }}" name="key" value="{{ old('key') }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="endpoint" class="col-md-4 col-form-label text-md-right">{{ __('Endpoint') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="endpoint" type="text" class="form-control{{ $errors->has('endpoint') ? ' is-invalid' : '' }}" name="endpoint" value="{{ old('endpoint') }}">
+                            </div>
+                        </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

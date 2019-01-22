@@ -22,7 +22,7 @@ Route::get('comercio/{id}', "TransaccionesController@general");
 
 Route::get('vistaTecnicos', "ValoracionesController@vistaTecnicos");
 
-Route::get('valoracionesAdministrador', "ValoracionesController@vistaAdministrador");
+Route::get('administrador/valoraciones', "ValoracionesController@vistaAdministrador");
 Route::get('valoracionesTecnico', "ValoracionesController@vistaTecnico");
 Route::get('valoracionesComercio', "ValoracionesController@vistaComercio");
 Route::post('valoraciones/crearValoracionComercio', "ValoracionesController@vistaCrearValoracion");
@@ -40,6 +40,8 @@ Route::get('comercio/{id}/pagosBusqueda', 'TransaccionesController@buscarId');
 
 //Administrador
 Route::get('administrador', "AdministradorController@vista");
+Route::get('administrador/dashboard', "AdministradorController@vista");
+Route::get('administrador/valoraciones', "AdministradorController@valoraciones");
 
 //Técnico
 Route::get('tecnico', "TecnicoController@vista");

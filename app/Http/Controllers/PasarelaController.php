@@ -14,7 +14,7 @@ class PasarelaController extends Controller
 
     public function endpoint(Request $response){
         
-        $tpvv = new Pasarela('Fran',NULL,'cl12347'); //web, idPedido, clave
+        $tpvv = new Pasarela('Mastodonte',NULL,'mastodonte'); //web, idPedido, clave
         $tpvv->SetRESPONSE($response); 
         $datos = $tpvv->ValidateResponse(); //Se obtiene un array 
         dump($datos);

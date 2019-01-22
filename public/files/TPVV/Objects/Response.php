@@ -28,7 +28,6 @@ class Response {
     }
     
     public function Fill($key,$text){
-        dump($key,$text);
         if(isset($text) && $text!=''){
             $struct = @openssl_decrypt($text, "AES-256-CBC", $key);
             $deserialized = unserialize($struct);

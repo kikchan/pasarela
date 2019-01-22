@@ -15,7 +15,7 @@
 
 @section('contenido')
   <div class="container-contenido">
-    <strong>Dashboard</strong>
-    <p>Vero, mete el código aquí</p>
+    <strong>Valoraciones</strong>
+    <p>JuanKa, mete el código aquí</p>
   </div>
 @endsection

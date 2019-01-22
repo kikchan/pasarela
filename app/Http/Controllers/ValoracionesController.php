@@ -18,7 +18,7 @@ class ValoracionesController extends Controller
      	$listaValoraciones = Valoracion::all();
      	$usuarios = User::all();
 		
-        return view('menuAdministradorValoraciones', compact('listaValoraciones'))->with('listaValoraciones', $listaValoraciones)->with('usuarios', $usuarios);
+        return view('admin/valoraciones', compact('listaValoraciones'))->with('listaValoraciones', $listaValoraciones)->with('usuarios', $usuarios);
     }
 
 
