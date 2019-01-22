@@ -32,7 +32,7 @@ class LoginController extends Controller
         } else if(Auth::user()->esTecnico) {
             return '/tecnico';
         } else if(Auth::user()->esComercio) {
-            return '/comercio';
+            return '/comercio/'.Auth::user()->id;
         } else return ('/');
     }
 

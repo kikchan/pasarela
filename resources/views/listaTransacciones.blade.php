@@ -1,17 +1,17 @@
-@extends('menuComercio')
+@extends('menuComercio', ['idUsuario'=>$idUsuario])
 
 @section('contenido')
 <div class="container-contenido">
 <nav class="navbar navbar-light bg-light" style="background-color: #fbfcfc;padding-right: 40px;">
   <a class="navbar-brand">Pagos</a>
-  <form class="form-inline"  action="{{ action('TransaccionesController@buscarId', 2) }}" method="GET">
+  <form class="form-inline"  action="{{ action('TransaccionesController@buscarId', [$idUsuario]) }}" method="GET">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="idTransaccion" style="margin-top: 9px;float: right;">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-top: 9px;float: right;background-color: #31b0c5;color: white;">Search</button>
   </form>
 </nav>
 
 
-<form id="filtros" action="{{ action('TransaccionesController@filtrar', 2) }}" method="GET" width="100%" style="padding-left: 30px;">
+<form id="filtros" action="{{ action('TransaccionesController@filtrar', [$idUsuario]) }}" method="GET" width="100%" style="padding-left: 30px;">
     <select class="selectpicker" data-style="btn-success" name="estado">
         <option value="0"> Todas los estados </option>
         @foreach(App\Estado::select(['id as c'])->groupBy(['id'])->get() as $estado)

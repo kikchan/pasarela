@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-//use App\TPVV\Pasarela;
+use Illuminate\Support\Facades\Auth;
 use App\Transaccion;
 use App\Valoracion;
 use App\User;
@@ -22,7 +22,7 @@ class TransaccionesController extends Controller
             $tarjeta = Tarjeta::FindOrFail($id);
             $transacciones->get($i)->idTarjeta = substr($tarjeta->numero,12,16);
         }
-        return view('listaTransacciones', ['pagos' => $transacciones]);
+        return view('listaTransacciones', ['pagos' => $transacciones, 'idUsuario'=>$idComercio]);
     }
 
     public function filtrar(Request $request, $idComercio) {
@@ -59,7 +59,7 @@ class TransaccionesController extends Controller
                 $transacciones = Transaccion::where('importe', '>=', 500.0)->paginate(5);
             }
         }
-        return view('listaTransacciones', ['pagos' => $transacciones]);
+        return view('listaTransacciones', ['pagos' => $transacciones, 'idUsuario'=>$idComercio]);
     }
 
     public function buscarId(Request $request, $idComercio) {
@@ -70,7 +70,7 @@ class TransaccionesController extends Controller
         } else {
             $transaccion = DB::table('transacciones')->where('idComercio',$idComercio)->where('id', $idTransaccion)->get();
         }
-        return view('listaTransacciones', ['pagos' => $transaccion]);
+        return view('listaTransacciones', ['pagos' => $transaccion, 'idUsuario'=>$idComercio]);
     }
 
     public function general($idComercio) {
@@ -98,7 +98,7 @@ class TransaccionesController extends Controller
             $ticketsPorEstado[] = DB::table('tickets')->where('idComercio', $idComercio)->where('idEstado', $i+1)->count();
         }
         return view('generalComercio', ['numPagos'=>$transaccionesDia, 'totalTrans'=>$totalTrans, 'totalTickets'=>$totalTickets,'transacciones'=>$transaccionesPorEstado,
-                'tickets'=>$ticketsPorEstado,'pagos'=>$pagos, 'ingresos'=>$ingresos, 's'=>$start, 'e'=>$end]);
+                'tickets'=>$ticketsPorEstado,'pagos'=>$pagos, 'ingresos'=>$ingresos, 'idUsuario'=>$idComercio]);
     }
 
     public function tecnicoMejorValorado() {

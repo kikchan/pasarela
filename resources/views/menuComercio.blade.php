@@ -8,10 +8,10 @@
     <div class="menu-list"> 
         <ul id="menu-content" class="menu-content collapse out">
             <li>
-                <a href="/pasarela/comercio/2"><i class=""></i> Dashboard</a>
+                <a class="li-link-full" href="{{ URL::to('/comercio/' . $idUsuario) }}"><i class=""></i> Dashboard</a>
             </li>
             <li>
-                <a href="/pasarela/comercio/2/pagos"><i class=""></i> BackOffice</a>
+                <a class="li-link-full" href="{{ URL::to('/comercio/' . $idUsuario . '/pagos') }}"><i class=""></i> BackOffice</a>
             </li>
 
             <li data-toggle="collapse" data-target="#new" class="collapsed active">
@@ -23,6 +23,15 @@
                 <li><a href="#">Ticket</a></li>
                 <li><a href="valoracionesComercio">Técnicos</a></li>
             </ul>
+            <li>
+                <a class="li-link-full" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class=""></i>
+                    {{ __('Cerrar sesión') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </li>
         </ul>
     </div>
 </div>

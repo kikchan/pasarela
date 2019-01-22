@@ -1,4 +1,4 @@
-@extends('menuComercio')
+@extends('menuComercio', ['idUsuario'=>$idUsuario])
 
 @section('contenido')
 <!-- Chart.js -->
@@ -60,7 +60,6 @@
           <tr><td>Tickets en espera: {{$tickets[1]}}</td></tr>
           <tr><td>Tickets aceptado: {{$tickets[2]}}</td></tr>
           <tr><td>Tickets rechazados: {{$tickets[3]}}</td></tr>
-          <tr><td>{{$s}}, {{$e}}</td></tr>
         </body>
       </table>
     </div>
