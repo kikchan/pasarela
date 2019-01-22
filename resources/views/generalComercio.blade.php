@@ -1,4 +1,12 @@
-@extends('menuComercio', ['idUsuario'=>$idUsuario])
+@extends('principal')
+
+@section('includes')
+<link href="{{ asset('css/main.css') }}" rel="stylesheet">                
+@endsection
+
+@section('menu')
+  @include('menuComercio', ['idUsuario'=>$idUsuario])
+@endsection
 
 @section('contenido')
 <!-- Chart.js -->
