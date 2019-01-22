@@ -1,4 +1,12 @@
-@extends('menuComercio', ['idUsuario'=>$idUsuario])
+@extends('principal')
+
+@section('includes')     
+<link href="{{ asset('css/comercio.css') }}" rel="stylesheet">       
+@endsection
+
+@section('menu')
+  @include('comercio/menuComercio', ['idUsuario'=>$idUsuario])
+@endsection
 
 @section('contenido')
 <div class="container-contenido">

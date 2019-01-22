@@ -34,6 +34,7 @@ Route::get('pagos={idComercio}', "TransaccionesController@pagos");
 Route::get('filtrar/pagos', 'TransaccionesController@filtrarEstado');
 
 Route::get('comercio/{id}/pagos', "TransaccionesController@pagos");
+Route::get('comercio/{id}/pagos/{idPago}', "TransaccionesController@detalleTransaccion");
 Route::get('comercio/{id}/pagosFiltro', 'TransaccionesController@filtrar');
 Route::get('comercio/{id}/pagosBusqueda', 'TransaccionesController@buscarId');
 

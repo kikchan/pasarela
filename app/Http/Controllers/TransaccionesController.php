@@ -117,4 +117,9 @@ class TransaccionesController extends Controller
 
         return $topTecnico;
     }
+
+    public function detalleTransaccion($idComercio, $idTransaccion){
+        $transaccion = Transaccion::FindOrFail($idTransaccion);
+        return view('detallesTransaccion', ['transaccion' => $transaccion, 'idUsuario'=>$idComercio]);
+    }
 }
