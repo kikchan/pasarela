@@ -49,7 +49,7 @@ class Pasarela {
 
     public function GetURL(){
         if(count($this->carrito)>0 && $this->precioAsignado) 
-            return "http://185.207.145.237/pruebas/form/".$this->web;
+            return "http://185.207.145.237/generar/".$this->web;
         return false;
     }
 

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 class AdministradorController extends Controller
 {
     public function vista(){
-        return view('admin/generalAdministrador');       
+        return view('admin/dashboard');       
     }
-
 }

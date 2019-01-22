@@ -47,17 +47,15 @@ Route::get('tecnico', "TecnicoController@vista");
 //Montoya (NO TOCAR POR DIOS)
 
 Route::get('pruebas', "PasarelaController@pruebas");
-
 Route::get('pruebas/form', "PasarelaController@gform");
-
-Route::get('pruebas/form', "PasarelaController@gform");
-Route::post('pruebas/response', "PasarelaController@response");
-Route::get('pruebas/form/pagar/{id}', "PasarelaController@pagar");
-Route::post('pruebas/form/check/{id}', "PasarelaController@check");
+Route::post('pruebas/response', "PasarelaController@endpoint");
 Route::get('pruebas/form/generate', "PasarelaController@gen")->name('gen');
 Route::post('pruebas/form/generate', "PasarelaController@pgen")->name('pgen');
 
-Route::post('pruebas/form/{web}', "PasarelaController@pform");
+Route::post('generar/{web}', "PasarelaController@pform");
+Route::get('pagar/{id}', "PasarelaController@pagar");
+Route::post('check/{id}', "PasarelaController@check");
+
 
 Route::get('tickets', 'TicketController@listado');
 Route::get('tickets/{id}', 'TicketController@detalles');

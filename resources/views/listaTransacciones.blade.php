@@ -1,7 +1,10 @@
 @extends('principal')
 
 @section('includes')     
-<link href="{{ asset('css/comercio.css') }}" rel="stylesheet">   
+<link href="{{ asset('css/comercio.css') }}" rel="stylesheet"> 
+
+
+
 <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">       
 @endsection
 

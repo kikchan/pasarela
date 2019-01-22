@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {        
         if(Auth::user()->esAdministrador) {
-            return view('admin/generalAdministrador');
+            return view('admin/dashboard');
         } else if(Auth::user()->esTecnico) {
             return view('tecnico/generalTecnico');
         } else if(Auth::user()->esComercio) {

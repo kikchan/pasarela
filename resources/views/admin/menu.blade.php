@@ -5,7 +5,7 @@
     <div class="menu-list"> 
         <ul id="menu-content" class="menu-content collapse out">
             <li>
-                <a class="li-link-full" href="#"><i class=""></i> Dashboard</a>
+                <a class="li-link-full" href="/administrador"><i class=""></i> Dashboard</a>
             </li>
 
             <li  data-toggle="collapse" data-target="#products" class="collapsed active">

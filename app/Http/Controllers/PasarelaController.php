@@ -17,7 +17,7 @@ class PasarelaController extends Controller
         $tpvv = new Pasarela('Fran',NULL,'cl12347'); //web, idPedido, clave
         $tpvv->SetRESPONSE($response); 
         $datos = $tpvv->ValidateResponse(); //Se obtiene un array 
-
+        dump($datos);
     }
 
     public function check($sha,Request $request){
@@ -51,12 +51,12 @@ class PasarelaController extends Controller
             $user = $transacciones[0]->_idComercio;
             $tpvv = new Pasarela($user->nick,$transacciones[0]->pedido,$user->key);
             $tpvv->AsignTransaction($transacciones[0]);
+            return view('pago/status',['registro'=>$transacciones[0],'url'=>$user->endpoint,'response'=>$tpvv->GetRESPONSE()]);
         }else {
-            $transacciones = 'error';
-        }
+            return view('pago/status',['registro'=>NULL,'url'=>NULL,'response'=>NULL]);
+        }        
         
-        //return view
-        return view('pago/status',['registro'=>$transacciones[0],'url'=>$user->endpoint,'response'=>$tpvv->GetRESPONSE()]);
+        
     }
 
     public function pagar($id){
