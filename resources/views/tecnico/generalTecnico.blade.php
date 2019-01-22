@@ -2,14 +2,16 @@
 
 @section('includes')
 <link href="{{ asset('css/main.css') }}" rel="stylesheet">                
+<link href="{{ asset('css/comercio.css') }}" rel="stylesheet">
 @endsection
 
 @section('menu')
-  @include('menuAdministrador')
+  @include('tecnico/menuTecnico')
 @endsection
 
 @section('contenido')
-  <div class="container-contenido" style="border: solid red 5px">
+  <div class="container-contenido">
+    <div class="jumbotron">asdasd</div>
     JASDLKASJD
   </div>
 @endsection

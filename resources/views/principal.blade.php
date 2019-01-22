@@ -5,10 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Pasarela - Comercio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="{{ asset('css/comercio.css') }}" rel="stylesheet">
-
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">                
-        <script src="{{ asset('js/app.js') }}"></script>
+       
+        
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">

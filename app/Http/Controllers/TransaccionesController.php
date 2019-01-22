@@ -100,7 +100,7 @@ class TransaccionesController extends Controller
                 ->whereDate('created_at', '<=', date($end->format('Y-m-d')))->whereDate('created_at', '>=', date($start->format('Y-m-d')))->count();
             $ticketsPorEstado[] = DB::table('tickets')->where('idComercio', $idComercio)->where('idEstado', $i+1)->count();
         }
-        return view('generalComercio', ['numPagos'=>$transaccionesDia, 'totalTrans'=>$totalTrans, 'totalTickets'=>$totalTickets,'transacciones'=>$transaccionesPorEstado,
+        return view('comercio/generalComercio', ['numPagos'=>$transaccionesDia, 'totalTrans'=>$totalTrans, 'totalTickets'=>$totalTickets,'transacciones'=>$transaccionesPorEstado,
                 'tickets'=>$ticketsPorEstado,'pagos'=>$pagos, 'ingresos'=>$ingresos, 'idUsuario'=>$idComercio]);
     }
 

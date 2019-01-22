@@ -1,11 +1,12 @@
 @extends('principal')
 
 @section('includes')
-<link href="{{ asset('css/main.css') }}" rel="stylesheet">                
+<link href="{{ asset('css/main.css') }}" rel="stylesheet">         
+<link href="{{ asset('css/comercio.css') }}" rel="stylesheet">       
 @endsection
 
 @section('menu')
-  @include('menuComercio', ['idUsuario'=>$idUsuario])
+  @include('comercio/menuComercio', ['idUsuario'=>$idUsuario])
 @endsection
 
 @section('contenido')

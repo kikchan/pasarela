@@ -1,7 +1,4 @@
-@include('principal')
-
-<body>
-<div class="nav-side-menu">
+<div class="nav-side-menu" style="z-index: 10">
     <div class="brand">Menu</div>
     <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
       
@@ -35,5 +32,3 @@
         </ul>
     </div>
 </div>
-    @yield('contenido')
-</body>

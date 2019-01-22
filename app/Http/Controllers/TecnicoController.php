@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class TecnicoController extends Controller
 {
     public function vista(){
-        return view('menuTecnico');       
+        return view('tecnico/generalTecnico');       
     }
 
 }

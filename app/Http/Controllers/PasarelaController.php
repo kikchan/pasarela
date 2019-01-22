@@ -48,10 +48,13 @@ class PasarelaController extends Controller
                 $transacciones[0]->idEstado = 3;
                 $transacciones[0]->save();
             }
+            $user = $transacciones[0]->_idComercio;
+            $tpvv = new Pasarela($user->nick,$transacciones[0]->pedido,$user->key);
+            $tpvv->AsignTransaction($transacciones[0]);
+        }else {
+            $transacciones = 'error';
         }
-        $user = $transacciones[0]->_idComercio;
-        $tpvv = new Pasarela($user->nick,$transacciones[0]->pedido,$user->key);
-        $tpvv->AsignTransaction($transacciones[0]);
+        
         //return view
         return view('pago/status',['registro'=>$transacciones[0],'url'=>$user->endpoint,'response'=>$tpvv->GetRESPONSE()]);
     }
