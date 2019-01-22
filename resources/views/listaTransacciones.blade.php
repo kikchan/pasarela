@@ -45,7 +45,11 @@
               <td> {{$pago->id}} </td>
               <td> {{$pago->importe}} €</td>
               <td> {{App\Estado::where('id', $pago->idEstado)->firstOrFail()->descripcion}} </td>
-              <td> **** **** **** {{$pago->idTarjeta}} </td>
+              @if($pago->idTarjeta == null)
+                <td></td>
+              @else
+                <td> **** **** **** {{$pago->idTarjeta}} </td>
+              @endif
               <td> {{$pago->comentario}} </td>
           </tr> 
         @endforeach

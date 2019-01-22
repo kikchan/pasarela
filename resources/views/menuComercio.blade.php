@@ -35,8 +35,5 @@
         </ul>
     </div>
 </div>
-
-
-
     @yield('contenido')
 </body>

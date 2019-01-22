@@ -18,9 +18,12 @@ class TransaccionesController extends Controller
         $transacciones = Transaccion::where('idComercio',$idComercio)->get();
        for($i=0; $i<$transacciones->count(); $i++)
         {
-            $id = $transacciones->get($i)->idTarjeta;
-            $tarjeta = Tarjeta::FindOrFail($id);
-            $transacciones->get($i)->idTarjeta = substr($tarjeta->numero,12,16);
+            if($transacciones->get($i)->idTarjeta != null)
+            {
+                $id = $transacciones->get($i)->idTarjeta;
+                $tarjeta = Tarjeta::FindOrFail($id);
+                $transacciones->get($i)->idTarjeta = substr($tarjeta->numero,12,16);
+            }
         }
         return view('listaTransacciones', ['pagos' => $transacciones, 'idUsuario'=>$idComercio]);
     }
