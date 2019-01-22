@@ -38,11 +38,7 @@ class Request {
         $encryption = @openssl_encrypt($serialized, "AES-256-CBC", $key??env("TPVV_KEY"));
         return $encryption;
     }
-    
-    private function getStruct(){
-        dump($this->struct);
-    }
-
+        
     public function Validate($web=NULL){ //por completar
         $resultado = false;
         if(isset($web)){ //Comprobamos vacios y nulos

@@ -95,6 +95,7 @@ class Pasarela {
                 $t->importe = $struct['precio'];
                 $t->timestamps = true;
                 $result = Transaccion::where('sha',$t->sha)->get();
+                dump($result,$t->sha);
                 $t->idEstado = 1;
                 if(count($result)==0){
                     $t->save();            
@@ -110,9 +111,11 @@ class Pasarela {
 
     public function AsignTransaction($transaccion){
         $struct = new Struct($this->web,$this->idPedido,NULL,NULL,$transaccion->_idEstado->descripcion,date("Y-m-d H:i:s"));
+        dump($struct);
         $response = new Response($this->web,$this->idPedido,NULL,NULL);
         $response->CompleteData($this->key,$struct);
         $this->response = $response;
+        dump($response);
     }
 
     public function GetRESPONSE(){

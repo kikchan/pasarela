@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -22,7 +23,13 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('home');
+    {        
+        if(Auth::user()->esAdministrador) {
+            return view('admin/generalAdministrador');
+        } else if(Auth::user()->esTecnico) {
+            return view('tecnico/generalTecnico');
+        } else if(Auth::user()->esComercio) {
+            return redirect('/comercio/'.Auth::user()->id);
+        } else return ('/');
     }
 }

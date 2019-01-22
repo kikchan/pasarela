@@ -1,7 +1,8 @@
 @extends('principal')
 
 @section('includes')     
-<link href="{{ asset('css/comercio.css') }}" rel="stylesheet">       
+<link href="{{ asset('css/comercio.css') }}" rel="stylesheet">   
+<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">       
 @endsection
 
 @section('menu')
@@ -45,6 +46,7 @@
             <th style="background: #67676c; color: white;"> Estado </th>
             <th style="background: #67676c; color: white;"> Tarjeta </th>
             <th style="background: #67676c; color: white;"> Comentario </th>
+            <th style="background: #67676c; color: white;"> Accion </th>
           </tr>
         </thead>
         <tbody>
@@ -59,6 +61,9 @@
                 <td> **** **** **** {{$pago->idTarjeta}} </td>
               @endif
               <td> {{$pago->comentario}} </td>
+              <td><a href="{{ URL::to('/comercio/' . $idUsuario . '/pagos/' .$pago->id) }}">
+                <i class="fa fa-eye"></i></a>
+                <a type='button' class='btn btn-primary' href="#" > Devolver </a></td>
           </tr> 
         @endforeach
         </tbody>

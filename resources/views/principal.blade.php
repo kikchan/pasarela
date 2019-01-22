@@ -15,6 +15,9 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
         @yield('includes')
         <style>@yield('style')</style>
+        <script type="text/javascript">
+            parent.document.title = "Your new title";
+        </script>
     </head>
     <body>  
       @yield('menu')

@@ -24,6 +24,15 @@
             <li>
                 <a href="valoracionesTecnico"><i class=""></i> Mis Valoraciones </a>
             </li>
+            <li>
+                <a class="li-link-full" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class=""></i>
+                    {{ __('Cerrar sesión') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </li>
         </ul>
     </div>
 </div>
