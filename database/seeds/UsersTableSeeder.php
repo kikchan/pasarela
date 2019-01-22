@@ -78,5 +78,16 @@ class UsersTableSeeder extends Seeder
             'esAdministrador' => '0',
             'esTecnico' => '0'
         ]);
+        DB::table('users')->insert([
+			'nombre' => 'Kiril',
+			'apellidos' => 'Gaydarov',
+			'nick' => 'kikchan',
+			'email' => 'kvg1@alu.ua.es',
+            'password' => bcrypt('123456'),
+            'key' => 'cl12351',
+            'esComercio' => '0',
+            'esAdministrador' => '1',
+            'esTecnico' => '0'
+        ]);
     }
 }

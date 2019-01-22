@@ -21,8 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable(); //Yo lo quitaria
             $table->string('password');
-            $table->string('key'); //necesario para la seguridad
-            $table->string('endpoint'); //necesario para la seguridad
+            $table->string('key')->nullable(); //necesario para la seguridad
+            $table->string('endpoint')->nullable(); //necesario para la seguridad
             $table->rememberToken();
 			$table->boolean('esComercio')->default('1');
 			$table->boolean('esAdministrador')->default('0');
