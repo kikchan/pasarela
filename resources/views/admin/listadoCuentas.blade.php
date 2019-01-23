@@ -15,7 +15,7 @@
       <a class="navbar-brand" style="padding-top: 0px;color: white">Listado cuentas</a>
     </nav>
 
-    <div class="container">
+    <div class="container" style="margin-top: 2em">
       <table data-toggle="table" class="table table-bordered tablesorter" style="background-color: white;">
         <thead>
           <tr>
@@ -25,6 +25,7 @@
             <th>Apellidos</th>
             <th>Correo electrónico</th>
             <th>Tipo de usuario</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -45,6 +46,10 @@
                 @else
                   no determinado
                 @endif
+              </td>
+              <td>
+                <a class="btn-sm btn-warning" href="/administrador/editarUsuario/{{$usuario->id}}">Editar</a>
+                <a class="btn-sm btn-danger" href="/administrador/borrarUsuario/{{$usuario->id}}">Borrar</a>
               </td>
             </tr>
           @endforeach

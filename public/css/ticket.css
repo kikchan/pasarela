@@ -1,3 +1,12 @@
+h2 {
+  font-weight: bold;
+}
+
+span {
+  font-weight: bold;
+  color: indigo;
+}
+
 input[type=text] {
   vertical-align: middle;
   height: 38px;
@@ -5,7 +14,8 @@ input[type=text] {
   box-sizing: border-box;
   border: 2px solid #00B4CC;
   border-radius: 4px;
-  font-size: 13px;
+  font-size: 16px;
+  color: black;
   background-color: white;
   background-position: 10px 10px; 
   background-repeat: no-repeat;
@@ -15,7 +25,7 @@ input[type=text] {
   display: inline;
 }
 input[type=text]:focus {
-  width: 30%;
+  width: 180px;
 }
 
 input[type=submit] {
@@ -31,24 +41,21 @@ input[type=submit] {
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
-  padding: 4px 9px 9px 4px;
-}
-
-.searchTerm {
-  width: 100%;
-  border: 3px solid #00B4CC;
-  padding: 5px;
-  height: 20px;
-  border-radius: 5px;
-  outline: none;
-  color: #9DBFAF;
-}
-
-.searchContainer {
-
+  padding: 0px 5px 0px 7px;
 }
 
 .fa-search:before {
   display: inline-block;
   width: 100%;
+  color: white;
+  font-size: 20px;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+	background-color: white;
+}
+
+.table > thead > tr > th {
+  background-color: darkslategray;
 }

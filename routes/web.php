@@ -43,6 +43,9 @@ Route::get('administrador', "AdministradorController@vista");
 Route::get('administrador/dashboard', "AdministradorController@vista");
 Route::get('administrador/valoraciones', "AdministradorController@valoraciones");
 Route::get('administrador/listadoCuentas', "AdministradorController@listadoCuentas");
+Route::get('administrador/borrarUsuario/{id}', "AdministradorController@borrarUsuario");
+Route::get('administrador/editarUsuario/{id}', "AdministradorController@editarUsuario");
+Route::post('administrador/editarUsuario/{id}', "AdministradorController@editarUsuario");
 
 //Técnico
 Route::get('tecnico', "TecnicoController@vista");
@@ -53,15 +56,11 @@ Route::get('pruebas/form', "PasarelaController@gform");
 Route::post('pruebas/response', "PasarelaController@endpoint");
 Route::get('pruebas/form/generate', "PasarelaController@gen")->name('gen');
 Route::post('pruebas/form/generate', "PasarelaController@pgen")->name('pgen');
+
 //TPVV
 Route::post('generar/{web}', "PasarelaController@pform");
 Route::get('pagar/{id}', "PasarelaController@pagar");
 Route::post('check/{id}', "PasarelaController@check");
-
-
-Route::get('tickets', 'TicketController@listado');
-Route::get('tickets/{id}', 'TicketController@detalles');
-Route::get('/detalle_ajax/{id}', 'TicketController@ajax_detalle')->name('detalle_ajax');
 
 Auth::routes();
 

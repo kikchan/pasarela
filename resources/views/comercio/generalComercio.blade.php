@@ -42,6 +42,10 @@
         <p style="margin-bottom: 0px;font-size: 18px;">Tickets</p>
         <p style="text-align: right;font-size: 26px;">{{$totalTickets}}</p>
       </div>
+      <div class="cuadrado" style="background: #e35c70; float: left;">
+        <p style="margin-bottom: 0px;font-size: 18px;">Devoluciones</p>
+        <p style="text-align: right;font-size: 26px;">{{$transacciones[4]/2}}</p>
+      </div>
     </div>
 
     <canvas id="grafico" height="300" width="900" style="width:900px;margin: 0 auto;background-color: white;"></canvas>

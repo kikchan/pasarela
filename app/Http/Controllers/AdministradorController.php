@@ -20,4 +20,11 @@ class AdministradorController extends Controller
 
         return view('admin/listadoCuentas', ['usuarios'=>$usuarios]);
     }
+
+    public function borrarUsuario($id) {
+        DB::table('users')->where('id', $id)->delete();
+        //User::findOrFail($id)->delete();
+
+        return redirect('/administrador/listadoCuentas');
+    }
 }

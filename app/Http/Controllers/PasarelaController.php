@@ -13,18 +13,31 @@ use App\Tarjeta;
 class PasarelaController extends Controller
 {
     public function pruebas(){
-        var_dump(CreditCardService::Simulate('460000000000000','2','12/2020','4'));
-        var_dump(CreditCardService::Simulate('461900000000000','2','12/2020','4'));
-        var_dump(CreditCardService::Simulate('51200000000000','2','12/2030','4'));
-        var_dump(CreditCardService::Simulate('51390000000000','2','12/2020','4'));
-        var_dump(CreditCardService::Simulate('46400000000000','2','12/2020','4'));
-        var_dump(CreditCardService::Simulate('46590000000000','2','12/2020','4'));
-        var_dump(CreditCardService::Simulate('51600000000000','2','12/2020','4'));
-        var_dump(CreditCardService::Simulate('46790000000000','2','12/2020','4'));
-        var_dump(CreditCardService::Simulate('518090000000000','2','12/2020','4'));
-        var_dump(CreditCardService::Simulate('51990000000000','2','12/2020','4'));
-        
-        
+        $pedido = Transaccion::Find(12);
+        if(isset($pedido)){
+            if($pedido->idEstado==3 && count(Transaccion::where('sha','devolucion.'.$pedido->sha)->get())==0){
+                $t = new Transaccion();
+                $t->idComercio = $pedido->idComercio;
+                $t->pedido = $pedido->pedido;
+                $t->sha = 'devolucion.'.$pedido->sha;
+                $t->carro = $pedido->carro;
+                $t->importe = $pedido->importe*(-1);
+                $t->idTarjeta = $pedido->idTarjeta;
+                $t->idTarjeta = $pedido->idTarjeta;
+                $t->idEstado = 5;
+                $t->comentario = 'Devolucion';
+                $pedido->idEstado = 5;
+                $t->save();
+                $pedido->save();
+                dump($pedido);
+            dump($t);
+            }
+            
+        }
+    }
+
+    public function devolucion($id){ //middleware comercio
+
     }
 
     public function endpoint(Request $response){

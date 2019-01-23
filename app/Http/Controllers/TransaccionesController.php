@@ -95,7 +95,7 @@ class TransaccionesController extends Controller
         // Numero de trasacciones y tichets generado, en espera, aceptado y rechazado
         $transaccionesPorEstado = array();
         $ticketsPorEstado = array();
-        for($i=0; $i<4; $i++) {    
+        for($i=0; $i<5; $i++) {    
             $transaccionesPorEstado[] = DB::table('transacciones')->where('idComercio', $idComercio)->where('idEstado', $i+1)
                 ->whereDate('created_at', '<=', date($end->format('Y-m-d')))->whereDate('created_at', '>=', date($start->format('Y-m-d')))->count();
             $ticketsPorEstado[] = DB::table('tickets')->where('idComercio', $idComercio)->where('idEstado', $i+1)->count();

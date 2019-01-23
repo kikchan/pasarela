@@ -21,7 +21,7 @@
 </form>
 
 @if ($tickets != null && count($tickets) > 0 )
-<span class="small"> Total listado: {{count($allTickets)}}</span>
+<span> Total listado: {{count($allTickets)}}</span>
 <br><br>
 <table class="table table-bordered table-striped table-hover" border="1" cellspacing="1" cellpadding="5">
 <thead>
