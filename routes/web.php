@@ -66,3 +66,30 @@ Route::get('/detalle_ajax/{id}', 'TicketController@ajax_detalle')->name('detalle
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+// ===== TICKETS =====
+
+// Admin
+Route::group(['middleware' => 'admin', 'prefix' => 'administrador'], function () {
+    Route::get('tickets', 'TicketController@listado')->name('tickets');
+    Route::get('tickets/{id}', 'TicketController@detalles')->name('detalles');
+    Route::put('tickets/{id}', 'TicketController@cerrarTicket')->name('cerrarTicket');
+});
+
+// Tecnico
+Route::group(['middleware' => 'tecnico', 'prefix' => 'tecnico'], function () {
+    Route::get('tickets', 'TicketController@listadoTecnico')->name('ticketsT');
+    Route::get('tickets/{id}', 'TicketController@detallesTecnico')->name('detallesTicketT');
+    Route::put('tickets/{id}', 'TicketController@gestionarTicketT')->name('gestionarTicketT');
+    Route::post('tickets/{id}', 'TicketController@mensajeTicketT')->name('mensajeTicketT');
+});
+
+// Comercio
+Route::group(['middleware' => 'comercio', 'prefix' => 'comercio'], function () {
+    Route::get('tickets', 'TicketController@listadoComercio')->name('ticketsC');
+    Route::get('tickets/{id}', 'TicketController@detallesComercio')->name('detallesTicketC');
+    Route::get('crearTicket', 'TicketController@formCrearTicket')->name('formCrearTicket');
+    Route::post('tickets', 'TicketController@crearTicket')->name('crearTicket');
+    Route::post('tickets/{id}', 'TicketController@mensajeTicketC')->name('mensajeTicketC');
+});

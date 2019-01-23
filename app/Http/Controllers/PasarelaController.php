@@ -41,9 +41,12 @@ class PasarelaController extends Controller
         $number = str_replace(' ','',$request->input('number'));
         $expiry = str_replace(' ','',$request->input('expiry')); //12/5262
         $cvv = $request->input('cvc'); 
-        
+
         if(strlen($name)>3 && strlen($number)>10 && strlen($expiry)==7 && strlen($cvv)>2 && strlen($cvv)<5){
             var_dump('dentro'); //Falta simular tarjeta y cvv
+
+            $array = CreditCardService::Simulate($num,$name,$exp,$cvv);
+
             $transacciones = Transaccion::where('sha',$sha)->get();
             if(count($transacciones)==1 && $transacciones[0]->idEstado==1){
                 $tarjetas = Tarjeta::where('numero',$number)->get();
