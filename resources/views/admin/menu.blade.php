@@ -12,7 +12,7 @@
                 <a class="li-link-full" href="#"><i class=""></i> Cuentas <span class="arrow"></span></a>
             </li>
             <ul class="sub-menu collapse" id="products">
-                <li><a href="#">Listado</a></li>
+                <li><a href="/administrador/listadoCuentas">Listado</a></li>
                 <li><a href="#">Buscador</a></li>
                 <li><a href="#">Cuenta</a></li>
                 <li><a href="#">Generar cuenta</a></li>

@@ -14,4 +14,8 @@ class AdministradorController extends Controller
     public function valoraciones() {
         return view('admin/valoraciones');
     }
+
+    public function listadoCuentas() {
+        return view('admin/listadoCuentas');
+    }
 }

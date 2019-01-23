@@ -42,18 +42,18 @@ Route::get('comercio/{id}/pagosBusqueda', 'TransaccionesController@buscarId');
 Route::get('administrador', "AdministradorController@vista");
 Route::get('administrador/dashboard', "AdministradorController@vista");
 Route::get('administrador/valoraciones', "AdministradorController@valoraciones");
+Route::get('administrador/listadoCuentas', "AdministradorController@listadoCuentas");
 
 //Técnico
 Route::get('tecnico', "TecnicoController@vista");
 
 //Montoya (NO TOCAR POR DIOS)
-
 Route::get('pruebas', "PasarelaController@pruebas");
 Route::get('pruebas/form', "PasarelaController@gform");
 Route::post('pruebas/response', "PasarelaController@endpoint");
 Route::get('pruebas/form/generate', "PasarelaController@gen")->name('gen');
 Route::post('pruebas/form/generate', "PasarelaController@pgen")->name('pgen');
-
+//TPVV
 Route::post('generar/{web}', "PasarelaController@pform");
 Route::get('pagar/{id}', "PasarelaController@pagar");
 Route::post('check/{id}', "PasarelaController@check");

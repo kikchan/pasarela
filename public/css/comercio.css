@@ -1,7 +1,9 @@
 .container-contenido {
   width: 100%;
   padding-left: 300px;
+  text-align: center;
   background-color: rgb(239, 239, 239);
+  height: 100%;
 }
 .cuadrado {
   width: 190px;
@@ -120,6 +122,7 @@
   .container-contenido {
     margin-left: 10px;
     padding-left: 0px;
+    text-align: center;
     background-color: rgb(239, 239, 239);
   }
   .nav-side-menu {
@@ -311,9 +314,6 @@ body {
 	background-color: #f97777;
 }
 
-
-
-//valoraciones
 .valoracion {
     position: relative;
     overflow: hidden;
@@ -339,7 +339,6 @@ body {
 }
 
 
-///valoracionMuestra
 .valoracionMuestra {
     position: relative;
     overflow: hidden;
@@ -378,4 +377,13 @@ hr.style2 {
   display: block;
   height: 100%;
   width: 100%;
+ }
+ 
+ .titulo-pagina {
+   margin: 1%;
+   padding: 50px;
+   color: black;
+   background: grey;
+   border: solid 2px gray;
+   border-radius: 25px;
  }

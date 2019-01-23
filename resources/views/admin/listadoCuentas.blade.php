@@ -11,7 +11,8 @@
 
 @section('contenido')
   <div class="container-contenido">
-    <strong>Dashboard</strong>
-    <p>Vero, mete el código aquí</p>
+    <div class="titulo-pagina">
+      <strong>Listado Cuentas</strong>
+    </div>
   </div>
 @endsection

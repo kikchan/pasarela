@@ -5,12 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TPVV\Pasarela;
 use App\TPVV\Objects\Item;
+use App\ServiceLayer\CreditCardService;
 use App\User;
 use App\Transaccion;
 use App\Tarjeta;
 
 class PasarelaController extends Controller
 {
+    public function pruebas(){
+        var_dump(CreditCardService::Simulate('460000000000000','2','12/2020','4'));
+        var_dump(CreditCardService::Simulate('461900000000000','2','12/2020','4'));
+        var_dump(CreditCardService::Simulate('51200000000000','2','12/2030','4'));
+        var_dump(CreditCardService::Simulate('51390000000000','2','12/2020','4'));
+        var_dump(CreditCardService::Simulate('46400000000000','2','12/2020','4'));
+        var_dump(CreditCardService::Simulate('46590000000000','2','12/2020','4'));
+        var_dump(CreditCardService::Simulate('51600000000000','2','12/2020','4'));
+        var_dump(CreditCardService::Simulate('46790000000000','2','12/2020','4'));
+        var_dump(CreditCardService::Simulate('518090000000000','2','12/2020','4'));
+        var_dump(CreditCardService::Simulate('51990000000000','2','12/2020','4'));
+        
+        
+    }
 
     public function endpoint(Request $response){
         
@@ -24,9 +39,8 @@ class PasarelaController extends Controller
 
         $name = $request->input('name');
         $number = str_replace(' ','',$request->input('number'));
-        $expiry = str_replace(' ','',$request->input('expiry'));
-        $cvv = $request->input('cvc');
-        $anyo = substr($expiry,3,4);
+        $expiry = str_replace(' ','',$request->input('expiry')); //12/5262
+        $cvv = $request->input('cvc'); 
         
         if(strlen($name)>3 && strlen($number)>10 && strlen($expiry)==7 && strlen($cvv)>2 && strlen($cvv)<5){
             var_dump('dentro'); //Falta simular tarjeta y cvv
