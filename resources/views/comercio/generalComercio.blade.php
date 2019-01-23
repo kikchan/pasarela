@@ -32,7 +32,7 @@
       </div>
       <div class="cuadrado" style="background: #3ad2ab ; float: left;">
         <p style="margin-bottom: 0px;font-size: 14px;">Transacciones rechazadas</p>
-        <p style="text-align: right;font-size: 26px;">{{$tickets[3]}}</p>
+        <p style="text-align: right;font-size: 26px;">{{$transacciones[3]}}</p>
       </div>
       <div class="cuadrado" style="background: #3dcb80 ; float: left;">
         <p style="margin-bottom: 0px;font-size: 18px;">Ingresos</p>
@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <canvas id="grafico" height="300" width="900" style="margin-left: 60px;background-color: white;"></canvas>
+    <canvas id="grafico" height="300" width="900" style="width:900px;margin: 0 auto;background-color: white;"></canvas>
 
     <div class="container" style="width: 100%;padding-left: 45px;">
     <h2></h2>

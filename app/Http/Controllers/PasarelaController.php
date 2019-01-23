@@ -43,12 +43,10 @@ class PasarelaController extends Controller
         $cvv = $request->input('cvc'); 
 
         if(strlen($name)>3 && strlen($number)>10 && strlen($expiry)==7 && strlen($cvv)>2 && strlen($cvv)<5){
-            var_dump('dentro'); //Falta simular tarjeta y cvv
-
-            $array = CreditCardService::Simulate($num,$name,$exp,$cvv);
 
             $transacciones = Transaccion::where('sha',$sha)->get();
             if(count($transacciones)==1 && $transacciones[0]->idEstado==1){
+                $array = CreditCardService::Simulate($number,$name,$expiry,$cvv);
                 $tarjetas = Tarjeta::where('numero',$number)->get();
                 if(count($tarjetas)==0){
                     $t = new Tarjeta();
@@ -60,15 +58,16 @@ class PasarelaController extends Controller
                     $transacciones[0]->save();
                 }else {
                     $transacciones[0]->idTarjeta = $tarjetas[0]->id;
-             
                 }
-                $transacciones[0]->idEstado = 3;
+                $transacciones[0]->idEstado = $array[0];
+                $transacciones[0]->comentario = $array[1];
                 $transacciones[0]->save();
+                $user = $transacciones[0]->_idComercio;
+                $tpvv = new Pasarela($user->nick,$transacciones[0]->pedido,$user->key);
+                $tpvv->AsignTransaction($transacciones[0]);
+                return view('pago/status',['registro'=>$transacciones[0],'url'=>$user->endpoint,'response'=>$tpvv->GetRESPONSE()]);
             }
-            $user = $transacciones[0]->_idComercio;
-            $tpvv = new Pasarela($user->nick,$transacciones[0]->pedido,$user->key);
-            $tpvv->AsignTransaction($transacciones[0]);
-            return view('pago/status',['registro'=>$transacciones[0],'url'=>$user->endpoint,'response'=>$tpvv->GetRESPONSE()]);
+            return view('pago/status',['registro'=>NULL,'url'=>NULL,'response'=>NULL]);
         }else {
             return view('pago/status',['registro'=>NULL,'url'=>NULL,'response'=>NULL]);
         }        

@@ -16,6 +16,8 @@ class AdministradorController extends Controller
     }
 
     public function listadoCuentas() {
-        return view('admin/listadoCuentas');
+        $usuarios = DB::table('users')->get();
+
+        return view('admin/listadoCuentas', ['usuarios'=>$usuarios]);
     }
 }

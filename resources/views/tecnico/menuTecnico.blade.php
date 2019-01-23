@@ -16,9 +16,7 @@
                 <a href="#"><i class=""></i> Tickets<span class="arrow"></span></a>
             </li>
             <ul class="sub-menu collapse" id="new">
-                <li><a href="#">Listado</a></li>
-                <li><a href="#">Buscador</a></li>
-                <li><a href="#">Ticket</a></li>
+                <li><a href="{{ route('ticketsT') }}">Listado</a></li>
             </ul>
 
             <li>

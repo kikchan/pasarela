@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\DB;
 class CreditCardService{
      
     public static function Simulate($num,$name,$exp,$cvv){
-        echo '<br>';
-        echo $num.' | '.$name.' | '.$exp.' | '.$cvv;
         $estado = 0;
         $mensaje = '';
 
@@ -51,10 +49,9 @@ class CreditCardService{
                 else if(preg_match("/^..8/", $num) || preg_match("/^..9/", $num))
                     $mensaje = 'Error de sistema';
             }
-
         } else{
-            $estado = 3;
-            $mensaje = 'Correcto';
+            $estado = 4;
+            $mensaje = 'Tarjeta no valida';
         }        
         
         return array($estado,$mensaje);

@@ -1,0 +1,54 @@
+input[type=text] {
+  vertical-align: middle;
+  height: 38px;
+  width: 130px;
+  box-sizing: border-box;
+  border: 2px solid #00B4CC;
+  border-radius: 4px;
+  font-size: 13px;
+  background-color: white;
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px;
+  -webkit-transition: width 0.5s ease-in-out;
+  transition: width 0.5s ease-in-out;
+  display: inline;
+}
+input[type=text]:focus {
+  width: 30%;
+}
+
+input[type=submit] {
+  line-height: 0px;
+}
+
+.searchButton {
+  height: 38px;
+  vertical-align: middle;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 4px 9px 9px 4px;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #00B4CC;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchContainer {
+
+}
+
+.fa-search:before {
+  display: inline-block;
+  width: 100%;
+}

@@ -22,9 +22,7 @@
                 <a class="li-link-full" href="#"><i class=""></i> Soporte (tickets)<span class="arrow"></span></a>
             </li>
             <ul class="sub-menu collapse" id="new">
-                <li><a href="#">Listado</a></li>
-                <li><a href="#">Buscador</a></li>
-                <li><a href="#">Ticket</a></li>
+                <li><a href="{{ route('tickets') }}">Listado</a></li>
             </ul>
 
             <li data-toggle="collapse" data-target="#service" class="collapsed">
