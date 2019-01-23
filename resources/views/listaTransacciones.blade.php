@@ -14,23 +14,23 @@
 
 @section('contenido')
 <div class="container-contenido">
-<nav class="navbar navbar-light bg-light" style="background-color: #fbfcfc;padding-right: 40px;">
-  <a class="navbar-brand">Pagos</a>
+<nav class="navbar" style="background-color: #fbfcfc;height: 50px">
+  <a class="navbar-brand" style="padding-top: 0px;">Pagos</a>
   <form class="form-inline"  action="{{ action('TransaccionesController@buscarId', [$idUsuario]) }}" method="GET">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="idTransaccion" style="margin-top: 9px;float: right;">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-top: 9px;float: right;background-color: #31b0c5;color: white;">Search</button>
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="idTransaccion">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="background-color: #31b0c5;color: white;">Search</button>
   </form>
 </nav>
 
 
-<form id="filtros" action="{{ action('TransaccionesController@filtrar', [$idUsuario]) }}" method="GET" width="100%" style="padding-left: 30px;">
-    <select class="selectpicker" data-style="btn-success" name="estado">
+<form id="filtros" action="{{ action('TransaccionesController@filtrar', [$idUsuario]) }}" method="GET" width="100%" style="padding-left: 30px;padding-top: 30px;">
+    <select class="custom-select" style="width: 200px;background-color: #2ead3d;color: white;" name="estado">
         <option value="0"> Todas los estados </option>
         @foreach(App\Estado::select(['id as c'])->groupBy(['id'])->get() as $estado)
             <option value="{{$estado->c}}"> {{App\Estado::where('id', $estado->c)->firstOrFail()->descripcion}} </option>    
         @endforeach
     </select>
-    <select class="selectpicker" data-style="btn-success" name = "importe" >
+    <select class="custom-select" style="width: 200px;background-color: #2ead3d;color: white;" name = "importe" >
         <option value="0"> Todos los importes </option>
         <option value="1"> 0€ - 50€ </option>
         <option value="2"> 50€ - 100€ </option>
@@ -41,7 +41,7 @@
 </form>
 <br>
 <div class="container" style="width: 100%;padding-left: 30px;padding-right: 40px;">
-<table data-toggle="table" class="table table-striped table-bordered tablesorter" style="background-color: white;">
+<table data-toggle="table" class="table table-bordered tablesorter" style="background-color: white;">
         <thead>
           <tr>
             <th style="background: #67676c; color: white;"> ID </th>

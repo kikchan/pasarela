@@ -4,7 +4,7 @@
 <div class="container" style="margin-top:25px">
 <h2> Generador de transacciones PA$AR€LA </h2>
 <form style="margin-top:25px" method="POST" action="{{ route('pgen') }}">
-    {{ csrf_field() }}
+    @csrf
     {{ method_field('POST') }}
     <input class="form-control" style="margin-top:10px" type="text" name="web" placeholder="web">
     <input class="form-control" style="margin-top:10px" type="text" name="idPedido" placeholder="idPedido">

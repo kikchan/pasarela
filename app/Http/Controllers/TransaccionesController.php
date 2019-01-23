@@ -85,8 +85,8 @@ class TransaccionesController extends Controller
 
         // Numero total de transacciones en un mes en específico
         $transaccionesDia = array();
-        $start = new Carbon('first day of last month');
-        $end = new Carbon('last day of last month');
+        $start = new Carbon('first day of this month');
+        $end = new Carbon('last day of this month');
         $dias = $end->diffInDays($start);
         for($i=0; $i<=$dias; $i++) {
             $numPagos = DB::table('transacciones')->where('idComercio', $idComercio)->whereDate('created_at', '=', date($start->format('Y-m').'-'.$i))->count();
