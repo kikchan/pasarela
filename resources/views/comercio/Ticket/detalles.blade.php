@@ -36,7 +36,7 @@
 <!-- Mostrar notificación si acabamos de enviar un mensaje -->
 @if (isset($mensajeEnviado))
     <div class="alert alert-success alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 0.9rem;"><span aria-hidden="true">&times;</span></button>
         Mensaje enviado satisfactoriamente.
     </div>
 @endif
@@ -71,7 +71,7 @@
 <br><br>
 
 <!-- Gestión de mensajes -->
-@if ($ticket->_idEstado->id != 5)
+@if ($ticket->_idEstado->id != 6)
     <form method="POST" action="{{ route('mensajeTicketC', $ticket->id) }}">
         {{ method_field('POST') }}
         {{ csrf_field() }}
@@ -83,6 +83,15 @@
             <input type="submit" class="btn btn-primary" value="Contestar" />
         </span>
     </form>
+@else 
+<form method="POST" action="{{ route('crearValoracionComercio')}}">
+    {{ csrf_field() }}
+    {{ method_field('POST') }}
+    <input hidden class="form-control" type="text" name="idTecnico" value="{{$ticket->idTecnico}}">
+    <input hidden class="form-control" type="text" name="nombreTecnico" value="{{$ticket->_idTecnico->nombre}}">
+
+    <input class="btn btn-dark" type="submit" value="Valora a este t&eacute;cnico">
+</form>
 @endif
 
 @else

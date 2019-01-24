@@ -34,5 +34,23 @@ class Ticket extends Model
     public function _idEstado()
 	{
 		return $this->belongsTo('App\Estado', 'idEstado');
-	}
+    }
+    
+    // Relacion 1-N con Mensaje
+    public function mensajes()
+    {
+        return $this->hasMany('App\Mensaje','idTicket');
+    }
+
+    // Buscador
+    public function scopeSearchByKeyword($query, $keyword)
+    {
+        if ($keyword!='') {
+            $query->where(function ($query) use ($keyword) {
+                $query->where("id", "LIKE","%$keyword%")
+                    ->orWhere("asunto", "LIKE", "%$keyword%");
+            });
+        }
+        return $query;
+    }
 }

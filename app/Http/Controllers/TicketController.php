@@ -41,10 +41,10 @@ class TicketController extends Controller
         $ticket = Ticket::findOrFail($id);
 
         if ($ticket) {
-            // El estado 5 representa "cerrado"
-            Ticket::where('id', $id)->update(array('idEstado' => '5'));
+            // El estado 6 representa "cerrado"
+            Ticket::where('id', $id)->update(array('idEstado' => '6'));
             $ticket = Ticket::findOrFail($id);
-            return View::make("admin/Ticket/detalles")->with('ticket', $ticket);
+            return View::make("admin/Ticket/detalles")->with('ticket', $ticket)->with('ticketCerrado', 1);
         }
     }
 
@@ -58,7 +58,7 @@ class TicketController extends Controller
         if ($request->has('search')) {
             // Obtenemos la palabra buscada
             $keyword = $request->input('search');
-            $tickets = Ticket::where('idTecnico', '=', $userID)->SearchByKeyword($keyword)->paginate(5); // CAMBIAR 3 por ID usuario logueado
+            $tickets = Ticket::where('idTecnico', '=', $userID)->SearchByKeyword($keyword)->paginate(5);
         } else {
             $tickets = Ticket::where('idTecnico', '=', $userID)->paginate(5);
         }
@@ -79,13 +79,13 @@ class TicketController extends Controller
             // Obtener la acción a aplicar al ticket
             $nuevoEstado = $request->input('accion');
 
-            // Diccionario de estados CAMBIAR GLOBAL
+            // Diccionario de estados
             $estados =
-                [
+            [
                 "esperar" => 2,
                 "aceptar" => 3,
                 "rechazar" => 4,
-                "cerrar" => 5,
+                "cerrar" => 6,
             ];
 
             Ticket::where('id', $id)->update(array('idEstado' => $estados[$nuevoEstado]));
@@ -111,23 +111,27 @@ class TicketController extends Controller
     // ===== COMERCIO =====
     public function listadoComercio(Request $request)
     {
-        $allTickets = Ticket::where('idComercio', '=', '2')->get();
+        $userID = $request->user()->id;
+        $allTickets = Ticket::where('idComercio', '=', $userID)->get();
 
         // Si venimos de la barra de búsqueda...
         if ($request->has('search')) {
             // Obtenemos la palabra buscada
             $keyword = $request->input('search');
-            $tickets = Ticket::where('idComercio', '=', '2')->SearchByKeyword($keyword)->paginate(5); // CAMBIAR 3 por ID usuario logueado
+            $tickets = Ticket::where('idComercio', '=', $userID)->SearchByKeyword($keyword)->paginate(5);
         } else {
-            $tickets = Ticket::where('idComercio', '=', '2')->paginate(5);
+            $tickets = Ticket::where('idComercio', '=', $userID)->paginate(5);
         }
-        return View::make("comercio/Ticket/listado")->with(compact('tickets', 'allTickets'));
+
+        return View::make("comercio/Ticket/listado")->with(compact('tickets', 'allTickets'))->with('idUsuario', $userID);
     }
 
-    public function detallesComercio($id)
+    public function detallesComercio(Request $request, $id)
     {
         $ticket = Ticket::find($id);
-        return View::make("comercio/Ticket/detalles")->with('ticket', $ticket);
+        $userID = $request->user()->id;
+
+        return View::make("comercio/Ticket/detalles")->with('ticket', $ticket)->with('idUsuario', $userID);
     }
 
     public function mensajeTicketC(Request $request, $id)
@@ -138,9 +142,10 @@ class TicketController extends Controller
         {
             // Obtener el mensaje
             $mensaje = $request->input('mensaje');
-            Mensaje::create(['idUsuario' => $request->user()->id, 'idTicket' => $id, 'comentario' => $mensaje, 'adjunto' => '', 'created_at' => date("Y-m-d H:i:s")]); // CAMBIAR idUsuario por ID usuario logueado
+            Mensaje::create(['idUsuario' => $request->user()->id, 'idTicket' => $id, 'comentario' => $mensaje, 'adjunto' => '', 'created_at' => date("Y-m-d H:i:s")]);
+            $userID = $request->user()->id;
 
-            return View::make("comercio/Ticket/detalles")->with(compact('ticket'))->with('mensajeEnviado', 1);
+            return View::make("comercio/Ticket/detalles")->with(compact('ticket'))->with('mensajeEnviado', 1)->with('idUsuario', $userID);
         }
     }
 
@@ -148,12 +153,16 @@ class TicketController extends Controller
     public function formCrearTicket(Request $request)
     {
         $transacciones = Transaccion::all();
-        return View::make("comercio/Ticket/crear")->with(compact('transacciones'));
+        $userID = $request->user()->id;
+
+        return View::make("comercio/Ticket/crear")->with(compact('transacciones'))->with('idUsuario', $userID);
     }
 
     // Crea un ticket y asigna un técnico aleatorio 
     public function crearTicket(Request $request)
     {
+        $userID = $request->user()->id;
+
         // Obtener datos del form
         $asunto = $request->input('asunto');
         $mensaje = $request->input('mensaje');
@@ -165,14 +174,16 @@ class TicketController extends Controller
         $tecnico = User::all()->where('esTecnico', '=', '1')->random(1)[0];
         
         // Crear el ticket
-        $ticket = Ticket::create(['idComercio' => '2', 'idTecnico' => $tecnico->id, 'idTransaccion' => is_null($transaccionID) ? NULL : $transaccionID, 'asunto' => $asunto, 'idEstado' => '1', 'created_at' => date("Y-m-d H:i:s")]); // CAMBIAR idComercio por ID usuario logueado
+        $ticket = Ticket::create(['idComercio' => $userID, 'idTecnico' => $tecnico->id, 'idTransaccion' => is_null($transaccionID) ? NULL : $transaccionID, 'asunto' => $asunto, 'idEstado' => '1', 'created_at' => date("Y-m-d H:i:s")]);
 
         // Crear el mensaje del ticket
-        Mensaje::create(['idUsuario' => '2', 'idTicket' => $ticket->id, 'comentario' => $mensaje, 'adjunto' => '', 'created_at' => date("Y-m-d H:i:s")]); // CAMBIAR idUsuario por ID usuario logueado
+        Mensaje::create(['idUsuario' => $userID, 'idTicket' => $ticket->id, 'comentario' => $mensaje, 'adjunto' => '', 'created_at' => date("Y-m-d H:i:s")]);
 
         // Actualizar el listado del comercio
-        $allTickets = Ticket::where('idComercio', '=', '2')->get();
-        $tickets = Ticket::where('idComercio', '=', '2')->paginate(5);
-        return View::make("comercio/Ticket/listado")->with(compact('tickets', 'allTickets'));
+        $allTickets = Ticket::where('idComercio', '=', $userID)->get();
+        $tickets = Ticket::where('idComercio', '=', $userID)->paginate(5);
+        $userID = $request->user()->id;
+
+        return View::make("comercio/Ticket/listado")->with(compact('tickets', 'allTickets'))->with('idUsuario', $userID);
     }
 }

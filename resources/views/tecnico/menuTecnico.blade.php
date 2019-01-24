@@ -20,7 +20,7 @@
             </ul>
 
             <li>
-                <a href="valoracionesTecnico"><i class=""></i> Mis Valoraciones </a>
+                <a href="{{route('valoracionesTecnico')}}"><i class=""></i> Mis Valoraciones </a>
             </li>
             <li>
                 <a class="li-link-full" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

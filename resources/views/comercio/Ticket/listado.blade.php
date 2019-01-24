@@ -21,7 +21,7 @@
 </form>
 
 @if ($tickets != null && count($tickets) > 0 )
-<span class="small"> Tickets abiertos: {{count($allTickets)}}</span>
+<span> Tickets abiertos: {{count($allTickets)}}</span>
 <table class="table table-bordered table-striped table-hover" border="1" cellspacing="1" cellpadding="5">
 <thead>
     <tr>
@@ -54,12 +54,12 @@
                 {
                     $color = '#ff3333';
                 }
-                else if($d->idEstado == 5)
+                else if($d->idEstado == 6)
                 {
                     $color = 'gray';
                 }
             ?>
-            <td style="background-color: {{$color}};"><strong>{{$d->asunto}}</strong></td>
+            <td style="background-color: {{$color}}; text-align: left; font-size: medium; font-weight: bold; color: black;">{{$d->asunto}}</td>
 
             <td> <a class="btn btn-info" href="{{ route('detallesTicketC', $d->id) }}">Detalles</a></td>
         <tr>

@@ -23,17 +23,16 @@ Route::get('comercio/{id}', "TransaccionesController@general");
 Route::get('vistaTecnicos', "ValoracionesController@vistaTecnicos");
 
 Route::get('administrador/valoraciones', "ValoracionesController@vistaAdministrador");
-Route::get('valoracionesTecnico', "ValoracionesController@vistaTecnico");
-Route::get('valoracionesComercio', "ValoracionesController@vistaComercio");
-Route::post('valoraciones/crearValoracionComercio', "ValoracionesController@vistaCrearValoracion");
-Route::post('/valoraciones/borrarComentario', "ValoracionesController@delete");
-Route::post('/valoraciones/crearValoracion', "ValoracionesController@create");
+Route::get('/comercio/valoracionesComercio', "ValoracionesController@vistaComercio");
+
+Route::post('/comercio-soporte/valoraciones/crearValoracion', "ValoracionesController@create");
 
 Route::get('pagos={idComercio}', "TransaccionesController@pagos");
 
 Route::get('filtrar/pagos', 'TransaccionesController@filtrarEstado');
 
 Route::get('comercio/{id}/pagos', "TransaccionesController@pagos");
+Route::get('comercio/{id}/wiki', "TransaccionesController@wiki");
 Route::get('comercio/{id}/pagos/{idPago}', "TransaccionesController@detalleTransaccion");
 Route::get('comercio/{id}/pagosFiltro', 'TransaccionesController@filtrar');
 Route::get('comercio/{id}/pagosBusqueda', 'TransaccionesController@buscarId');
@@ -44,8 +43,9 @@ Route::get('administrador/dashboard', "AdministradorController@vista");
 Route::get('administrador/valoraciones', "AdministradorController@valoraciones");
 Route::get('administrador/listadoCuentas', "AdministradorController@listadoCuentas");
 Route::get('administrador/borrarCuenta/{id}', "AdministradorController@borrarCuenta");
-Route::get('administrador/editarCuenta/{id}', "AdministradorController@editarCuenta");
-Route::post('administrador/editarCuenta/{id}', "AdministradorController@editarCuenta");
+
+Route::get('administrador/editarCuenta/{id}', "AdministradorController@editarCuentaForm");
+Route::post('administrador/editarCuenta/{id}', "AdministradorController@editarCuentaUsuario")->name('editarCuentaUsuario');
 
 //Técnico
 Route::get('tecnico', "TecnicoController@vista");
@@ -66,14 +66,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-// ===== TICKETS =====
-
 // Admin
 Route::group(['middleware' => 'admin', 'prefix' => 'administrador'], function () {
     Route::get('tickets', 'TicketController@listado')->name('tickets');
     Route::get('tickets/{id}', 'TicketController@detalles')->name('detalles');
     Route::put('tickets/{id}', 'TicketController@cerrarTicket')->name('cerrarTicket');
+	Route::get('valoracionesAdministrador', "ValoracionesController@vistaAdministrador")->name('valoracionesAdministrador');
+	Route::post('valoracionesAdministrador/borrarComentario', 'ValoracionesController@delete');
 });
 
 // Tecnico
@@ -82,13 +81,19 @@ Route::group(['middleware' => 'tecnico', 'prefix' => 'tecnico'], function () {
     Route::get('tickets/{id}', 'TicketController@detallesTecnico')->name('detallesTicketT');
     Route::put('tickets/{id}', 'TicketController@gestionarTicketT')->name('gestionarTicketT');
     Route::post('tickets/{id}', 'TicketController@mensajeTicketT')->name('mensajeTicketT');
+	Route::get('valoraciones', "ValoracionesController@vistaTecnico")->name('valoracionesTecnico');
 });
 
 // Comercio
-Route::group(['middleware' => 'comercio', 'prefix' => 'comercio'], function () {
+Route::group(['middleware' => 'comercio', 'prefix' => 'comercio-soporte'], function () {
+	Route::get('valoracionesComercio', "ValoracionesController@vistaComercio")->name('valoracionesComercio');
+    
+    
     Route::get('tickets', 'TicketController@listadoComercio')->name('ticketsC');
     Route::get('tickets/{id}', 'TicketController@detallesComercio')->name('detallesTicketC');
     Route::get('crearTicket', 'TicketController@formCrearTicket')->name('formCrearTicket');
     Route::post('tickets', 'TicketController@crearTicket')->name('crearTicket');
     Route::post('tickets/{id}', 'TicketController@mensajeTicketC')->name('mensajeTicketC');
+	Route::post('valoraciones/crearValoracionComercio', 'ValoracionesController@vistaCrearValoracion')->name('crearValoracionComercio');
+
 });

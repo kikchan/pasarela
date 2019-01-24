@@ -54,12 +54,12 @@
                 {
                     $color = '#ff3333';
                 }
-                else if($d->idEstado == 5)
+                else if($d->idEstado == 6)
                 {
                     $color = 'gray';
                 }
             ?>
-            <td style="background-color: {{$color}};"><strong>{{$d->asunto}}</strong></td>
+            <td style="background-color: {{$color}}; text-align: left; font-size: medium; font-weight: bold; color: black;">{{$d->asunto}}</td>
 
             <td> <a class="btn btn-info" href="{{ route('detallesTicketT', $d->id) }}">Detalles</a></td>
         <tr>

@@ -339,13 +339,13 @@ body {
 
 
 .valoracionMuestra {
-    position: relative;
+    position: left;
     overflow: hidden;
     display: inline-block;
 }
 
 .valoracionMuestra input {
-    position: absolute;
+    position: left;
     top: -100px;
 }
 
@@ -354,6 +354,7 @@ body {
     float: left;
     color: #ffff00;
     font-size: 30px; 
+	padding-left:-2000px;
 }
 
 .valoracionMuestra label:hover,
@@ -421,3 +422,32 @@ body {
  tecnico {
    color: mediumseagreen;
  }
+
+.container-contenido > .container {
+  text-align: center;
+}
+
+.container-contenido > .container > form > input[type="text"],
+.container-contenido > .container > form > input[type="email"] {
+  border: solid gray 1px;
+  background-color: white;
+  color: black;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+select {
+  color: black;
+  height: 40px;
+  background-color: white;
+  margin-bottom: 1em;
+}
+
+select > option {
+  color: black;
+}
+
+.close {
+  height: 50px;
+}

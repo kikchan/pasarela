@@ -103,7 +103,7 @@
     },
     options: {
       responsive: false,
-      title: {  display: true, text: 'Análisis de las tranacciones realizadas', fontSize: 28 },
+      title: {  display: true, text: 'Análisis de las transacciones realizadas', fontSize: 28 },
       scales: {
         yAxes: [{ display: true, ticks: { beginAtZero: true, suggestedMax: 5 } }],
         xAxes: [{ display: true, ticks: { autoSkip: true } }]

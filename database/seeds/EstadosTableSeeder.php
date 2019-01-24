@@ -25,6 +25,9 @@ class EstadosTableSeeder extends Seeder
             'descripcion' => 'rechazado'
         ]);
         DB::table('estados')->insert([
+            'descripcion' => 'devolucion'
+        ]);
+        DB::table('estados')->insert([
             'descripcion' => 'cerrado'
         ]);
     }

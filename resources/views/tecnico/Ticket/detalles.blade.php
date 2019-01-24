@@ -36,18 +36,18 @@
 <!-- Mostrar notificación si acabamos de modificar el estado del ticket o enviado un mensaje -->
 @if (isset($ticketModificado))
     <div class="alert alert-success alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 0.9rem;"><span aria-hidden="true">&times;</span></button>
         Ticket {{$ticket->_idEstado->descripcion}} satisfactoriamente.
     </div>
 @elseif (isset($mensajeEnviado))
     <div class="alert alert-success alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 0.9rem;"><span aria-hidden="true">&times;</span></button>
         Mensaje enviado satisfactoriamente.
     </div>
 @endif
 
 <!-- Gestión del ticket -->
-@if ($ticket->_idEstado->id != 5)
+@if ($ticket->_idEstado->id != 6)
     <form method="POST" action="{{ route('gestionarTicketT', $ticket->id) }}">
 		{{ method_field('PUT') }}
 		{{ csrf_field() }}
@@ -98,7 +98,7 @@
 <br><br>
 
 <!-- Gestión de mensajes -->
-@if ($ticket->_idEstado->id != 5)
+@if ($ticket->_idEstado->id != 6)
     <form method="POST" action="{{ route('mensajeTicketT', $ticket->id) }}">
         {{ method_field('POST') }}
         {{ csrf_field() }}

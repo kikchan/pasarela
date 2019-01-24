@@ -24,19 +24,11 @@
             <ul class="sub-menu collapse" id="new">
                 <li><a href="{{ route('tickets') }}">Listado</a></li>
             </ul>
+			
+			<ul class="sub-menu collapse" id="new">
+                <li><a href="{{ route('valoracionesAdministrador') }}">Valoraciones</a></li>
+            </ul>
 
-            <li data-toggle="collapse" data-target="#service" class="collapsed">
-                  <a class="li-link-full" href="#"><i class=""></i> Soporte (técnico) <span class="arrow"></span></a>
-                </li>  
-                <ul class="sub-menu collapse" id="service">
-                  <li><a href="#">Listado</a></li>
-                  <li><a href="#">Buscador</a></li>
-                  <li><a href="#">Ticket</a></li>
-                </ul>
-
-                <li>
-                <a class="li-link-full" href="/administrador/valoraciones"><i class=""></i> Valoraciones </a>
-            </li>
             <li>
                 <a class="li-link-full" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class=""></i>

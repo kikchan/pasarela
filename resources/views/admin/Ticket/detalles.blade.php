@@ -34,13 +34,21 @@
 </table>
 <br>
 <!-- Gestión del ticket -->
-@if ($ticket->_idEstado->id != 5)
+@if ($ticket->_idEstado->id != 6)
     <form method="POST" action="{{ route('cerrarTicket', $ticket->id) }}">
 		{{ method_field('PUT') }}
 		{{ csrf_field() }}
-        <button class="btn btn-danger">Cerrar ticket</button>
+        <button class="btn btn-default">Cerrar ticket</button>
 	</form>
     <br>
+@endif
+
+<!-- Mostrar notificación si acabamos de cerrar el ticket -->
+@if (isset($ticketCerrado))
+    <div class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="font-size: 0.9rem;"><span aria-hidden="true">&times;</span></button>
+        Ticket {{$ticket->_idEstado->descripcion}} satisfactoriamente.
+    </div>
 @endif
 
 @if ($ticket->mensajes != null && count($ticket->mensajes) > 0) 

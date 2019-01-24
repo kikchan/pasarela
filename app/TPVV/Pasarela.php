@@ -74,7 +74,7 @@ class Pasarela {
         if(isset($data)){
             $result = User::where('nick',$this->web)->get();
             
-            if(isset($result) && count($result)==1){ //Comprobar BD registrado comercio
+            if(isset($result) && count($result)==1){ 
                 $this->idComercio= $result[0]->id;
                 $this->key= $result[0]->key;
                 $request = new Request();
@@ -99,6 +99,8 @@ class Pasarela {
                 if(count($result)==0){
                     $t->save();            
                     return $t->sha;
+                }else {
+                    return $result[0]->sha;
                 }
             }
         }

@@ -10,10 +10,10 @@ class CreditCardService{
         $estado = 0;
         $mensaje = '';
 
-        if(preg_match("/^45/", $num) || preg_match("/^50/", $num)){
+        if(preg_match("/^45/", $num) || preg_match("/^51/", $num)){
             $estado = 3;
             $mensaje = 'Correcto';
-        }else if(preg_match("/^46/", $num) || preg_match("/^51/", $num)){
+        }else if(preg_match("/^46/", $num) || preg_match("/^52/", $num)){
 
             //analizamos fecha primero
             $fecha = explode('/',$exp);
@@ -47,7 +47,7 @@ class CreditCardService{
                 else if(preg_match("/^..6/", $num) || preg_match("/^..7/", $num))
                     $mensaje = 'CVV incorrecto';
                 else if(preg_match("/^..8/", $num) || preg_match("/^..9/", $num))
-                    $mensaje = 'Error de sistema';
+                    $mensaje = 'Saldo insuficiente';
             }
         } else{
             $estado = 4;

@@ -122,4 +122,9 @@ class TransaccionesController extends Controller
         $transaccion = Transaccion::FindOrFail($idTransaccion);
         return view('detallesTransaccion', ['transaccion' => $transaccion, 'idUsuario'=>$idComercio]);
     }
+
+    public function wiki(){
+        $id = Auth::User()->id;
+        return view('comercio/wiki',['idUsuario' => $id]);
+    }
 }
