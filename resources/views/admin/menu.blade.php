@@ -13,9 +13,8 @@
             </li>
             <ul class="sub-menu collapse" id="products">
                 <li><a href="/administrador/listadoCuentas">Listado</a></li>
-                <li><a href="#">Buscador</a></li>
-                <li><a href="#">Cuenta</a></li>
-                <li><a href="#">Generar cuenta</a></li>
+                <li><a href="/administrador/buscarCuenta">Buscador</a></li>
+                <li><a href="/administrador/crearCuenta">Crear cuenta</a></li>
             </ul>
 
             <li data-toggle="collapse" data-target="#new" class="collapsed">

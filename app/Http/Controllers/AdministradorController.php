@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use Hash;
 
 class AdministradorController extends Controller
 {
@@ -62,5 +63,39 @@ class AdministradorController extends Controller
         // Actualizar la página con los datos nuevos
         $usuario = DB::table('users')->where('id', $id)->first();
         return view('admin/editarCuenta', ['usuario'=>$usuario])->with('usuarioEditado', 1);
+    }
+
+    public function buscarCuenta() {
+
+    }
+
+    public function crearCuenta() {        
+        return view('admin/crearCuenta');
+    }
+    
+    public function crearCuentaUsuario(Request $request) {       
+        // Obtener datos del form
+        $nick = $request->input('nick');
+        $password = Hash::make($request->input('password'));
+        $nombre = $request->input('nombre');
+        $apellidos = $request->input('apellidos');
+        $email = $request->input('email');
+        $key = $request->input('key');
+        $endpoint = $request->input('endpoint');
+        $tipo = $request->input('tipo');
+        
+        // Actualizar el usuario
+        if($tipo == "administrador") {
+            DB::table('users')->insert(['nick' => $nick, 'password' => $password, 'nombre' => $nombre, 'apellidos' => $apellidos, 'email' => $email, 
+            'esComercio' => false, 'esAdministrador' => true, 'esTecnico' => false, 'key' => $key, 'endpoint' => $endpoint]);
+        } else if($tipo == "tecnico") {
+            DB::table('users')->insert(['nick' => $nick, 'password' => $password, 'nombre' => $nombre, 'apellidos' => $apellidos, 'email' => $email,
+            'esComercio' => false, 'esAdministrador' => false, 'esTecnico' => true, 'key' => $key, 'endpoint' => $endpoint]);
+        } else {
+            DB::table('users')->insert(['nick' => $nick, 'password' => $password, 'nombre' => $nombre, 'apellidos' => $apellidos, 'email' => $email, 
+            'esComercio' => true, 'esAdministrador' => false, 'esTecnico' => false, 'key' => $key, 'endpoint' => $endpoint]);
+        }
+        
+        return view('admin/crearCuenta')->with('usuarioCreado', 1);
     }
 }

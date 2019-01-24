@@ -43,6 +43,9 @@ Route::get('administrador/dashboard', "AdministradorController@vista");
 Route::get('administrador/valoraciones', "AdministradorController@valoraciones");
 Route::get('administrador/listadoCuentas', "AdministradorController@listadoCuentas");
 Route::get('administrador/borrarCuenta/{id}', "AdministradorController@borrarCuenta");
+Route::get('administrador/buscarCuenta', "AdministradorController@buscarCuenta");
+Route::get('administrador/crearCuenta', "AdministradorController@crearCuenta");
+Route::post('administrador/crearCuentaUsuario', "AdministradorController@crearCuentaUsuario");
 
 Route::get('administrador/editarCuenta/{id}', "AdministradorController@editarCuentaForm");
 Route::post('administrador/editarCuenta/{id}', "AdministradorController@editarCuentaUsuario")->name('editarCuentaUsuario');

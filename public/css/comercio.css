@@ -428,6 +428,7 @@ body {
 }
 
 .container-contenido > .container > form > input[type="text"],
+.container-contenido > .container > form > input[type="password"],
 .container-contenido > .container > form > input[type="email"] {
   border: solid gray 1px;
   background-color: white;
