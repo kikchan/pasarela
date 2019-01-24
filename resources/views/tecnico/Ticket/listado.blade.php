@@ -1,4 +1,14 @@
-@extends('menuTecnico')
+@extends('principal')
+
+@section('includes')
+  <link href="{{ asset('css/main.css') }}" rel="stylesheet">                
+  <link href="{{ asset('css/comercio.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/ticket.css') }}" rel="stylesheet">
+@endsection
+
+@section('menu')
+  @include('tecnico/menuTecnico')
+@endsection
 
 @section('contenido')
 <div class="container-contenido">
@@ -11,7 +21,7 @@
 </form>
 
 @if ($tickets != null && count($tickets) > 0 )
-<span class="small"> Tickets a atender: {{count($allTickets)}}</span>
+<span> Tickets a atender: {{count($allTickets)}}</span>
 <table class="table table-bordered table-striped table-hover" border="1" cellspacing="1" cellpadding="5">
 <thead>
     <tr>

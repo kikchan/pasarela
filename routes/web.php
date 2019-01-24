@@ -43,9 +43,9 @@ Route::get('administrador', "AdministradorController@vista");
 Route::get('administrador/dashboard', "AdministradorController@vista");
 Route::get('administrador/valoraciones', "AdministradorController@valoraciones");
 Route::get('administrador/listadoCuentas', "AdministradorController@listadoCuentas");
-Route::get('administrador/borrarUsuario/{id}', "AdministradorController@borrarUsuario");
-Route::get('administrador/editarUsuario/{id}', "AdministradorController@editarUsuario");
-Route::post('administrador/editarUsuario/{id}', "AdministradorController@editarUsuario");
+Route::get('administrador/borrarCuenta/{id}', "AdministradorController@borrarCuenta");
+Route::get('administrador/editarCuenta/{id}', "AdministradorController@editarCuenta");
+Route::post('administrador/editarCuenta/{id}', "AdministradorController@editarCuenta");
 
 //Técnico
 Route::get('tecnico', "TecnicoController@vista");

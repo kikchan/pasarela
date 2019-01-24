@@ -26,8 +26,7 @@ class TicketController extends Controller
         } else {
             $tickets = Ticket::paginate(5);
         }
-        $idUsuario = $request->user()->id;
-        return View::make("admin/Ticket/listado")->with(compact('tickets', 'allTickets', 'idUsuario'));
+        return View::make("admin/Ticket/listado")->with(compact('tickets', 'allTickets'));
     }
 
     public function detalles($id)
@@ -42,6 +41,7 @@ class TicketController extends Controller
         $ticket = Ticket::findOrFail($id);
 
         if ($ticket) {
+            // El estado 5 representa "cerrado"
             Ticket::where('id', $id)->update(array('idEstado' => '5'));
             $ticket = Ticket::findOrFail($id);
             return View::make("admin/Ticket/detalles")->with('ticket', $ticket);
@@ -51,15 +51,16 @@ class TicketController extends Controller
     // ===== TECNICO =====
     public function listadoTecnico(Request $request)
     {
-        $allTickets = Ticket::where('idTecnico', '=', '3')->get();
+        $userID = $request->user()->id;
+        $allTickets = Ticket::where('idTecnico', '=', $userID)->get();
 
         // Si venimos de la barra de búsqueda...
         if ($request->has('search')) {
             // Obtenemos la palabra buscada
             $keyword = $request->input('search');
-            $tickets = Ticket::where('idTecnico', '=', '3')->SearchByKeyword($keyword)->paginate(5); // CAMBIAR 3 por ID usuario logueado
+            $tickets = Ticket::where('idTecnico', '=', $userID)->SearchByKeyword($keyword)->paginate(5); // CAMBIAR 3 por ID usuario logueado
         } else {
-            $tickets = Ticket::where('idTecnico', '=', '3')->paginate(5);
+            $tickets = Ticket::where('idTecnico', '=', $userID)->paginate(5);
         }
         return View::make("tecnico/Ticket/listado")->with(compact('tickets', 'allTickets'));
     }
@@ -101,7 +102,7 @@ class TicketController extends Controller
         {
             // Obtener el mensaje
             $mensaje = $request->input('mensaje');
-            Mensaje::create(['idUsuario' => $request->user()->id, 'idTicket' => $id, 'comentario' => $mensaje, 'adjunto' => '', 'created_at' => date("Y-m-d H:i:s")]); // CAMBIAR idUsuario por ID usuario logueado
+            Mensaje::create(['idUsuario' => $request->user()->id, 'idTicket' => $id, 'comentario' => $mensaje, 'adjunto' => '', 'created_at' => date("Y-m-d H:i:s")]);
 
             return View::make("tecnico/Ticket/detalles")->with(compact('ticket'))->with('mensajeEnviado', 1);
         }

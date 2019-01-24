@@ -53,9 +53,15 @@ input[type=submit] {
 
 .table-striped>tbody>tr:nth-child(odd)>td,
 .table-striped>tbody>tr:nth-child(odd)>th {
-	background-color: white;
+  background-color: white;
+  vertical-align: middle;
 }
 
 .table > thead > tr > th {
   background-color: darkslategray;
+}
+
+.table {
+  width:95%;
+  margin-left: 25px;
 }

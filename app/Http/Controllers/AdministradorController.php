@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 class AdministradorController extends Controller
 {
@@ -21,10 +22,15 @@ class AdministradorController extends Controller
         return view('admin/listadoCuentas', ['usuarios'=>$usuarios]);
     }
 
-    public function borrarUsuario($id) {
+    public function borrarCuenta($id) {
         DB::table('users')->where('id', $id)->delete();
-        //User::findOrFail($id)->delete();
 
         return redirect('/administrador/listadoCuentas');
+    }
+
+    public function editarCuenta($id) {
+        $usuario = User::where('id', '=', $id)->get();
+
+        return view('admin/editarCuenta', ['usuario'=>$usuario]);
     }
 }

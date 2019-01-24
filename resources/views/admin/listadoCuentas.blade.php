@@ -48,8 +48,8 @@
                 @endif
               </td>
               <td>
-                <a class="btn-sm btn-warning" href="/administrador/editarUsuario/{{$usuario->id}}">Editar</a>
-                <a class="btn-sm btn-danger" href="/administrador/borrarUsuario/{{$usuario->id}}">Borrar</a>
+                <a class="btn-sm btn-warning" href="/administrador/editarCuenta/{{$usuario->id}}">Editar</a>
+                <a class="btn-sm btn-danger" href="/administrador/borrarCuenta/{{$usuario->id}}">Borrar</a>
               </td>
             </tr>
           @endforeach

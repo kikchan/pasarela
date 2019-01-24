@@ -1,4 +1,14 @@
-@extends('menuComercio')
+@extends('principal')
+
+@section('includes')
+  <link href="{{ asset('css/main.css') }}" rel="stylesheet">                
+  <link href="{{ asset('css/comercio.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/ticket.css') }}" rel="stylesheet">
+@endsection
+
+@section('menu')
+  @include('comercio/menuComercio')
+@endsection
 
 @section('contenido')
 <div class="container-contenido">

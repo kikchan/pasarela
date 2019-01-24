@@ -60,7 +60,7 @@
                     $color = 'gray';
                 }
             ?>
-            <td style="background-color: {{$color}};"><strong>{{$d->asunto}}</strong></td>
+            <td style="background-color: {{$color}}; text-align: left"><strong>{{$d->asunto}}</strong></td>
 
             <td> <a class="btn btn-info" href="{{ route('detalles', $d->id) }}">Detalles</a></td>
         <tr>
