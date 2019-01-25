@@ -12,8 +12,9 @@
 
 @section('contenido')
 <div class="container-contenido">
-
-<h2>Detalles de Ticket</h2>
+    <nav class="navbar" style="background-color: #2e353d;height: 50px">
+      <a class="navbar-brand" style="padding-top: 0px;color: white">Detalles ticket</a>
+    </nav>
 
 @if (isset($ticket))
 <table class="table table-bordered table-striped table-hover" border="1" cellspacing="1" cellpadding="5">

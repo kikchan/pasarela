@@ -11,8 +11,8 @@
 
 @section('contenido')
 <div class="container-contenido" >
-    <nav class="navbar" style="background-color: #fbfcfc;height: 50px">
-        <a class="navbar-brand" style="padding-top: 0px;color: black">WIKI</a>
+    <nav class="navbar" style="background-color: #2e353d;height: 50px">
+      <a class="navbar-brand" style="padding-top: 0px;color: white">Wiki</a>
     </nav>
     <div class="container">
         <p style="margin-bottom:10px"><strong>PA$AR€LA</strong> es un TPVV seguro y muy facil de utilizar. Para incorporarlo <br> en tu pagina web solo tienes que seguir unos sencillos pasos.</p>

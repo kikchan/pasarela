@@ -12,17 +12,21 @@
 
 @section('contenido')
     <div class="container-contenido">
+        <nav class="navbar" style="background-color: #2e353d;height: 50px">
+            <a class="navbar-brand" style="padding-top: 0px;color: white">Listado valoraciones a técnicos</a>
+        </nav>
         <ul class="list-group">
             @if($listaTickets != null)
                 @foreach($listaTickets as $ticket)
                     @foreach($usuarios as $usuario)  
-                        @if($usuario->id == $ticket->idTecnico)
+                        @if($ticket->idComercio == $idUsuario && $usuario->id == $ticket->idTecnico)
                         <form action="valoraciones/crearValoracionComercio" method="POST" role="form">    
                             {{ csrf_field( )}}
                             <a class="list-group-item list-group-item-action">
                                  <font size="3">
                                     <strong> Técnico asignado:</strong> {{$usuario->nombre}}<br/> 
                                     <strong>Problema:</strong> {{$ticket->asunto}}<br/> 
+									<strong>Ticket id:</strong> {{$ticket->id}}<br/> 
                                     
                                     @foreach($estados as $estado)
                                         @if($estado->id == $ticket->idEstado)
@@ -44,7 +48,6 @@
                                                     <strong>Nombre completo del técnico:</strong> {{$usuario->nombre}} {{$usuario->apellidos}}<br/> 
                                                     <strong>Email técnico: </strong>{{$usuario->email}} <br/> 
                                                     <strong>Comentario: </strong>{{$valoracion->comentario}} <br/>
-                                                    <strong>Valoracion:</strong>
                                                     </font>
                                                         @for($i=0;$i < $valoracion->valoracion;$i++)                 
                                                             <div class="valoracionMuestra">
@@ -70,14 +73,13 @@
             @endif
         </ul>
            
+	<div class="pagination">
+    {{ $listaTickets->links() }}
+</div>
 
 
     </div>
 
-    </div>
-        @yield('contenido')
-
-</body>
 <script language="JavaScript1.2">
                                 function expandir(quien){
                                 var capa = document.getElementById(quien);

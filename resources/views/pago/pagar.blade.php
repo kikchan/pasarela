@@ -59,8 +59,8 @@
         </div>
     @else
         @if($registro->idEstado!=1)
-            <div class="alert alert-danger" style="margin-top:15px" role="alert">
-                La transaccion ya se ha completado previamente.
+            <div class="alert alert-warning" style="margin-top:15px" role="alert">
+               La transaccion ya ha finalizado previamente.
             </div>
         @else
             <form  method="POST" action="{{action('PasarelaController@check',$registro->sha)}}">

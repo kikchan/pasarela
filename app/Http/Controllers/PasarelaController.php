@@ -9,11 +9,16 @@ use App\ServiceLayer\CreditCardService;
 use App\User;
 use App\Transaccion;
 use App\Tarjeta;
+use Auth;
 
 class PasarelaController extends Controller
 {
     public function pruebas(){
-        $pedido = Transaccion::Find(12);
+        
+    }
+
+    public function devolucion($idU,$idP){ //middleware comercio
+        $pedido = Transaccion::Find($idP);
         if(isset($pedido)){
             if($pedido->idEstado==3 && count(Transaccion::where('sha','devolucion.'.$pedido->sha)->get())==0){
                 $t = new Transaccion();
@@ -25,19 +30,19 @@ class PasarelaController extends Controller
                 $t->idTarjeta = $pedido->idTarjeta;
                 $t->idTarjeta = $pedido->idTarjeta;
                 $t->idEstado = 5;
-                $t->comentario = 'Devolucion';
+                $t->comentario = 'Devolucion pedido '.$pedido->id;
                 $pedido->idEstado = 5;
+                $pedido->comentario = 'Devolucion';
                 $t->save();
                 $pedido->save();
-                dump($pedido);
-            dump($t);
+                //Generar la peticion
+                $user = $pedido->_idComercio;
+                $tpvv = new Pasarela($user->nick,$pedido->pedido,$user->key);
+                $tpvv->AsignTransaction($pedido);
+                return view('pago/devolucion',['registro'=>$pedido,'url'=>$user->endpoint,'response'=>$tpvv->GetRESPONSE(),'idUsuario'=>$idU]);
             }
-            
         }
-    }
-
-    public function devolucion($id){ //middleware comercio
-
+        return view('pago/devolucion',['registro'=>NULL,'url'=>NULL,'response'=>NULL,'idUsuario'=>Auth::User()->id]);
     }
 
     public function endpoint(Request $response){
@@ -55,7 +60,7 @@ class PasarelaController extends Controller
         $expiry = str_replace(' ','',$request->input('expiry')); //12/5262
         $cvv = $request->input('cvc'); 
 
-        if(strlen($name)>3 && strlen($number)>10 && strlen($number)<20 && strlen($expiry)==7 && strlen($cvv)>2 && strlen($cvv)<5){
+        if(strlen($name)>3 && strlen($number)>=10 && strlen($number)<20 && strlen($expiry)==7 && strlen($cvv)>2 && strlen($cvv)<5){
             $transacciones = Transaccion::where('sha',$sha)->get();
             if(count($transacciones)==1 && $transacciones[0]->idEstado==1){
                 $array = CreditCardService::Simulate($number,$name,$expiry,$cvv);
@@ -78,6 +83,9 @@ class PasarelaController extends Controller
                 $tpvv = new Pasarela($user->nick,$transacciones[0]->pedido,$user->key);
                 $tpvv->AsignTransaction($transacciones[0]);
                 return view('pago/status',['registro'=>$transacciones[0],'url'=>$user->endpoint,'response'=>$tpvv->GetRESPONSE()]);
+            }
+            else if(count($transacciones)==1 && $transacciones[0]->idEstado>=3){
+                return view('pago/status',['registro'=>$transacciones[0],'url'=>NULL,'response'=>NULL]);
             }
             return view('pago/status',['registro'=>NULL,'url'=>NULL,'response'=>NULL]);
         }else {

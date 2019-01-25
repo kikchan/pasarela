@@ -4,25 +4,40 @@
 <div class='container'>
 @if($registro==NULL)
     <div class="alert alert-danger" style="margin-top:15px" role="alert">
-        No existe la transacción o ya se ha completado. Pongase en contacto con el servicio técnico. 
+        No existe la transacción. Pongase en contacto con el servicio técnico. 
+    </div>
+@elseif($registro!=NULL && $response==NULL)
+    <div class="alert alert-warning" style="margin-top:15px" role="alert">
+        La transaccion ya ha finalizado previamente.
     </div>
 @else
-    <form method="POST" action="{{$url}}">
+    <form id="form" method="POST" action="{{$url}}">
         {{ csrf_field() }}
         {{ method_field('POST') }}
         <input type="hidden" name="response" value="{{$response}}">
     @if($registro!=NULL && $registro->idEstado==4)
         <div class="alert alert-warning" style="margin-top:15px" role="alert">
-            Se ha producido un error. Redirigiendo automáticamente a la web. <input type="submit" class="btn btn-info" value="Volver" >
+            Se ha producido un error con la tarjeta. Redirigiendo automáticamente a la web en 3 segundos. <input type="submit" class="btn btn-info" value="Volver" >
         </div>
     @endif
     @if($registro!=NULL && $registro->idEstado==3)
         <div class="alert alert-success" style="margin-top:15px" role="alert">
-            Pago realizado correctamente. Redirigiendo automáticamente a la web. <input type="submit" class="btn btn-info" value="Volver">
+            Pago realizado correctamente. Redirigiendo automáticamente a la web en 3 segundos. <input type="submit" class="btn btn-info" value="Volver">
         </div>
     @endif
     </form>
 @endif
 </div>
-
 @endsection
+
+@if($response!=NULL && $registro!=NULL && ($registro->idEstado==4 || $registro->idEstado==3))
+    @section('js')
+    <script>
+    $(function () {
+        setTimeout(function(){
+            document.getElementById('form').submit();
+        },3000)
+    });
+    </script>
+    @endsection
+@endif

@@ -20,7 +20,7 @@
             </ul>
 			
 			<ul class="sub-menu collapse" id="new">
-                <li><a href="{{ route('valoracionesAdministrador') }}">Valoraciones</a></li>
+                <li><a href="{{ route('valoracionesAdministrador') }}">Valoraciones técnicos</a></li>
             </ul>
 
             <li>

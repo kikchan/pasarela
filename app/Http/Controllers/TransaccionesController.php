@@ -33,30 +33,30 @@ class TransaccionesController extends Controller
         $importe = $request->input('importe');
 
         if($estado != "0") {
-            $transacciones = DB::table('transacciones')->where('idComercio', $idComercio)->where('idEstado', $estado)->paginate(5);
+            $transacciones = DB::table('transacciones')->where('idComercio', $idComercio)->where('idEstado', $estado)->get();
             if($importe == "1") {
-                $transacciones = Transaccion::where('idComercio', $idComercio)->where('idEstado', $estado)->where('importe', '<=', 50.0)->paginate(5);
+                $transacciones = Transaccion::where('idComercio', $idComercio)->where('idEstado', $estado)->where('importe', '<=', 50.0)->get();
             }
             elseif($importe == "2") {
-                $transacciones = Transaccion::where('idComercio', $idComercio)->where('idEstado', $estado)->whereBetween('importe', [50.0, 100.0])->paginate(5);
+                $transacciones = Transaccion::where('idComercio', $idComercio)->where('idEstado', $estado)->whereBetween('importe', [50.0, 100.0])->get();
             }
             elseif($importe == "3") {
-                $transacciones = Transaccion::where('idComercio', $idComercio)->where('idEstado', $estado)->whereBetween('importe', [100.0, 500.0])->paginate(5);
+                $transacciones = Transaccion::where('idComercio', $idComercio)->where('idEstado', $estado)->whereBetween('importe', [100.0, 500.0])->get();
             }
             elseif($importe == "4") {
-                $transacciones = Transaccion::where('idComercio', $idComercio)->where('idEstado', $estado)->where('importe', '>=', 500.0)->paginate(5);
+                $transacciones = Transaccion::where('idComercio', $idComercio)->where('idEstado', $estado)->where('importe', '>=', 500.0)->get();
             }
         }
         elseif($estado == "0") {
-            $transacciones = DB::table('transacciones')->where('idComercio', $idComercio)->paginate(5);
+            $transacciones = DB::table('transacciones')->where('idComercio', $idComercio)->get();
             if($importe == "1") {
-                $transacciones = Transaccion::where('importe', '<=', 50.0)->paginate(5);
+                $transacciones = Transaccion::where('importe', '<=', 50.0)->get();
             }
             elseif($importe == "2") {
-                $transacciones = Transaccion::whereBetween('importe', [50.0, 100.0])->paginate(5);
+                $transacciones = Transaccion::whereBetween('importe', [50.0, 100.0])->get();
             }
             elseif($importe == "3") {
-                $transacciones = Transaccion::whereBetween('importe', [100.0, 500.0])->paginate(5);
+                $transacciones = Transaccion::whereBetween('importe', [100.0, 500.0])->get();
             }
             elseif($importe == "4") {
                 $transacciones = Transaccion::where('importe', '>=', 500.0)->paginate(5);

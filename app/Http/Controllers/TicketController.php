@@ -152,8 +152,8 @@ class TicketController extends Controller
     // Formulario para crear un ticket
     public function formCrearTicket(Request $request)
     {
-        $transacciones = Transaccion::all();
         $userID = $request->user()->id;
+        $transacciones = Transaccion::where('idComercio', '=', $userID)->get();
 
         return View::make("comercio/Ticket/crear")->with(compact('transacciones'))->with('idUsuario', $userID);
     }

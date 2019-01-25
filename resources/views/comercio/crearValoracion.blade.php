@@ -11,6 +11,9 @@
 
 @section('contenido')
 <div class="container-contenido">
+<nav class="navbar" style="background-color: #2e353d;height: 50px">
+            <a class="navbar-brand" style="padding-top: 0px;color: white">Crear valoracion</a>
+        </nav>
     <div class="form-group">
         </br>
         <form method="POST" action="crearValoracion">    
@@ -22,7 +25,7 @@
           <textarea class="form-control" id="exampleFormControlTextarea1" name="comentario" rows="3" required></textarea>
           <div style="height:75px">
              <label for="exampleInputEmail1">Valoración:</label>
-              <p class="valoracion" style="margin-left:-190px;position:absolute">
+              <p class="valoracion" style="margin-left:-150px;position:absolute">
                 <input  height:90px" id="radio1" type="radio" name="estrellas" value="5" required><!--
                 --><label for="radio1">★</label><!--
                 --><input id="radio2" type="radio" name="estrellas" value="4" required><!--

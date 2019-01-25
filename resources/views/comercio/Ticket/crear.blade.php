@@ -12,11 +12,13 @@
 
 @section('contenido')
 <div class="container-contenido">
-<h2> Crear ticket </h2>
+  <nav class="navbar" style="background-color: #2e353d;height: 50px">
+      <a class="navbar-brand" style="padding-top: 0px;color: white">Crear ticket</a>
+    </nav>
   <form class="crearTicket" method="POST" action="{{ route('crearTicket') }}" style="width: 95%; margin-left: 25px;">
     {{ csrf_field() }}
     {{ method_field('POST') }}
-    <input class="form-control" required type="text" name="asunto" placeholder="Asunto..." style="margin-bottom: 25px; width: 350px; display: inline">
+    <input class="form-control" required type="text" name="asunto" placeholder="Asunto..." style="margin-bottom: 25px; margin-top: 25px; width: 350px; display: inline">
 
     <!-- Relación con Transacción (opcional) -->
     <div class="select-input">

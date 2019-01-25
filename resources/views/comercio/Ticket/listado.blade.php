@@ -12,8 +12,9 @@
 
 @section('contenido')
 <div class="container-contenido">
-
-<h2>Listado de Tickets</h2>
+    <nav class="navbar" style="background-color: #2e353d;height: 50px">
+      <a class="navbar-brand" style="padding-top: 0px;color: white">Listado tickets</a>
+    </nav>
 
 <!-- Buscador -->
 <form method="GET" action="{{ route('ticketsC') }}">

@@ -34,6 +34,7 @@ Route::get('filtrar/pagos', 'TransaccionesController@filtrarEstado');
 Route::get('comercio/{id}/pagos', "TransaccionesController@pagos");
 Route::get('comercio/{id}/wiki', "TransaccionesController@wiki");
 Route::get('comercio/{id}/pagos/{idPago}', "TransaccionesController@detalleTransaccion");
+Route::get('comercio/{id}/pagos/{idPago}/devolucion', "PasarelaController@devolucion");
 Route::get('comercio/{id}/pagosFiltro', 'TransaccionesController@filtrar');
 Route::get('comercio/{id}/pagosBusqueda', 'TransaccionesController@buscarId');
 
@@ -78,6 +79,8 @@ Route::group(['middleware' => 'admin', 'prefix' => 'administrador'], function ()
 
 // Tecnico
 Route::group(['middleware' => 'tecnico', 'prefix' => 'tecnico'], function () {
+    // Home de técnico
+    Route::get('/', 'TicketController@listadoTecnico');
     Route::get('tickets', 'TicketController@listadoTecnico')->name('ticketsT');
     Route::get('tickets/{id}', 'TicketController@detallesTecnico')->name('detallesTicketT');
     Route::put('tickets/{id}', 'TicketController@gestionarTicketT')->name('gestionarTicketT');
@@ -88,7 +91,6 @@ Route::group(['middleware' => 'tecnico', 'prefix' => 'tecnico'], function () {
 // Comercio
 Route::group(['middleware' => 'comercio', 'prefix' => 'comercio-soporte'], function () {
 	Route::get('valoracionesComercio', "ValoracionesController@vistaComercio")->name('valoracionesComercio');
-    
     
     Route::get('tickets', 'TicketController@listadoComercio')->name('ticketsC');
     Route::get('tickets/{id}', 'TicketController@detallesComercio')->name('detallesTicketC');

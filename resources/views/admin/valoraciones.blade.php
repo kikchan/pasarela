@@ -16,6 +16,9 @@
 @section('contenido')
   
    <div class="container-contenido">
+   <nav class="navbar" style="background-color: #2e353d;height: 50px">
+      <a class="navbar-brand" style="padding-top: 0px;color: white">Listado valoraciones</a>
+    </nav>
        <ul class="list-group">
             @if($listaValoraciones != null)
                 @foreach($listaValoraciones as $valoracion)
@@ -54,6 +57,9 @@
                 @endforeach
             @endif
         </ul>
+	<div class="pagination">
+    {{ $listaValoraciones->links() }}
+		</div>
     </div>
 
 

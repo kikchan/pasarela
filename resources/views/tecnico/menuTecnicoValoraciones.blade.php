@@ -12,6 +12,9 @@
 
 @section('contenido')
     <div class="container-contenido">
+        <nav class="navbar" style="background-color: #2e353d;height: 50px">
+            <a class="navbar-brand" style="padding-top: 0px;color: white">Valoración promedia</a>
+        </nav>
         <ul class="list-group">
             @if($listaValoraciones != null)
                 @foreach($listaValoraciones as $valoracion)
@@ -26,9 +29,9 @@
                                     <div id="{{$valoracion->id}}" style="display:none">
                                      <hr class="style2">
                                     <font size="3">
-									@foreach($usuarios as $comercio)
+									@foreach($comercios as $comercio)
 										@if($comercio->id == $valoracion->idComercio)
-											<strong>Comercio nombre: {{$comercio->nombre}} {{$comercio->apellidos}}</strong><br/> 
+											<strong>Comercio nombre: </strong>{{$comercio->nombre}} {{$comercio->apellidos}}<br/> 
 										@endif
 									@endforeach
                                     <strong>Nombre completo del técnico:</strong> {{$tecnico->nombre}} {{$tecnico->apellidos}}<br/> 
@@ -52,7 +55,10 @@
                 @endforeach
             @endif
         </ul>
-
+	</div>
+	<div class="pagination">
+    {{ $listaValoraciones->links() }}
+</div>
 <script language="JavaScript1.2">
                                 function expandir(quien){
                                 var capa = document.getElementById(quien);

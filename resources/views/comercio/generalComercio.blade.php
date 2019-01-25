@@ -15,8 +15,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
 
 <div class="container-contenido" >
-    <nav class="navbar" style="background-color: #fbfcfc;height: 50px">
-    <a class="navbar-brand" style="padding-top: 0px;color: black">Vista general</a>
+    <nav class="navbar" style="background-color: #2e353d;height: 50px">
+      <a class="navbar-brand" style="padding-top: 0px;color: white">Vista general</a>
     </nav>
 
     <div class="container">
@@ -48,31 +48,31 @@
       </div>
     </div>
 
-    <canvas id="grafico" height="300" width="900" style="width:900px;margin: 0 auto;background-color: white;"></canvas>
+    <canvas id="grafico" height="300" width="900" style="width:900px;margin: 0 auto;background-color: #f9fcfc;"></canvas>
 
     <div class="container" style="width: 100%;padding-left: 45px;">
     <h2></h2>
       <table class="table table-bordered tablesorter" style="width: 45%;float: left;margin-right: 50px; background-color: white; color:black">
         <thead>
-          <tr><th style="background: #67676c; color: white;">Número de pagos realizados en el mes anterior: {{$totalTrans}}</th></tr>
+          <tr><th style="background: #67676c; color: white;font-size: 16px;">Número de pagos realizados en el mes anterior: {{$totalTrans}}</th></tr>
         </thead>
         <tbody>
-          <tr><td>Pagos generados: {{$transacciones[0]}}</td></tr>
-          <tr><td>Pagos en espera: {{$transacciones[1]}}</td></tr>
-          <tr><td>Pagos aceptado: {{$transacciones[2]}}</td></tr>
-          <tr><td>Pagos rechazados: {{$transacciones[3]}}</td></tr>
+          <tr><td style="font-size: 14px;">Pagos generados: {{$transacciones[0]}}</td></tr>
+          <tr><td style="font-size: 14px;">Pagos en espera: {{$transacciones[1]}}</td></tr>
+          <tr><td style="font-size: 14px;">Pagos aceptado: {{$transacciones[2]}}</td></tr>
+          <tr><td style="font-size: 14px;">Pagos rechazados: {{$transacciones[3]}}</td></tr>
         </tbody>
       </table>
 
       <table class='table table-bordered tablesorter' style="width: 45%;background-color: white; color:black">
         <head>
-          <tr><th style="background: #67676c; color: white;">Número de tickets (incidencias): {{$totalTickets}}</th></tr>
+          <tr><th style="background: #67676c; color: white;font-size: 16px;">Número de tickets (incidencias): {{$totalTickets}}</th></tr>
         </head>
         <body>
-          <tr><td>Tickets generados: {{$tickets[0]}}</td></tr>
-          <tr><td>Tickets en espera: {{$tickets[1]}}</td></tr>
-          <tr><td>Tickets aceptado: {{$tickets[2]}}</td></tr>
-          <tr><td>Tickets rechazados: {{$tickets[3]}}</td></tr>
+          <tr><td style="font-size: 14px;">Tickets generados: {{$tickets[0]}}</td></tr>
+          <tr><td style="font-size: 14px;">Tickets en espera: {{$tickets[1]}}</td></tr>
+          <tr><td style="font-size: 14px;">Tickets aceptado: {{$tickets[2]}}</td></tr>
+          <tr><td style="font-size: 14px;">Tickets rechazados: {{$tickets[3]}}</td></tr>
         </body>
       </table>
     </div>
