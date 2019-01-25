@@ -68,7 +68,7 @@
 </table>
 <!-- Links de paginación -->
 <div class="pagination">
-    {{ $tickets->appends(['sort' => Request::input('sort')])->links() }}
+    {{ $tickets->appends(['search' => Request::input('search')])->links() }}
 </div>
 @elseif (count($allTickets) > 0)
     <div class="alert alert-warning">No hay resultados para esta b&uacute;squeda.</div>

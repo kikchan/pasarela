@@ -9,16 +9,20 @@ use Hash;
 
 class AdministradorController extends Controller
 {
-    public function vista(){
-        return view('admin/dashboard');       
-    }
-
     public function valoraciones() {
         return view('admin/valoraciones');
     }
 
-    public function listadoCuentas() {
-        $usuarios = DB::table('users')->get();
+    public function listadoCuentas(Request $request) {
+        // Si venimos de la barra de búsqueda...
+        if ($request->has('search')) {
+            // Obtenemos la palabra buscada
+            $keyword = $request->input('search');
+            $usuarios = User::SearchByKeyword($keyword)->paginate(5);
+        } else {
+            $usuarios = User::paginate(5);
+        }
+        //$usuarios = DB::table('users')->get();
 
         return view('admin/listadoCuentas', ['usuarios'=>$usuarios]);
     }
@@ -66,7 +70,7 @@ class AdministradorController extends Controller
     }
 
     public function buscarCuenta() {
-
+        return view('admin/buscarCuenta');
     }
 
     public function crearCuenta() {        

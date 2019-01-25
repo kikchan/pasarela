@@ -41,4 +41,17 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Valoracion', 'idTecnico');
     }
+
+    // Buscador
+    public function scopeSearchByKeyword($query, $keyword)
+    {
+        if ($keyword!='') {
+            $query->where(function ($query) use ($keyword) {
+                $query->where("nombre", "LIKE","%$keyword%")
+                    ->orWhere("nick", "LIKE", "%$keyword%")
+                    ->orWhere("email", "LIKE", "%$keyword%");
+            });
+        }
+        return $query;
+    }
 }

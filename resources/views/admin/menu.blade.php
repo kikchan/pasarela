@@ -4,16 +4,11 @@
       
     <div class="menu-list"> 
         <ul id="menu-content" class="menu-content collapse out">
-            <li>
-                <a class="li-link-full" href="/administrador/dashboard"><i class=""></i> Dashboard</a>
-            </li>
-
             <li data-toggle="collapse" data-target="#products" class="collapsed">
                 <a class="li-link-full" href="#"><i class=""></i> Cuentas <span class="arrow"></span></a>
             </li>
             <ul class="sub-menu collapse" id="products">
                 <li><a href="/administrador/listadoCuentas">Listado</a></li>
-                <li><a href="/administrador/buscarCuenta">Buscador</a></li>
                 <li><a href="/administrador/crearCuenta">Crear cuenta</a></li>
             </ul>
 

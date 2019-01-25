@@ -15,6 +15,11 @@
       <a class="navbar-brand" style="padding-top: 0px;color: white">Listado cuentas</a>
     </nav>
 
+    <!-- Buscador -->
+    <form method="GET" action="{{ route('listadoCuentas') }}">
+        @include('admin.Ticket.partials.searchbar')
+    </form>
+
     <div class="container" style="margin-top: 2em">
       <table data-toggle="table" class="table table-bordered tablesorter" style="background-color: white;">
         <thead>
@@ -54,7 +59,11 @@
             </tr>
           @endforeach
         </tbody>
-      <table>
+      </table>
+      <!-- Links de paginación -->
+      <div class="pagination">
+          {{ $usuarios->appends(['search' => Request::input('search')])->links() }}
+      </div>
     </div>
   </div>
 @endsection

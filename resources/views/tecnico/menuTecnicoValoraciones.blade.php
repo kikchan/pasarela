@@ -26,7 +26,11 @@
                                     <div id="{{$valoracion->id}}" style="display:none">
                                      <hr class="style2">
                                     <font size="3">
-                                    <strong>Comercio id: {{$valoracion->idComercio}}</strong><br/> 
+									@foreach($usuarios as $comercio)
+										@if($comercio->id == $valoracion->idComercio)
+											<strong>Comercio nombre: {{$comercio->nombre}} {{$comercio->apellidos}}</strong><br/> 
+										@endif
+									@endforeach
                                     <strong>Nombre completo del técnico:</strong> {{$tecnico->nombre}} {{$tecnico->apellidos}}<br/> 
                                     <strong>Email técnico:</strong> {{$tecnico->email}} <br/> 
                                     <strong>Nick técnico: </strong>{{$tecnico->nick}}<br/>

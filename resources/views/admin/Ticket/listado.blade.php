@@ -69,7 +69,7 @@
 </table>
 <!-- Links de paginación -->
 <div class="pagination">
-    {{ $tickets->appends(['sort' => Request::input('sort')])->links() }}
+    {{ $tickets->appends(['search' => Request::input('search')])->links() }}
 </div>
 
 @else
